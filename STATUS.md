@@ -33,15 +33,33 @@
 
 ## Итоговая совместная сборка
 
-`docs/integration/dog_mrv_wri.txt` = DOG (головной + основной) + MRV
-PRINT-блок + WRI (6 модулей). Компиляция и загрузка через `dispak`
-проходят без ошибок (`build/integration/final_joint.lst`).
+`docs/integration/mrv_all.txt` (8281 строка, 27 исходников, **50 модулей**) —
+максимальный рабочий набор: DOG (головной + основной, включая PRINT13…20)
++ MRV/PROMON (PRINT1…12, PRINTS, PRINTK) + REA + WRI (6) + RCD (9) + WCD (6)
++ M7B (4) + PS (7) + DEB МАДЛЕН (14). Fortran DEB (`*system`) собирается
+отдельно и в обёртку не входит.
 
-PRINT13…20 расшифрованы по стр.40–41 и вставлены в
-`docs/print13/dog_all_v2.txt` (1956 перфокарт, 0 ошибок); строки
-`ОТСУТСТВУЕТ PRINT13…PRINT20` из таблицы загрузчика исчезли.
-Остаются незакрытыми: `PRPR2`, `PRV*`, `RQTOCMD`, `BUFCOM`,
-`ОКNО` (латиница/кириллица), плюс символы сервиса ОС ДИСПАК.
+Компиляция: `bash scripts/build_one.sh docs/integration/mrv_all.txt MRVALL
+build/integration` — 0 ошибок; в полном листинге
+`build/integration/mrv_all_full.lst` все 50 модулей имеют
+`ЧИСЛО ОШИБ. ОПЕРАТОРОВ 0000`. Загрузчик (`build/integration/mrv_all.lst`):
+PROGRAM 01000, DOG 02000, СВОБОД 20023. PRINT13…20 закрыты (в списке
+`ОТСУТСТВУЕТ` отсутствуют). Остаются незакрытыми 25 символов:
+`PRINT1…7`, `PRINT9…12`, `PRINTS`, `PRINTK`, `PRPR2`, `PRV`, `PRV1…3`,
+`SPIGUN`, `DERD`, `DEWR`, `RZAVAR`, `RQTOCMD`, `BUFCOM`, `ОКНО`
+(кириллица); предупреждения `НЕВЕРНАЯ ДЛИНА LINK / *DEBAR*`.
+Остальные модули оттранслированы, но загрузчиком в задачу не включены
+(нет `XTS`/`CALL` из PROGRAM и DOG) — это свойство загрузчика dispak.
+
+Для снятия конфликта `ENTRY PROGRAM` (6 модулей PS: ONE, СБОР 1–4,
+HD PS1) эти строки заменены комментариями; без этого загрузчик грузит
+по 01000 последний такой модуль вместо головного PROGRAM. Подробности,
+порядок модулей, адреса и исключённые исходники —
+`docs/integration/README.md`. `mrv_all.txt` добавлен в `docs/SOURCES.txt`.
+
+Предыдущая промежуточная сборка — `docs/integration/dog_mrv_wri.txt`
+(DOG + WRI, `build/integration/final_joint.lst`); в ней PRINT13…20 ещё
+были незакрытыми.
 
 ## Проверка
 

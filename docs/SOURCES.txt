@@ -34,3 +34,4 @@ docs/ps/sbor4.txt
 docs/ps/hdps1.txt
 docs/deb/deb_src.txt
 docs/integration/dog_mrv_wri.txt
+docs/integration/mrv_all.txt
