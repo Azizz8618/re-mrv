@@ -16,6 +16,8 @@ header = ['шифр 419999 зс5^', 'лен 41(2048)^', 'eeв1а3',
 footer = ['*execute', '*end file', '``````', 'еконец']
 with open(src, encoding='utf-8') as f:
     lines = [l.rstrip('\n') for l in f]
+# Строки-комментарии, начинающиеся с '.', конвертируем в 'С' (требование МАДЛЕН)
+lines = [('С' + l.lstrip()[1:]) if l.lstrip().startswith('.') else l for l in lines]
 with open(b6, 'w', encoding='utf-8') as f:
     f.write('\n'.join(header + lines + footer) + '\n')
 PY

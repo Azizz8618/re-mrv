@@ -1,0 +1,560 @@
+C=== PDF p.303, DEB08860..DEB09090  подпрограмма УС M35 =================
+C Адреса (левая колонка листинга) — восьмеричные.
+C Идентификаторы DEBxxxxx — GENERATED LINE ID листинга, в исходник не входят.
+C ===
+ УС M35   : , NAME,
+ SH PS    :LC,BLOCK,(1)
+         : , CONT,SPS(4)
+         : , STI ,14
+         : , STI ,12
+         : , ITS ,13
+     14, XTS ,
+     12, AOX ,
+         : , UTC ,=77 7777
+         : , AAX ,
+         : , UTC ,INF W
+         : , ATX ,
+     13, VTM ,INF W         .УСТАНОВКА М35
+         : , *62 ,47B
+         : , UTC ,=7 7777
+         : , AEX ,
+         : , UZA ,RET
+         : , SJ  ,
+ RET      : , STI ,
+         : , STI ,13
+     13, UJ ,
+ INF W    : , BSS ,1
+         : , END ,
+C=== PDF p.304, DEB09100..DEB09500  подпрограмма RD M35 ==================
+C=== continuation of symbol table — PDF p.305 (не в исходнике) ==========
+ RD M35   : , NAME,
+ SH PS    :LC,BLOCK,(1)
+         : , CONT,SPS(4)
+         : , STI ,12
+         : , ITS ,13
+         : , UTC ,INF 34
+         : , XTS ,
+         : , UTC ,C
+         : , ATX ,
+     13, VTM ,C
+         : , XTA ,SH PS
+         : , *62 ,47B        .ЧИТАТЬ М34
+         : , UTC ,C          .РЕЗУЛЬТАТ
+         : , XTA ,
+     12, ATX ,              .НА ВЫХОД
+         : , ITS ,INF 35
+         : , XTA ,
+         : , UTC ,C
+         : , ATX ,
+     13, VTM ,C
+         : , XTA ,SH PS
+         : , *62 ,47B        .ЧИТАТЬ М35
+         : , CALL,OKHO
+         : , UTC ,C          .РЕЗУЛЬТАТ
+         : , XTA ,           .ОСТ. ПО ЧТЕНИЮ
+     12, ATX ,1             .ОСТ. ПО ЗАПИСИ
+     12, ATX ,2
+         : , UTC ,=14
+         : , AAX ,           .ПО ЧТЕНИЮ
+         : , UZA ,RD         .ГАСИМ ЧТЕНИЕ
+         : , ITA ,
+     12, STX ,1
+         : , UJ  ,EXIT       .ГАСИМ ЗАПИСЬ
+         : , ITA ,
+     12, STX ,2
+ Rh       : , BSS ,
+ EXIT     : , STI ,13
+     13, UJ ,
+         : , OCT ,4000 0000 0010
+         : , OCT ,4000 0000 0020
+ INF 34   : , OCT ,1
+ INF 35   : , BSS ,1
+ C        : , BSS ,1
+ RD       : , BSS ,1   .ВНЕШНЯЯ МЕТКА RD (ГАШЕНИЕ ЧТЕНИЯ)
+         : , END ,
+C=== PDF p.306, DEB09520..DEB09710  подпрограмма GIV RGS ================
+ GIV RGS  : , NAME,
+ SH PS    :LC,BLOCK,SH MRV
+         : , CONT,(4)
+         : , ATI ,8
+         : , ITA ,13
+         : , ITS ,
+ L       :14, VTM ,-15
+         : , UTC ,15
+      8, ATX ,
+     14, VLM ,L
+         : , UTC ,=4000 0000 0000 1701
+      8, XTA ,
+      8, ATX ,
+         : , XTA ,SH MRV
+      8, MTJ ,13
+         : , *62 ,50B        .ЧИТАТЬ РЕГ.ПЗ
+         : , STI ,
+         : , STI ,13
+     13, UJ ,
+         : , END ,
+C=== PDF p.307, DEB09720..DEB09940  подпрограмма GIV RGM ================
+ GIV RGM  : , NAME,
+ SH PS    :LC,BLOCK,SH MRV
+         : , CONT,(4)
+         : , ATI ,8
+         : , ITA ,13
+         : , ITS ,
+     14, VTM ,-7
+ L        : , UTC ,7
+      8, ATX ,
+     14, VLM ,L
+         : , ITA ,8
+         : , ITS ,=1
+         : , ARX ,
+         : , AOX ,=4000 0000 0000 0000
+      8, ATX ,
+         : , XTA ,SH MRV
+      8, MTJ ,13
+         : , *62 ,51B        .ЧИТАТЬ СМ,РГГ,РМП,АП,АЭ И ДР.
+         : , STI ,
+         : , STI ,13
+     13, UJ ,
+         : , END ,
+C=== PDF p.308, DEB09950..DEB10060  подпрограмма JOCTI ==================
+ JOCTI    : , NAME,
+         : , STI ,11        .ОСТ ТЕКСТ В ЧЕЛО
+         : , ATI ,12        .E
+     12, XTA ,              .РЕЗ-Т
+C 8-Й ТЕКСТ
+         : , UTC ,=6H077777
+         : , APX ,
+         : , ASN ,64+33
+         : , UTC ,=10
+         : , AOX ,
+     11, STX ,
+     13, UJ ,
+         : , END ,
+C=== PDF p.309, DEB10070..DEB10230  подпрограмма TODE ===================
+ TODE     : , NAME,
+ *SH PS*  : , LC ,5
+ SH PS    : , LC ,5
+ *CH PS*  : , LC ,5
+ CH PS    : , LC ,5
+     14, VTM ,-4
+ L1       : , XTA ,SH PS+4
+         : , UTC ,*SH PS*
+     14, ATX ,4
+     14, XTA ,CH PS+4
+         : , UTC ,=10
+         : , AOX ,
+         : , UTC ,*CH PS*
+     14, ATX ,4
+     14, VLM ,L1
+     13, UJ ,
+         : , END ,
+C=== PDF p.310, DEB10240..DEB10410  подпрограмма SH ISO ================
+ SH ISO   : , NAME,
+         : , STI ,14
+     12, ATI ,14
+     12, XTA ,12         .КУДА
+         : , UTC ,=6H777777   .ОТКУДА
+         : , AUX ,
+         : , UTC ,=6H000000
+         : , AOX ,
+     14, ATX ,
+     12, XTA ,
+         : , ASN ,64-24
+         : , UTC ,=6H777777
+         : , AUX ,
+         : , UTC ,=6H000000
+         : , AOX ,
+     14, STX ,1
+     13, UJ ,
+         : , END ,
+C=== PDF p.313, DEB11000..DEB11210  подпрограмма TO STK ================
+C В ОРИГИНАЛЕ  "НЕДОПУСТИМЫЙ ОПЕРАТОР" и ЧИСЛО ОШИБ. ОПЕРАТОРОВ 0001.
+C Строка с оператором ПЗ,UJ, оставлена комментарием (иначе трансляция
+C МАДЛЕН невозможна); это ЕДИНСТВЕНная правка, не восстановленная по скану.
+ TO STK   : , NAME,
+C БУФЕРИЗАЦИЯ ПРИ ОТЛААКЕ
+ BUF      : , EQU ,74000B     .BUFER
+ CNT      : , EQU ,75000B       .COUNTER
+         : , UTC ,CNT
+         : , ATX ,BUF
+         : , ITS ,14
+     14, UTC ,CNT
+     14, VTM ,1
+         : , ITS ,14
+         : , UTC ,=1000
+         : , AEX ,
+         : , U1A ,RET
+     14, VTM ,
+ RET      : , ITA ,14
+         : , UTC ,CNT
+         : , STX ,
+         : , STI ,14
+C******НЕДОПУСТИМЫЙ ОПЕРАТОР (в оригинале  , ПЗ ,UJ,)
+         : , END ,
+C=== PDF p.314, DEB11220..DEB11480  подпрограмма MEM ==================
+C ПЕРЕДАЧА В ПЗ ФЛАГА ОТЛААКИ
+ MEM      : , NAME,
+ SH PS    :LC,BLOCK,SH MRV,(4)
+ *DEBAR*  :LC,BLOCK,DEB FLG
+         : , STI ,12
+         : , ITS ,13
+     12, XTA ,
+         : , UTC ,DEB FLG
+         : , ATX ,
+     14, VTM ,DEB FLG
+         : , ITA ,14
+         : , ITS ,14
+         : , ASN ,64-15
+     15, AOX ,
+         : , UTC ,=10000 01.ИЗ ГЗ В ПЗ ЧИСЛО
+         : , UTC ,INF WR
+         : , ATX ,
+     13, VTM ,INF WR
+         : , XTA ,SH MRV
+         : , *62 ,52B        .ПИСАТЬ В ПЗ
+         : , STI ,
+         : , STI ,13
+     13, UJ ,
+ INF WR   : , BSS ,1
+         : , END ,
+C--- PDF p.315, DEB11490..DEB11840 - подпрограмма GOTO ---
+C ПУСК ПОДЧИНЕННОЙ ПОСЛЕ ОСТАНОВА
+ GOTO     : , NAME,
+ SH PS    :LC,BLOCK,SH MRV,(4)
+          : , STI ,12
+          : , ITS ,13
+     12, XTS ,
+          : , U1A ,TO         .НОВЫЙ АДРЕС
+ GO       : , XTA ,SH MRV
+          : , *53 ,31B        .ПУСТИ ПС
+          : , CALL,OKHO
+          : , STI ,
+          : , STI ,13
+     13, UJ ,
+ TO       : , XTA ,SH MRV
+     13, VTM ,INF R
+          : , *62 ,51B        .ЧИТАТЬ СПЕЦ-РЕГ
+          : , UTC ,M33        .НОВЫЙ АДРЕС ПРЕРЫВАНИЯ
+     12, XTA ,
+          : , ATX ,
+     13, VTM ,INF W
+          : , XTA ,SH MRV
+          : , *62 ,51B        .ПИСАТЬ СПЕЦ-РЕГ
+          : , UJ ,GO
+ INF R    : , BSS ,1
+ REGIS    : , BSS ,1
+ INF W    : , BSS ,1
+ CM       : , BSS ,1
+ PK       : , BSS ,1
+ PMP      : , BSS ,1
+ M33      : , BSS ,1
+ M32      : , BSS ,1
+ M27      : , BSS ,1
+ M20      : , BSS ,1
+          : , END ,
+C--- PDF p.317, DEB11850..DEB12300 - подпрограмма RD PT N ---
+C--- continuation of symbol table - PDF p.318 (не в исходнике) ---
+ RD PT N  : , NAME,
+ SH PS    :LC,BLOCK,
+          : , CONT,SH MRV
+          : , CONT,S PS(4)
+      8, BASE,*
+          : , STI ,9          .ГЗ-ПЗ ФЛАГ
+          : , STI ,12         .РЕЗ-Т
+          : , STI ,11         .А КОН
+          : , ATI ,10         .А НАЧ
+     10, WTC ,
+     10, VTM ,
+     11, WTC ,
+     11, VTM ,
+          : , ITA ,13
+          : , ITS ,10
+C НАЧ АДРЕС НА СУММАТОР
+          : , ITS ,12         .РЕЗ-Т
+          : , ASN ,64-15
+     15, AOX ,
+          : , AOX ,=14000 01   .ИЗ ПЗ В ГЗ ЧИСЛО
+          : , ATX ,INF WR     .ИНФ.СЛОВО ОБМЕНА
+ LP DEB1  : , XTA ,SH MRV
+     13, VTM ,INF WR
+          : , *62 ,52B        .ЧИТАТЬ СЛОВО ИЗ ПЗ
+          : , UJ ,RET
+ GZ       : , XTA ,
+     12, ATX ,
+ RET      : , BSS ,10
+          : , ITA ,10
+          : , ITS ,11
+     15, AEX ,
+          : , UZA ,END DEB1   .КОНЕЦ ЗАДАНИЯ
+     10, UTM ,1              .СЛЕД.РЕЗ-Т
+     12, UTM ,1
+          : , XTA ,INF WR    .ДЛЯ СЛЕД СЛОВА
+          : , ARX ,=10 0001
+          : , ATX ,INF WR
+          : , UJ ,LP DEB1
+ END DEB1 : , STI ,
+          : , STI ,13
+     13, UJ ,
+ INF WR   : , BSS ,1
+          : , END ,
+C--- PDF p.323, DEB13370..DEB13710 - подпрограмма DES W ---
+ DES W    : , NAME,
+ SH PS    :LC,BLOCK,
+          : , CONT,SH MRV
+          : , CONT,S PS(4)
+      8, BASE,*
+          : , STI ,10        .АДР.АЛИНЫ
+          : , ATI ,9         .АДР.МАССИВА
+          : , ITA ,13
+          : , ITS ,13
+     10, WTC ,
+     10, VTM ,RETURN         .АЛИНЫ
+          : , ITA ,9
+C НАЧ АДРЕС НА СУММАТОР
+          : , ITS ,9
+          : , ASN ,64-15
+     15, AOX ,
+          : , AOX ,=10000 01  .ИЗ ГЗ В ПЗ ЧИСЛО
+          : , ATX ,INF WR     .ИНФ.СЛОВО ОБМЕНА
+ LP DEB1  : , BSS ,1
+          : , XTA ,SH MRV
+     13, VTM ,INF WR
+          : , *62 ,52B        .ЧИТАТЬ СЛОВО ИЗ ПЗ
+     10, UTM ,-1
+     10, UZA ,RETURN
+     12, XTA ,INF WR         .ДЛЯ СЛЕД СЛОВА
+          : , ARX ,=10 0001
+          : , ATX ,INF WR
+          : , UJ ,LP DEB1
+ RETURN   : , STI ,
+          : , STI ,13
+     13, UJ ,
+ INF WR   : , BSS ,1
+          : , END ,
+C--- PDF p.324, DEB13750..DEB13970 - подпрограмма FINAL ---
+ FINAL    : , NAME,
+ LINK     :LC,BLOCK,READ DOG,CONT DOG
+C АДРЕСА ТОЧЕК ЗАПУСКА ЗАДАЧ
+          : , CONT,READ PM,READ PS(4)
+          : , CONT,STRT PM,STRT PS(4)
+          : , CONT,INT ERR.ОБРАБ ПРЕРЫВАНИЯ В МРВ
+          : , CONT,NUM PS.НОМЕР ОБСЛУЖИВАЕМОЙ ПОДСИСТЕМЫ
+          : , CONT,AV PS.АВАРИЯ В ПС
+          : , CONT,WORK PS
+          : , CONT,END PS(4).ФЛАГ ЗАВЕРШАЕМОЙ ПОДСИСТЕМЫ
+          : , CONT,STOP F.ФЛАГ ЗАВЕРШЕНИЯ РАБОТЫ ТУ
+          : , UTC ,=7
+          : , XTA ,
+          : , ATX ,STOP F
+     14, ITA ,13
+     14, VTM ,STOP F
+          : , ITS ,14
+          : , AAX ,
+          : , CALL,nESW        .СЛОВО В ПЗ
+          : , ATI ,13
+     13, UJ ,
+          : , END ,
+C--- PDF p.325, DEB13950..DEB14510 - подпрограмма BASOR ---
+ BASOR    : , NAME,
+C : , BASE,*   .ДИРЕКТИВА БАЗЫ НЕ ПОДДЕРЖАНА ЭМУЛЯТОРНЫМ АССЕМБЛЕРОМ
+          : , STX ,NN         .ПОД АДРЕСА
+          : , ITA ,13         .РЕЗУЛЬТ.ТЕКСТ
+          : , STI ,10
+          : , STX ,KA         .КОНЕЧ.АДРЕС
+          : , STI ,11         .НАЧ.АДРЕС
+          : , ATI ,9          .ИСХ.КОМАНДА
+          : , ITA ,13
+          : , ITS ,
+      9, UTC ,-1             .СЧЕТЧИК MAS
+     10, UTM ,-1             .СЧЕТЧИК NMAS
+     11, XTA ,               .НА-НАЧ.АДРЕС
+     11, VTM ,
+ A3       :8, VTM ,-3         .СЧ.КОМАНДА В СТРОКЕ
+          : , XTA ,ADR
+          : , AAX ,=77777
+          : , ASN ,64-30
+          : , AUX ,=6H777777
+          : , AOX ,=6H00000
+          : , WTC ,NN
+      9, UTM ,1
+     11, ATX ,1
+C CALL,ВОКНО
+ A1       :9, UTM ,1
+          : , XTA ,
+      9, ASN ,64+24          .ЛЕВАЯ КОМАНДА
+     12, VJM ,A
+          : , XTA ,ADR
+          : , AEX ,
+     12, AAX ,=77777777      .ПРАВАЯ КОМАНДА
+     12, VJM ,A
+          : , XTA ,TABKOP
+          : , AOX ,RMOD
+C CALL,ВОКНО
+     10, ATX ,
+     10, UTM ,1
+          : , XTA ,KOM
+          : , AAX ,=7777     .ВЫДЕЛЯЕМ АДРЕС
+          : , ASN ,64-33
+          : , AUX ,=6H777777
+          : , AOX ,=6H00000
+          : , ATX ,
+     12, UJ ,
+C КОМАНДА С ДЛИННЫМ АДРЕСОМ
+          : , XTA ,KOM
+          : , ASN ,64+15
+          : , AAX ,=37       .ВЫДЕЛЯЕМ КОП
+          : , AOX ,=200
+          : , ATX ,KOP
+          : , WTC ,KOP
+          : , XTA ,TABKOP
+          : , AOX ,RMOD
+C CALL,ВОКНО
+     10, ATX ,
+     10, UTM ,1
+          : , XTA ,KOM
+          : , AAX ,=777777   .ВЫДЕЛЯЕМ АДРЕС
+          : , ASN ,64-33
+          : , AUX ,=6H777777
+          : , AOX ,=6H00000
+     12, ATX ,
+     12, UJ ,
+ KON      : , STI ,
+          : , STI ,13
+     13, UJ ,
+C--- PDF p.326, DEB14520..DEB15130 - продолжение BASOR ---
+C ТАБЛИЦА ТЕКСТОВ TABKOP (начало); продолжение - PDF p.327..p.329
+C (здесь не воспроизведено, см. README).
+          : , XTA ,TABKOP
+          : , AOX ,RMOD
+C CALL,ВОКНО
+     10, ATX ,
+     10, UTM ,1
+          : , XTA ,KOM
+          : , AAX ,=7777
+          : , ASN ,64-33
+          : , AUX ,=6H777777
+          : , AOX ,=6H00000
+          : , ATX ,
+     12, UJ ,
+C КОМАНДА С ДЛИННЫМ АДРЕСОМ
+          : , XTA ,KOM
+          : , ASN ,64+15
+          : , AAX ,=37
+          : , AOX ,=200
+          : , ATX ,KOP
+          : , WTC ,KOP
+          : , XTA ,TABKOP
+          : , AOX ,RMOD
+C CALL,ВОКНО
+     10, ATX ,
+     10, UTM ,1
+          : , XTA ,KOM
+          : , AAX ,=777777
+          : , ASN ,64-33
+          : , AUX ,=6H777777
+          : , AOX ,=6H00000
+     12, ATX ,
+     12, UJ ,
+ TABKOP   : , GOST,6H00 ATX
+          : , GOST,6H00 STX
+          : , GOST,6H00 STI
+          : , GOST,6H00 ITA
+          : , GOST,6H00 ITS
+          : , GOST,6H00 WTC
+          : , GOST,6H00 ASN
+          : , GOST,6H00 AOX
+          : , GOST,6H00 AAX
+          : , GOST,6H00 AEX
+          : , GOST,6H00 ARX
+          : , GOST,6H00 XTA
+          : , GOST,6H00 ATX
+          : , GOST,6H00 VTM
+          : , GOST,6H00 UTC
+          : , GOST,6H00 UTM
+          : , GOST,6H00 XTS
+          : , GOST,6H00 VLM
+          : , GOST,6H00 VZA
+          : , GOST,6H00 VJM
+          : , GOST,6H00 U1A
+          : , GOST,6H00 UZA
+          : , GOST,6H00 UJA
+          : , GOST,6H00 VZM
+          : , GOST,6H00 MTJ
+          : , GOST,6H00 E*N
+          : , GOST,6H00 J*M
+          : , GOST,6H00 046
+          : , GOST,6H00 047
+          : , GOST,6H00 *50
+          : , GOST,6H00 *51
+          : , GOST,6H00 *52
+          : , GOST,6H00 *53
+          : , GOST,6H00 *54
+          : , GOST,6H00 *55
+          : , GOST,6H00 *56
+          : , GOST,6H00 *57
+          : , GOST,6H00 *60
+          : , GOST,6H00 *61
+          : , GOST,6H00 *62
+          : , GOST,6H00 *63
+          : , GOST,6H00 *64
+          : , GOST,6H00 *65
+          : , GOST,6H00 *66
+          : , GOST,6H00 *67
+          : , GOST,6H00 *70
+          : , GOST,6H00 *71
+          : , GOST,6H00 *72
+          : , GOST,6H00 *73
+          : , GOST,6H00 *74
+          : , GOST,6H00 *75
+          : , GOST,6H00 *76
+          : , GOST,6H00 *77
+          : , GOST,6H00 100
+          : , GOST,6H00 101
+          : , GOST,6H00 102
+          : , GOST,6H00 103
+ KOP      : , BSS ,1
+ NN       : , BSS ,1
+ KA       : , BSS ,1
+ ADR      : , BSS ,1
+ KOM      : , BSS ,1
+ RMOD     : , BSS ,1
+ A        : , BSS ,1
+C--- PDF p.335, DEB18650..DEB18940 - таблица текстов диагностики, КОНЕЦ ---
+C Эталонная ТАБЛИЦА ССЫЛОК со стр.335 (адреса - восьмеричные):
+C ADRREZ 00034/00000/00023/00026 ; NACH 00003/00027
+C RAB 00031/00003/00005/00007/00010
+C RABBUK 00032/00006/00015/00017/00020
+C RABSL 00033/00012/00013/00021/00022/00024
+C SRAVNE 00005/00022 ; SR7N 00014/00016 ; SRIN 00035/00010
+C TABL 00020/00015 ; ZAPZN (50601,40,0C K71 - константа)
+C ПОДПРОГРАММА: ЗАГОЛОВОК 00001, ОБОЗНАЧЕНИЯ 00004, КОМАНДЫ 00031,
+C КОНСТАНТЫ 00147, ПЕРФ. 0151, ЧИСЛО ОШИБ. ОПЕРАТОРОВ 0000.
+          : , GOST,6HШ
+          : , GOST,6HШ
+          : , GOST,6HЗ
+          : , GOST,6HХ
+          : , GOST,6HЖ
+          : , GOST,6HФ
+          : , GOST,6HФ
+          : , GOST,6HВ
+          : , GOST,6HA
+          : , GOST,6HП
+          : , GOST,6HP
+          : , GOST,6HЛ
+          : , GOST,6HO
+          : , GOST,6HA
+          : , GOST,6HK
+          : , GOST,6HE
+          : , GOST,6HЮ
+          : , GOST,6HЧ
+          : , GOST,6HC
+          : , GOST,6HM
+          : , GOST,6HI
+          : , GOST,6HY
+          : , GOST,6HT
+          : , GOST,6HБ
+          : , GOST,6HO
+          : , GOST,6HФ
+          : , GOST,6HS
+          : , GOST,6H
+          : , END ,
