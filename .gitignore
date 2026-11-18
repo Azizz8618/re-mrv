@@ -5,4 +5,5 @@
 __pycache__/
 ocr/img/
 ocr/test/
+build/check/
 *.pdf
