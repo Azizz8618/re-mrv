@@ -1,0 +1,217 @@
+ WRITE D : , NAME,
+C-------------------------------
+C ЗАПИСЬ ПТ ГЛАВНОЙ ЗАДАЧИ
+C
+C-------------------------------
+ LINE IN : , SUBP,
+ LINE OUT: , SUBP,
+C
+ LINK  :LC,BLOCK,READ DOG,CONT DOG
+       , CONT,READ PM,READ PS(4)
+C АДРЕСА ТОЧЕК ЗАПУСКА ЗАДАЧ
+       , CONT,STRT PM,STRT PS(4)
+       , CONT,INT ERR.OБPAБ. ПPEPЫBAHИЙ
+C       В МРВ
+       , CONT,NUM PS.HOMEP ЗAGPYЖAEMOЙ
+C       ПОДСИСТЕМЫ
+       , CONT,AV PS.HOMEP ABAPИЙHOЙ ПOД
+C       СИСТЕМЫ
+       , CONT,WORK PS.HOMEP BЫПOЛHЯEMOЙ
+C       ПОДСИСТЕМЫ
+       , CONT,END PS(4).ФЛAG ЗABEPШAEMO
+C       Й ПОДСИСТЕМЫ
+       , CONT,STOP F.ПPИЗHAK ЗABEPШEHИЯ
+C       РАБОТЫ ТУ
+ *DEBAR*:LC,BLOCK,DEB FLG.ФЛAG OTЛAДKИ
+C АДРЕСА МАССИВОВ ДЛЯ ОТЛАДЧИКА
+       , CONT,DES M(3).OПИCAHИE ПPИEMA
+       , CONT,DES B(3).OПИCAHИE BЫДAЧИ
+       , CONT,C COM(3).KOMAHДЫ CM-2
+       , CONT,B COM(3).KOMAHДЫ БЭCM-6
+       , CONT,M FLD(3).BЫДAЧA HA BCE CM
+       , CONT,I FLD(7).ПPИEM OT CM
+ CH PS  :LC,BLOCK,CH MPB,CPS(4)
+C
+ IN E50 : , EQU ,133B
+C
+ NEXT PCT: , EQU ,7B
+ N MASH  : , EQU ,10B
+ N PACK  : , EQU ,11B
+ BEG COM : , EQU ,12B
+C
+ LENG E60: , EQU ,32
+C
+       , ITS ,1
+       , ITS ,2
+       , ITS ,3
+       , ITS ,4
+       , ITS ,5
+       , ITS ,6
+       , ITS ,7
+       , ITS ,13
+       , ITS ,
+ BAS    : 8, BASE,BAS
+C-------------------------------
+C
+C ЗАПИСЬ КОМАНА В ОБЩУЮ ПАМЯТЬ
+C
+C-------------------------------
+C
+C УСТАНОВКА НАЧАЛЬНЫХ ЗНАЧЕНИЙ.
+C
+       , ITA ,
+       , ATX ,P BASE Э.БAЗA 1-GO ПAKETA
+C       В Э-60
+       , XTA ,BEFOR B .БАЗА ПРЕДИД. ПАКЕТА
+       3, VTM ,-3 .СЧЕТЧИК МАШИН
+       , NTR ,3
+ WR PACK: 3, UTC ,3
+       14, VTM , .НОМЕР МАШИНЫ
+       , ITA ,14
+       , WTC ,P BASE Э
+       , 132 ,N MASH .В ПАКЕТ
+       14, V1M ,W P1 .НЕ Э-60
+C
+C ПАКЕТ ДЛЯ Э-60
+       , XTA ,STOP F .ОТ DOG
+       , U1A ,WP 2
+       , XTA ,=30
+       , 132 ,12B .ОТКЛЮЧИ ОТ СЕТИ
+       , XTA ,=1
+       , 132 ,13B .НОМ.МАШ.
+       , XTA ,=4
+       , 132 ,14B
+       , XTA ,=35 .KS
+       , 132 ,15B
+       , XTA ,=7707 0000 0001 0002
+       , *50 ,IN E50 .КОНЕЦ ЗАПИСИ
+       , PRINT,PR PR1
+       , SJ ,
+       , XTA ,CH MPB
+       , ASN ,64-4
+       , AAX ,=7700
+       , AOX ,=7705 0000 0000 0002
+       , *50 ,IN E50 .ОТКАЗ ОТ НЕРЕЗИ-
+C       ДА
+       , SJ ,
+ WP 2  : , 032 ,5 .ЧТ.КОДА ПРЕРЫВ.
+       , ASN ,64+24
+       , AAX ,=1 0000 .ПИСАТЬ
+       , U1A ,WP 3
+       , *64 ,PR PR2 .СЕАНС ЗАПИГИ
+       , ITA , .ПРИПУЩЕН
+       , UJ ,E WR
+ WP 3  :14, VTM ,LENG E60
+       , ITA ,14
+       , ATX ,P BASE Э.HOBAЯ БAЗA
+       3, VTM ,WR PACK
+ W P1  :14, UTC ,LINE OUT-1
+       4, VTM , .АДРЕС УКАЗАТЕЛЯ
+C       ЧТЕНИЯ БУФЕРА
+C       СООБЩЕНИЯ
+       1, VTM , .СЧЕТЧИК ПО БЛОКУ
+C       КОМАНА В Э-60
+ COM LP: , BSS ,
+       , ITA ,4
+       14, UTC ,LINE IN-1
+       , AEX , .УКАЗАТЕЛЬ ЗАПИСИ
+C       БУФЕРА СООБЩ.
+       , UZA ,NEXT BUF.HET KOMAHДA ДЛЯ
+C       ДАННОЙ МАШИНЫ
+       , ATX ,NUM P
+C ПЕРЕПИСЫВАЕМ КОМАНДУ В ПАКЕТ
+       4, XTA ,
+       , ATI ,4 .АДРЕС СЛЕД.СЛОВА
+C       БУФЕРА СООБЩЕНИЙ
+       4, XTA ,
+       , ASN ,64+15 .ВЫДЕЛЯЕМ КОД КО-
+C       МАНДЫ
+       , WTC ,P BASE Э
+       1, 132 ,BEG COM
+       1, UTM ,1
+       , UJ ,COM LP .ЗА СЛЕД. СЛОВОМ
+C       БЛОКА КОМАНА
+ NEXT BUF: , ITA ,4
+       14, UTC ,LINE OUT-1.HOBOE ЗHAЧEHИE
+C       УКАЗ. ЧТЕНИЯ
+       , ATX ,
+       , ITA , .ЗАПИСЫВАЕМ НУЛЕ-
+C       ВОЙ КОД КОМАНДЫ
+       , WTC ,P BASE Э.KAK ПPИЗHAK KOH-
+C       ЦА БЛОКА КОМАНА
+       1, 132 ,BEG COM .
+       1, UTC ,BEG COM+1
+       10, VTM , .ДЛЯ ОТЛАДЧИКА
+C
+C ОПРЕДЕЛЯЕМ НАЛИЧИЕ НОВОЙ ИНФОРМАЦИИ
+C В ПАКЕТЕ
+       , XTA ,NUM P .ФЛАГ ОТ БЛОКОВ
+       , UZA ,FORMER .НИЧЕГО НОВОГО
+       , WTC ,P BASE Э.CЧИTЫBAEM CTAPOE
+       , 032 ,N PACK .ЗНАЧЕНИЕ НОМЕРА
+       , ASN ,64+24 .ПАКЕТА
+       , ARX ,=3 .УВЕЛИЧИВАЕМ НА 3
+       , AAX ,=17 7777
+       , WTC ,P BASE Э.И ПEPEДAEM HA CM
+       , 132 ,N PACK
+       , ITA , .ОБНУЛЯЕМ ФЛАГ
+       , ATX ,NUM P .НАЛИЧИЯ ИНФОРМ.
+       , XTA ,P BASE Э.OФOPMЛЯEM CCЫЛKY
+       , WTC ,BEFOR B .НА ДАННЫЙ ПАКЕТ.
+       , 132 ,NEXT PCT
+       , ATX ,BEFOR B .ЗАПОМИНАЕМ БАЗУ
+       , WTC ,P BASE Э.BЫЧИCЛЯEM БAЗY
+       7, UTM ,BEG COM+1.ДЛЯ HOBOGO ПAKE-
+C       ТА
+       , ITA ,1 .ТА
+       , ATX ,P BASE Э
+ FORMER : 3, VLM ,WR PACK
+       , ITA , .ОБНУЛЯЕМ ССЫЛКУ
+       , WTC ,BEFOR B .В ПОСЛЕДНЕМ
+       , 132 ,NEXT PCT .ПАКЕТЕ
+C
+       , XTA ,DEB FLG .НЕТ ОТЛАДЧИКА
+       , UZA ,E WR
+ L     :10, VZM ,E WR .ПОВТОР.СЧИТЫВ.
+       10, 032 ,
+       , ASN ,64+24
+       10, UTC ,OT F .ДЛЯ ОТЛАДЧИКА
+       , ATX , .ДЛЯ ОТЛАДЧИКА
+       10, UTM ,-1
+       , UJ ,L
+ E WR  : , BSS ,
+       , BSS ,
+       , XTA ,=7707 0000 0001 0002
+       , *50 ,IN E50 .КОНЕЦ ЗАПИСИ
+       , STI ,13
+       , STI ,7
+       , STI ,6
+       , STI ,5
+       , STI ,4
+       , STI ,3
+       , STI ,2
+       , STI ,1
+       13, UJ ,
+C-------------------------------
+C
+C-------------------------------
+ P BASE Э: , BSS ,1
+ BEFOR B : , BSS ,1
+ NUM P   : , BSS ,1
+C
+ OT F    : , BSS ,300
+ PR PR1  : , Z00 ,TXT
+       , Z00 ,TXT+8
+       , Z00 ,
+       8, Z00 ,
+ TXT    : , GOST,27HТУ К-71 ЗАВЕРШИЛА РАБО-
+C       ТУ ПО
+       , CONT,24H ПPИKAЗY ПPEПOДABATEЛЯ
+C       '172.
+ PR PR2  : , Z00 ,TXT1
+       , Z00 ,TXT1+3
+       , Z00 ,
+       8, Z00 ,
+ TXT1   : , GOST,24HРАССИНХРОНИЗАЦИЯ ЗАПИ-
+C       И '172.
+       , END ,

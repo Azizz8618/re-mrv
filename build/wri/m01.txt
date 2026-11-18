@@ -1,0 +1,115 @@
+ RQTOCM  : , NAME,
+C-----------------------------------------------
+C
+C ЗАПИСЬ СООБЩЕНИЯ В БУФЕР ДЛЯ ПЕРЕДАЧИ
+C НА ОДНУ ИЗ СМ-2 ОТ МРВ.
+C
+C ОБРАЩЕНИЕ :
+C CALL RQTOCM(MASH,ARRAY,N),
+C ГДЕ: MASH - НОМЕР СМ-2, ДЛЯ КОТОРОЙ
+C        ГОТОВИТСЯ СООБЩЕНИЕ;
+C      ARRAY = МАССИВ СООБЩЕНИЯ;
+C      N - ДЛИНА СООБЩЕНИЯ (СЛОВ).
+C
+C-----------------------------------------------
+C
+ INT OUT : , SUBP,
+ LINE IN : , SUBP,   .УКАЗАТЕЛЬ ЗАПИСИ
+ LINE OUT: , SUBP,   .УКАЗАТЕЛЬ ЧТЕНИЯ
+C
+       , ITS ,13
+       , ITS ,  .БЛОКИР.-ПРЕРЫВ.
+       , CALL,INTOFF
+       , STI ,
+       , STI ,13
+       , STI ,9 .N
+       , STI ,10 .ARRAY
+       , STI ,11 .MASH
+ RQ TO CM: , BSS ,
+       , ITS ,13
+       , ITS ,1
+       , ITS ,2
+       , ITS ,3
+       , ITS ,7
+       7, BASE,*
+       11, XTS , .MASH
+       , ATX ,MASH
+       , U1A ,L1 .НОМ.МАШИНЫ ЗАДАН
+       , SJ , .0-Й НОМЕР МАШ.
+ L1     : , ITA , .ДЛЯ КОНТР.СУММЫ
+       , ATX ,KS
+       9, WTC , .N
+       1, VTM , .N
+       10, MTJ ,2 .ARRAY
+ L      : 2, XTA ,
+       , ARX ,KS
+       , ATX ,KS .КОНТР.СУММА
+C
+C ЗАПИСЬ ОДНОГО СЛОВА СООБЩЕНИЯ В БУФЕР
+C ДЛЯ ПЕРЕДАЧИ НА ОДНУ ИЗ СМ-2.
+C
+ L2     : 2, XTA , .КОД СООБЩЕНИЯ
+       , WTC ,MASH
+       3, VTM ,LINE IN-1 .АДРЕС УКАЗ. ЗА-
+C       ПИСИ
+       , WTC ,MASH
+       14, VTM ,LINE OUT-1 .АДРЕС УКАЗАТЕ-
+C       ЛЯ
+       , ATI ,13
+       10, VTM ,FLD B .BEGIN OF REQUEST
+       , ITA ,FLD B+1
+       , UTC ,14 .QUANT-OF PARAM.
+       14, UTM ,2 .FULL LENG-CH OF
+C       REQUEST
+       , U1A ,
+       , ITA ,14
+       , UTC ,LENG
+       , STX ,LENG
+       9, VTM ,RQ TO CM
+       , UJ ,L
+C---------------------------------------------
+       , BSS ,1
+ MASH  : , BSS ,1
+ KS    : , Z00 ,TEXT
+ PRT   : , Z00 ,TEXT+6
+       , Z00 ,
+       , Z00 ,LINE IN
+ DRI   : , Z00 ,LINE IN+5
+       , Z00 ,16
+       2, 021 ,2
+       9, Z00 ,TEXT1
+ PRT1  : , Z00 ,TEXT1+3
+       , Z00 ,
+       , Z00 ,
+       8, Z00 ,
+ PRI1  : 8, Z00 ,99
+       8, Z00 ,16
+       2, 021 ,4
+       9, Z00 ,
+ TEXT  : , GOST,39HПЕРЕПОЛНЕН БУФЕР СООБЩЕ-
+C       НИЙ. УКАЗАТЕЛИ '172.
+ TEXT1 : , GOST,20HСОДЕРЖИМОЕ БУФЕРОВ:'172'
+C       2.
+ LENG  : , BSS ,1
+ FLD B : , LOG ,11 .КОД КОМАНДЫ
+ FLD   : , LOG ,  .КОЛ-ВО ПАРАМ.
+ SHIFT : , INT ,32 .ТЕКСТ
+       , INT ,16
+       , INT ,0
+ PRINT10: , Z00 ,TEX10
+       , Z00 ,TEX10+9
+       , Z00 ,
+       8, Z00 ,
+ TEX10 : , GOST,18HПРИ ВЫДАЧЕ КОМАНДА
+       , GOST,18HВ ОБЩУЮ ПАМЯТЬ '032'ЭМ
+       , GOST,23HЕКТРОНИКИ-60'033' ИЗ М
+C       ПВ. '172'.
+ PRINTK: , Z00 ,TEK K
+       , Z00 ,TEK K+9
+       , Z00 ,
+       8, Z00 ,
+ TEK K : , GOST,18HСООБЩИТЕ СИСТЕМНОМ
+       , GOST,18HУ ПРОГРАММИСТУ ИЛИ
+       , GOST,20H ПЕРЕЗАПУСТИТЕ ТУ. '172'
+C       2'.
+       , END ,

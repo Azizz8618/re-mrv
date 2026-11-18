@@ -1,0 +1,1086 @@
+шифр 419999 зс5^
+лен 41(2048)^
+eeв1а3
+*name WRILIST
+*assembler
+ WRITE  : , NAME,
+C----------------------------------------------------------
+C 0 - 6 ЯЧЕЙКИ КАЖДОГО ПАКЕТА - СЛУ-
+C ЖЕБНЫЕ, ИСПОЛЬЗУЮТСЯ Э-60.
+C РАСПРЕДЕЛЕНИЕ ОСТАЛЬНОЙ ПАМЯТИ ПАКЕ-
+C ТА:
+C  - 7B - ЭЛЕМЕНТ СПИСКА ПАКЕТОВ;
+C  - 10B - НОМЕР СМ-2;
+C  - 11B - НОМЕР ПАКЕТА;
+C  - 12B И ДАЛЕЕ - СОДЕРЖИМОЕ ПАКЕТА.
+C
+C СТРУКТУРА ПАКЕТА, ПЕРЕДАВАЕМОГО НА
+C СМ-2:
+C  - 0 - КОД КОМАНДЫ, =0- КОНЕЦ ПАКЕТА;
+C  - 1 - КОЛИЧЕСТВО ПАРАМЕТРОВ КОМАНДЫ
+C       (N);
+C  ......  ПАРАМЕТРЫ КОМАНДЫ;
+C  ......
+C  - N+2 - КОД СЛЕДУЮЩЕЙ КОМАНДЫ;
+C  ......
+C ......
+C - БЛОКИ ИНФОРМАЦИИ ОТ МОДЕЛЕЙ ПС.
+C
+C СТРУКТУРА БЛОКА:
+C - ТЕЛО БЛОКА;
+C - ТЕКУЩИЙ НОМЕР БЛОКА.
+ LINK  :LC,BLOCK,READ DOG,CONT DOG
+       , CONT,READ PM,READ PS(4)
+C АДРЕСА ТОЧЕК ЗАПУСКА ЗАДАЧ
+       , CONT,STRT PM,STRT PS(4)
+       , CONT,INT ERR.OБPAБ. ПPEPЫBAHИЙ
+C       В МРВ
+       , CONT,N PS.HOMEP OБCЛYЖИBAEMOЙ
+C       ПОДСИСТЕМЫ
+       , CONT,AV PS.ABAPИЯ B ПC
+       , CONT,WORK PS
+       , CONT,END PS(4).ФЛAG ЗABEPШAEMO
+C       Й ПОДСИСТЕМЫ
+       , CONT,STOP F.ФЛAG ЗABEPШEHИЯ PA
+C       БОТЫ ТУ
+C
+C ИНФОРМАЦИЯ О БЛОКАХ, ВХОДЯЩИХ В СОС-
+C ТАВ ПАКЕТА, ХРАНИТСЯ В МАССИВАХ ОПИСАНИЙ
+C ПАКЕТОВ КАЖДОЙ ИЗ ВНЕШНИХ МАШИН:
+C
+C ПО ВЫДАЧЕ ИЗ БЭСМ-6:
+C
+ DESK B1 :LC,BLOCK,Q BLB1,T DESKB1
+ DESK B2 :LC,BLOCK,Q BLB2,T DESKB2
+ DESK B3 :LC,BLOCK,Q BLB3,T DESKB3
+C ГДЕ Q BLB - КОЛИЧЕСТВО БЛОКОВ,
+C T DESKB - ОПИСАТЕЛИ БЛОКОВ СЛЕДУЮЩЕЙ
+C           СТРУКТУРЫ:
+ *0     : , BLOCK,A BLOCK .AДPEC HAЧAЛA БЛO-
+C       КА
+ *1     : , CONT,NUM PS.HOMEP ПOДCИCTEMЫ
+ *2     : , CONT,A PROG,AДPEC ПPOGPAMMЫ
+C       ПЕРЕКОДИРОВАНИЯ
+C       БЛОКА
+ *3     : , CONT,A TABL.AДPEC TAБЛ. CBOЙCTB БЛOKA
+C       В ПАКЕТЕ
+ *4     : , CONT,LENG.ДЛИHA БЛOKA B CЛOBAX
+C       РАЗР. СЛОВА В ПАКЕТЕ
+ *5     : , CONT,C NUMR.ПEPEДAHHЫЙ HOMEP
+C       ЭКЗЕМПЛЯРА НОМЕРА
+ *6     : , CONT,PERIOD.ПEPИOД BЫДAЧИ БЛOKA
+C
+ OUT FLD1 : , LC ,1000 .МАССИВЫ ДЛЯ
+ OUT FLD2 : , LC ,1200 .МЕЖУТОЧНОЙ БУФЕРИ-
+ OUT FLD3 : , LC ,1000 .ЗАЦИИ ВЫДАВАЕМОЙ ИНФОР-
+C       МАЦИИ ОТЛАДЧИКУ
+ M FL    : , LC ,4000 .ДЛЯ ОТЛАДЧИКА
+C
+C ДЛИНЫ И БАЗЫ ПАКЕТОВ ВЫДАЧИ ПО МАШИНАМ
+ POI PAC :LC,BLOCK,L PACKET(3).ДЛИHЫ
+C
+ *DEBAR* :LC,BLOCK,DEB FLG.ФЛAG OTЛAДKИ
+       , CONT,(9)
+       , CONT,B COM(3)
+       , CONT,M FLD
+       , CONT,I FLD(7)
+ LINE IN : , SUBP,   .УКАЗАТЕЛИ ЧТЕНИЯ
+ LINE OUT: , SUBP,   .И ЗАПИСИ БУФЕРА
+C       КОМАНД.
+ IN E50  : , EQU ,133B
+C
+ NEXT PCT: , EQU ,7B
+ N MASH  : , EQU ,10B
+ N PACK  : , EQU ,11B
+ BEG COM : , EQU ,12B
+C
+ LENG E60: , EQU ,32
+       8, BASE,*
+C
+C-------------------------------------------------------
+C ЗАПИСЬ КОМАНД В ОБЩУЮ ПАМЯТЬ.
+C-------------------------------------------------------
+C
+C УСТАНОВКА НАЧАЛЬНЫХ ЗНАЧЕНИЙ.
+C
+       , ITA ,
+       , ATX ,P BASE Э.БAЗA 1-GO ПAKETA
+C       В Э-60
+       , ATX ,BEFOR B .БАЗА ПРЕДИД. ПА-
+C       КЕТА
+       3, VTM ,-3
+       , NTR ,3   .СЧЕТЧИК МАШИН
+C
+C ЗАПИСЬ БЛОКА КОМАНД ДЛЯ ОДНОЙ МАШИНЫ
+ WR PACK : 3, UTC ,3
+       14, VTM ,  .НОМЕР МАШИНЫ
+       , ITA ,14
+       , WTC ,P BASE Э
+       , 132 ,N MASH .В ПАКЕТ
+       14, V1M ,WP1 .ДЛЯ СМ-2
+C
+C ПАКЕТ ДЛЯ Э-60
+       , XTA ,STOP F .ОТ ОТЛАЧИКА
+       , UZA ,WP 2
+       , XTA ,=30 .ОТКЛЮЧИ ОТ СЕТИ
+       , 132 ,12B
+       , XTA ,=1
+       , 132 ,13B .НОМ.МАШ.
+       , XTA ,=4
+       , 132 ,14B
+       , XTA ,=35 .KS
+       , 132 ,15B .0001 0002
+       , XTA ,=7707 0000 0001 0002
+       , *50 ,IN E50 .КОНЕЦ ЗАПИСИ
+       , PRINT,PR PR1
+       , SJ ,
+ WP 2  : , 032 ,5 .ЧТ.КОДА ПРЕРЫВ.
+       , ASN ,64+24
+       , AAX ,=1 0000 .ЗАПИСЬ
+       , U1A ,WP 3
+       , *64 ,PR PR2 .СЕАНС ПРОПУЩЕН -
+       , ITA ,  .ЗАПИСЬ НЕ ДЕЛАЕМ
+       , CALL,REST
+ WP 3  :14, VTM ,LENG E60
+       , ITA ,14
+       , ATX ,P BASE Э.БAЗA ДЛЯ 1Й CM2
+       3, VLM ,WR PACK
+ WP1   :14, WTC ,LINE OUT-1 .АДРЕС УКАЗАТЕЛЯ
+       4, VTM ,  .ЧТЕНИЯ БУФЕРА
+C       СООБЩЕНИЙ
+       1, VTM ,  .СЧЕТЧИК ПО БЛОКУ
+C       КОМАНД В Э-60
+ COM LP: , BSS ,
+       , ITA ,4
+       14, UTC ,LINE IN-1
+       , AEX ,  .УКАЗАТЕЛЬ ЗАПИСИ
+C       БУФЕРА СООБЩ.
+       , UZA ,NEXT BUF.HET KOMAHДA ДЛЯ
+C       ДАННОЙ МАШИНЫ
+       , ATX ,NUM P
+C ПЕРЕПИСЫВАЕМ КОМАНДУ В ПАКЕТ
+       4, XTA ,
+       , ATI ,4 .АДРЕС СЛЕД.СЛОВА
+C       БУФЕРА СООБЩЕНИЙ
+       4, XTA ,
+       , ASN ,64+15 .ВЫДЕЛЯЕМ КОД КО-
+C       МАНДЫ
+       14, WTC ,A OUTF-1 .ДЛЯ ОТЛАДЧИКА
+       1, ATX ,
+       , WTC ,P BASE Э
+       1, 132 ,BEG COM
+       1, UTM ,1 .ЗА СЛЕД. СЛОВОМ
+       , UJ ,COM LP .БЛОКА КОМАНА
+ NEXT BUF: , ITA ,4
+       14, UTC ,LINE OUT-1.HOBOE ЗHAЧEHИE
+       , ATX ,  .УКАЗАТЕЛЯ ЧТЕНИЯ
+       , ITA ,  .ЗАПИСЫВАЕМ НУЛЕ-
+C       ВОЙ КОД КОМАНДЫ
+       14, WTC ,A OUTF-1 .ДЛЯ ОТЛАДЧИКА
+       1, ATX ,
+       , WTC ,P BASE Э.KAK ПPИЗHAK KOH-
+C       ЦА БЛОКА КОМАНА
+       1, 132 ,BEG COM .ДЛЯ СМ-2
+       , WTC ,P BASE Э
+       1, UTC ,BEG COM+1
+       10, VTM ,  .ДЛЯ БЫСТР. ЗАПИСИ
+C       НЕТ ОПИСАНИЯ
+C
+C-------------------------------------------------------
+C ЗАПИСЬ ДАННЫХ В ОБЩУЮ ПАМЯТЬ.
+C-------------------------------------------------------
+C
+C ПЕРЕПИСЫВАЕМ ИНФОРМАЦИЮ, ВЫРАБОТАННУЮ
+C МОДЕЛЯМИ ПС, И ПРИВЕДЕННУЮ К ТРЕБУЕМОМУ ВИДУ
+C МИ ПЕРЕКОДИРОВАНИЯ К ТРЕБУЕМОМУ ВИДУ
+C В ПРОМЕЖУТОЧНЫХ БУФЕРАХ OUT FLD1,2,3.
+C
+       3, UTC ,2 .НОМЕР МАШИНЫ
+       , WTC ,TABL DB
+       4, VTM ,  .АДРЕС ТАБЛ. ОПИ-
+C       САНИЯ ПАКЕТА ДАННЫХ
+       4, WTC ,
+       5, VTM ,  .КОЛИЧ. БЛОКОВ В
+C       ПАКЕТЕ
+       5, VZM ,E CKL .НЕТ БЛОКОВ
+       4, UTM ,1 .ОПИСАНИЕ 1-ГО БЛОКА
+       4, UTM ,7 .БЛОК КО-
+       5, UTM ,-1 .МАНДА ПРОПУСКАЕМ,
+ DATA CKL: , BSS,
+       5, VZM ,E CKL .НЕТ БЛОКОВ
+       4, WTC ,A PROG .АДРЕС ПРОГРАММЫ
+       6, VTM ,  .ПЕРЕКОДИРОВАНИЯ
+       6, VZM ,NEXT BLC .ПУСТОЙ БЛОК
+       4, WTC ,A BLOCK
+       6, VTM ,  .ОТН. АДРЕС БЛОКА
+       6, VZM ,E CKL .ОШ. В ОПИСАНИИ
+       , WTC ,P BASE Э.+БAЗA ПAKETA
+       6, UTM ,  .= КУДА ПИСАТЬ
+C       БЛОК.
+       3, UTC ,2
+       , WTC ,TAB FLD
+       9, VTM ,  .ПРОМЕЖУТОЧНЫЙ
+C       БУФЕР
+       4, WTC ,A BLOCK .=ОТН.АДРЕС БЛОКА
+       9, UTM ,  .= ОТКУДА ЧИТАТЬ
+C       БЛОК
+       4, WTC ,LENG
+       7, VTM ,  .ДЛИНА БЛОКА В
+C       СЛОВАХ СМ-2
+       7, VIM ,DC 1
+       , CALL,OKNO
+       3, UTC ,2
+       14, VTM ,
+       , ITA ,14
+       , ATX ,T9
+       , *64 ,PRINT9
+       , *64 ,PRINTK
+       , UJ ,E CKL .БЛОК 0-Й ДЛИНЫ
+ DC 1   : , BSS,
+       4, WTC ,LENG
+       9, XTA ,  .НОМЕР БЛОКА НО-
+C       ВЫЯ
+C  , CALL,OKNO
+       4, UTC ,C NUMR .ПЕРЕДАННЫЙ НОМЕР
+       , AEX ,  .БЛОКА
+       , AAX ,=17 7777
+       , UZA ,NEXT BLC .НЕТ ИНФОРМАЦИИ
+C       ПО ЭТОМУ БЛОКУ
+       , ATX ,NUM P
+       4, WTC ,LENG
+       9, XTA ,  .НОВЫЙ НОМЕР
+       4, UTC ,C NUMR
+       , ATX ,  .ДЛЯ СЛЕД. ШАГА
+ BLC CKL :9, XTA ,
+       , ARX ,  .СЛ. НЕ МЕНЯЛОСЬ
+       , U1A ,NEXT W .СЛ. НЕ МЕНЯЛОСЬ
+       6, 132 ,  .НА СМ=2
+       , ITA ,
+       9, ATX ,
+ NEXT W : , BSS ,
+       6, UTM ,1
+       9, UTM ,1
+       7, UTM ,-1
+       7, V1M ,BLC CKL .ПОСЛЕДНИМ ПИШЕМ
+       4, XTA ,C NUMR .ШАХМАТНЫЙ КОД+
+       , AOX ,=5 2400 .НОМЕР БЛОКА
+       6, 132 ,  .НОМЕР БЛОКА
+ NEXT BLC: 4, UTM ,7 .ОПИСАНИЕ СЛЕД.
+C       БЛОКА
+       5, UTM ,-1
+       , UJ ,DATA CKL .НА СЛЕД. БЛОК
+ E CKL  : , BSS ,
+       3, UTC ,L PACKET+2
+       , XTA ,  .ДЛИНА ПАКЕТА
+       , UZA ,E CKL 1 .НЕТ ОПИСАНИЯ
+       , ATI ,10 .ДЛИНА ПАКЕТА
+       , WTC ,P BASE Э.*CTAPAЯ БAЗA=
+       10, UTM , .НОВАЯ БАЗА ПАКЕ-
+C       ТА
+ E CKL 1 : , BSS ,
+C ОПРЕДЕЛЯЕМ НАЛИЧИЕ НОВОЙ ИНФОРМАЦИИ
+C В ПАКЕТЕ
+       , XTA ,NUM P .ФЛАГ ОТ БЛОКОВ
+       , UZA ,FORMER .НИЧЕГО НОВОГО
+       3, XTA ,N PACKET+2.CTAPOE ЗHAЧEHИE
+C       НОМЕРА ПАКЕТА
+       , ARX ,=1 .УВЕЛИЧИВАЕМ НА 1
+       3, AAX ,=17 7777
+       3, ATX ,N PACKET+2.ЗAПOMИHAEM
+       , WTC ,P BASE Э.И ПEPEДAEM HA CM
+       , 132 ,N PACK
+       , ITA , .ОБНУЛЯЕМ ФЛАГ
+       , ATX ,NUM P .НАЛИЧИЯ ИНФОРМ.
+ FORMER : , XTA ,P BASE Э.OФOPMЛЯEM CCЫЛKY
+       , WTC ,BEFOR B .НА ДАННЫЙ ПАКЕТ
+       , 132 ,NEXT PCT .ИЗ ПPEДЫДYЩEGO
+       , ATX ,BEFOR B .ДЛЯ СЛЕД.ССЫЛКИ
+       , ITA ,210 .БАЗА СЛЕД. ПАКЕТА
+       , ATX ,P BASE Э
+       3, VLM ,WR PACK
+       , ITA ,
+       , WTC ,BEFOR B .ОБНУЛЯЕМ ССЫЛКУ
+       , 132 ,NEXT PCT .В ПОСЛЕДНЕМ ПА-
+C       КЕТЕ
+C , XTA ,DEB FLG .НЕТ ОТЛАДЧИКА
+       , U1A ,E WR
+ L     :10, VZM ,E WR .ПОВТОР.СЧИТЫВ.
+       10, 032 ,
+       , ASN ,64+24
+       10, UTC ,M FL .АНАЛИЗ
+       , ATX , .ДЛЯ ОТЛАДЧИКА
+       10, UTM ,-1
+       , UJ ,L
+ E WR  : , BSS,
+       , XTA ,=7707 0000 0001 0002
+       , *50 ,IN E50 .КОНЕЦ ЗАПИСИ
+       , ITA ,
+       , CALL,REST
+C===========================================
+C
+ P BASE Э: , BSS ,1
+ BEFOR B : , BSS ,1
+ NUM P   : , BSS ,1
+ N PACKET: , BSS ,3
+ PR PR1  : , Z00 ,TXT
+       8, Z00 ,TXT+8
+       , Z00 ,
+       8, Z00 ,
+ TXT    : , GOST,27HТУ К-71 ЗАВЕРШИЛА РАБО-
+C       ТУ ПО
+       , CONT,24H ПPИKAЗY OTЛAДЧИKA.
+C       172.
+ PR PR2 : , Z00 ,TXT1
+       , Z00 ,TXT1+3
+       , Z00 ,
+       8, Z00 ,
+ TXT1   : , GOST,24HРАССИНХРОНИЗАЦИЯ ЗАПИС-
+C       ИЯ 172.
+ OUT F1 : , BSS ,700
+ OUT F2 : , BSS ,100
+ OUT F3 : , BSS ,100
+ TABL DB: , Z00 ,
+       , Z00 ,DESK B1
+       8, Z00 ,
+       , Z00 ,DESK B2
+       8, Z00 ,
+       , Z00 ,DESK B3
+       , Z00 ,
+ TAB FLD: , Z00 ,
+       , Z00 ,OUT FLD1
+       , Z00 ,
+       , Z00 ,OUT FLD2
+       , Z00 ,
+       , Z00 ,OUT FLD3
+ PRINT9 : , Z00 ,TEX9
+       , Z00 ,T9
+       , Z00 ,
+       , Z00 ,
+       , Z00 ,
+       2, 111 ,1
+       8, 000 ,0
+ TEX9   : , GOST,18HПРОЦЕСС WRITE. НУЛЕ
+       , GOST,18HВАЯ ДЛИНА БЛОКА В
+       , GOST,18HОПИСАНИИ ПРИ ВЫДАЧ
+       , GOST,19HЕ БЛОКА ДЛЯ МАШИНЫ 172
+ T9     : , BSS ,1
+ PRINTK : , Z00 ,TEK K
+       , Z00 ,TEK K+9
+       , Z00 ,
+       8, Z00 ,
+ TEK K  : , GOST,18HСООБЩИТЕ СИСТЕМНОМ
+       , GOST,18HУ ПРОГРАММИСТУ ИЛИ
+       , GOST,20H ПЕРЕЗАПУСТИТЕ ТУ. 17
+C       2.
+ A OUTF : , Z00 ,
+       , Z00 ,OUT F1
+       , Z00 ,
+       , Z00 ,OUT F2
+       , Z00 ,
+       , Z00 ,OUT F3
+       , Z00 ,
+       , Z00 ,M FL
+       : 4, SET ,A OUTF
+       1, , B COM
+       , END ,
+ RQTOCM  : , NAME,
+C-----------------------------------------------
+C
+C ЗАПИСЬ СООБЩЕНИЯ В БУФЕР ДЛЯ ПЕРЕДАЧИ
+C НА ОДНУ ИЗ СМ-2 ОТ МРВ.
+C
+C ОБРАЩЕНИЕ :
+C CALL RQTOCM(MASH,ARRAY,N),
+C ГДЕ: MASH - НОМЕР СМ-2, ДЛЯ КОТОРОЙ
+C        ГОТОВИТСЯ СООБЩЕНИЕ;
+C      ARRAY = МАССИВ СООБЩЕНИЯ;
+C      N - ДЛИНА СООБЩЕНИЯ (СЛОВ).
+C
+C-----------------------------------------------
+C
+ INT OUT : , SUBP,
+ LINE IN : , SUBP,   .УКАЗАТЕЛЬ ЗАПИСИ
+ LINE OUT: , SUBP,   .УКАЗАТЕЛЬ ЧТЕНИЯ
+C
+       , ITS ,13
+       , ITS ,  .БЛОКИР.-ПРЕРЫВ.
+       , CALL,INTOFF
+       , STI ,
+       , STI ,13
+       , STI ,9 .N
+       , STI ,10 .ARRAY
+       , STI ,11 .MASH
+ RQ TO CM: , BSS ,
+       , ITS ,13
+       , ITS ,1
+       , ITS ,2
+       , ITS ,3
+       , ITS ,7
+       7, BASE,*
+       11, XTS , .MASH
+       , ATX ,MASH
+       , U1A ,L1 .НОМ.МАШИНЫ ЗАДАН
+       , SJ , .0-Й НОМЕР МАШ.
+ L1     : , ITA , .ДЛЯ КОНТР.СУММЫ
+       , ATX ,KS
+       9, WTC , .N
+       1, VTM , .N
+       10, MTJ ,2 .ARRAY
+ L      : 2, XTA ,
+       , ARX ,KS
+       , ATX ,KS .КОНТР.СУММА
+C
+C ЗАПИСЬ ОДНОГО СЛОВА СООБЩЕНИЯ В БУФЕР
+C ДЛЯ ПЕРЕДАЧИ НА ОДНУ ИЗ СМ-2.
+C
+ L2     : 2, XTA , .КОД СООБЩЕНИЯ
+       , WTC ,MASH
+       3, VTM ,LINE IN-1 .АДРЕС УКАЗ. ЗА-
+C       ПИСИ
+       , WTC ,MASH
+       14, VTM ,LINE OUT-1 .АДРЕС УКАЗАТЕ-
+C       ЛЯ
+       , ATI ,13
+       10, VTM ,FLD B .BEGIN OF REQUEST
+       , ITA ,FLD B+1
+       , UTC ,14 .QUANT-OF PARAM.
+       14, UTM ,2 .FULL LENG-CH OF
+C       REQUEST
+       , U1A ,
+       , ITA ,14
+       , UTC ,LENG
+       , STX ,LENG
+       9, VTM ,RQ TO CM
+       , UJ ,L
+C---------------------------------------------
+       , BSS ,1
+ MASH  : , BSS ,1
+ KS    : , Z00 ,TEXT
+ PRT   : , Z00 ,TEXT+6
+       , Z00 ,
+       , Z00 ,LINE IN
+ DRI   : , Z00 ,LINE IN+5
+       , Z00 ,16
+       2, 021 ,2
+       9, Z00 ,TEXT1
+ PRT1  : , Z00 ,TEXT1+3
+       , Z00 ,
+       , Z00 ,
+       8, Z00 ,
+ PRI1  : 8, Z00 ,99
+       8, Z00 ,16
+       2, 021 ,4
+       9, Z00 ,
+ TEXT  : , GOST,39HПЕРЕПОЛНЕН БУФЕР СООБЩЕ-
+C       НИЙ. УКАЗАТЕЛИ '172.
+ TEXT1 : , GOST,20HСОДЕРЖИМОЕ БУФЕРОВ:'172'
+C       2.
+ LENG  : , BSS ,1
+ FLD B : , LOG ,11 .КОД КОМАНДЫ
+ FLD   : , LOG ,  .КОЛ-ВО ПАРАМ.
+ SHIFT : , INT ,32 .ТЕКСТ
+       , INT ,16
+       , INT ,0
+ PRINT10: , Z00 ,TEX10
+       , Z00 ,TEX10+9
+       , Z00 ,
+       8, Z00 ,
+ TEX10 : , GOST,18HПРИ ВЫДАЧЕ КОМАНДА
+       , GOST,18HВ ОБЩУЮ ПАМЯТЬ '032'ЭМ
+       , GOST,23HЕКТРОНИКИ-60'033' ИЗ М
+C       ПВ. '172'.
+ PRINTK: , Z00 ,TEK K
+       , Z00 ,TEK K+9
+       , Z00 ,
+       8, Z00 ,
+ TEK K : , GOST,18HСООБЩИТЕ СИСТЕМНОМ
+       , GOST,18HУ ПРОГРАММИСТУ ИЛИ
+       , GOST,20H ПЕРЕЗАПУСТИТЕ ТУ. '172'
+C       2'.
+       , END ,
+ RUF COM : , NAME,
+C-------------------------------
+C СТРУКТУРА СЛОВА КОЛЬЦЕВОГО БУФЕРА
+C СООБЩЕНИЯ В БЭСМ-6:
+C 1 - 15 РР. = АДРЕС СЛЕД.СЛОВА БУФЕРА;
+C 16 - 31 РР. = КОД СООБЩЕНИЯ.
+C
+ LINE IN : , ENTRY,
+ LINE IN : , Z00 ,   .УКАЗАТЕЛИ ЗАПИСИ
+       , Z00 ,BUF1
+       : , Z00 ,
+       , Z00 ,BUF2
+       : , Z00 ,
+       , Z00 ,BUF3
+ LINE OUT: , ENTRY,
+ LINE OUT: , Z00 ,   .УКАЗАТЕЛИ ЧТЕНИЯ
+       , Z00 ,BUF1
+       : , Z00 ,
+       , Z00 ,BUF2
+       : , Z00 ,
+       , Z00 ,BUF3
+ BUF1  : , BSS ,100
+ BUF2  : , BSS ,100
+ BUF3  : , BSS ,100
+       , END ,
+ WRITE D : , NAME,
+C-------------------------------
+C ЗАПИСЬ ПТ ГЛАВНОЙ ЗАДАЧИ
+C
+C-------------------------------
+ LINE IN : , SUBP,
+ LINE OUT: , SUBP,
+C
+ LINK  :LC,BLOCK,READ DOG,CONT DOG
+       , CONT,READ PM,READ PS(4)
+C АДРЕСА ТОЧЕК ЗАПУСКА ЗАДАЧ
+       , CONT,STRT PM,STRT PS(4)
+       , CONT,INT ERR.OБPAБ. ПPEPЫBAHИЙ
+C       В МРВ
+       , CONT,NUM PS.HOMEP ЗAGPYЖAEMOЙ
+C       ПОДСИСТЕМЫ
+       , CONT,AV PS.HOMEP ABAPИЙHOЙ ПOД
+C       СИСТЕМЫ
+       , CONT,WORK PS.HOMEP BЫПOЛHЯEMOЙ
+C       ПОДСИСТЕМЫ
+       , CONT,END PS(4).ФЛAG ЗABEPШAEMO
+C       Й ПОДСИСТЕМЫ
+       , CONT,STOP F.ПPИЗHAK ЗABEPШEHИЯ
+C       РАБОТЫ ТУ
+ *DEBAR*:LC,BLOCK,DEB FLG.ФЛAG OTЛAДKИ
+C АДРЕСА МАССИВОВ ДЛЯ ОТЛАДЧИКА
+       , CONT,DES M(3).OПИCAHИE ПPИEMA
+       , CONT,DES B(3).OПИCAHИE BЫДAЧИ
+       , CONT,C COM(3).KOMAHДЫ CM-2
+       , CONT,B COM(3).KOMAHДЫ БЭCM-6
+       , CONT,M FLD(3).BЫДAЧA HA BCE CM
+       , CONT,I FLD(7).ПPИEM OT CM
+ CH PS  :LC,BLOCK,CH MPB,CPS(4)
+C
+ IN E50 : , EQU ,133B
+C
+ NEXT PCT: , EQU ,7B
+ N MASH  : , EQU ,10B
+ N PACK  : , EQU ,11B
+ BEG COM : , EQU ,12B
+C
+ LENG E60: , EQU ,32
+C
+       , ITS ,1
+       , ITS ,2
+       , ITS ,3
+       , ITS ,4
+       , ITS ,5
+       , ITS ,6
+       , ITS ,7
+       , ITS ,13
+       , ITS ,
+ BAS    : 8, BASE,BAS
+C-------------------------------
+C
+C ЗАПИСЬ КОМАНА В ОБЩУЮ ПАМЯТЬ
+C
+C-------------------------------
+C
+C УСТАНОВКА НАЧАЛЬНЫХ ЗНАЧЕНИЙ.
+C
+       , ITA ,
+       , ATX ,P BASE Э.БAЗA 1-GO ПAKETA
+C       В Э-60
+       , XTA ,BEFOR B .БАЗА ПРЕДИД. ПАКЕТА
+       3, VTM ,-3 .СЧЕТЧИК МАШИН
+       , NTR ,3
+ WR PACK: 3, UTC ,3
+       14, VTM , .НОМЕР МАШИНЫ
+       , ITA ,14
+       , WTC ,P BASE Э
+       , 132 ,N MASH .В ПАКЕТ
+       14, V1M ,W P1 .НЕ Э-60
+C
+C ПАКЕТ ДЛЯ Э-60
+       , XTA ,STOP F .ОТ DOG
+       , U1A ,WP 2
+       , XTA ,=30
+       , 132 ,12B .ОТКЛЮЧИ ОТ СЕТИ
+       , XTA ,=1
+       , 132 ,13B .НОМ.МАШ.
+       , XTA ,=4
+       , 132 ,14B
+       , XTA ,=35 .KS
+       , 132 ,15B
+       , XTA ,=7707 0000 0001 0002
+       , *50 ,IN E50 .КОНЕЦ ЗАПИСИ
+       , PRINT,PR PR1
+       , SJ ,
+       , XTA ,CH MPB
+       , ASN ,64-4
+       , AAX ,=7700
+       , AOX ,=7705 0000 0000 0002
+       , *50 ,IN E50 .ОТКАЗ ОТ НЕРЕЗИ-
+C       ДА
+       , SJ ,
+ WP 2  : , 032 ,5 .ЧТ.КОДА ПРЕРЫВ.
+       , ASN ,64+24
+       , AAX ,=1 0000 .ПИСАТЬ
+       , U1A ,WP 3
+       , *64 ,PR PR2 .СЕАНС ЗАПИГИ
+       , ITA , .ПРИПУЩЕН
+       , UJ ,E WR
+ WP 3  :14, VTM ,LENG E60
+       , ITA ,14
+       , ATX ,P BASE Э.HOBAЯ БAЗA
+       3, VTM ,WR PACK
+ W P1  :14, UTC ,LINE OUT-1
+       4, VTM , .АДРЕС УКАЗАТЕЛЯ
+C       ЧТЕНИЯ БУФЕРА
+C       СООБЩЕНИЯ
+       1, VTM , .СЧЕТЧИК ПО БЛОКУ
+C       КОМАНА В Э-60
+ COM LP: , BSS ,
+       , ITA ,4
+       14, UTC ,LINE IN-1
+       , AEX , .УКАЗАТЕЛЬ ЗАПИСИ
+C       БУФЕРА СООБЩ.
+       , UZA ,NEXT BUF.HET KOMAHДA ДЛЯ
+C       ДАННОЙ МАШИНЫ
+       , ATX ,NUM P
+C ПЕРЕПИСЫВАЕМ КОМАНДУ В ПАКЕТ
+       4, XTA ,
+       , ATI ,4 .АДРЕС СЛЕД.СЛОВА
+C       БУФЕРА СООБЩЕНИЙ
+       4, XTA ,
+       , ASN ,64+15 .ВЫДЕЛЯЕМ КОД КО-
+C       МАНДЫ
+       , WTC ,P BASE Э
+       1, 132 ,BEG COM
+       1, UTM ,1
+       , UJ ,COM LP .ЗА СЛЕД. СЛОВОМ
+C       БЛОКА КОМАНА
+ NEXT BUF: , ITA ,4
+       14, UTC ,LINE OUT-1.HOBOE ЗHAЧEHИE
+C       УКАЗ. ЧТЕНИЯ
+       , ATX ,
+       , ITA , .ЗАПИСЫВАЕМ НУЛЕ-
+C       ВОЙ КОД КОМАНДЫ
+       , WTC ,P BASE Э.KAK ПPИЗHAK KOH-
+C       ЦА БЛОКА КОМАНА
+       1, 132 ,BEG COM .
+       1, UTC ,BEG COM+1
+       10, VTM , .ДЛЯ ОТЛАДЧИКА
+C
+C ОПРЕДЕЛЯЕМ НАЛИЧИЕ НОВОЙ ИНФОРМАЦИИ
+C В ПАКЕТЕ
+       , XTA ,NUM P .ФЛАГ ОТ БЛОКОВ
+       , UZA ,FORMER .НИЧЕГО НОВОГО
+       , WTC ,P BASE Э.CЧИTЫBAEM CTAPOE
+       , 032 ,N PACK .ЗНАЧЕНИЕ НОМЕРА
+       , ASN ,64+24 .ПАКЕТА
+       , ARX ,=3 .УВЕЛИЧИВАЕМ НА 3
+       , AAX ,=17 7777
+       , WTC ,P BASE Э.И ПEPEДAEM HA CM
+       , 132 ,N PACK
+       , ITA , .ОБНУЛЯЕМ ФЛАГ
+       , ATX ,NUM P .НАЛИЧИЯ ИНФОРМ.
+       , XTA ,P BASE Э.OФOPMЛЯEM CCЫЛKY
+       , WTC ,BEFOR B .НА ДАННЫЙ ПАКЕТ.
+       , 132 ,NEXT PCT
+       , ATX ,BEFOR B .ЗАПОМИНАЕМ БАЗУ
+       , WTC ,P BASE Э.BЫЧИCЛЯEM БAЗY
+       7, UTM ,BEG COM+1.ДЛЯ HOBOGO ПAKE-
+C       ТА
+       , ITA ,1 .ТА
+       , ATX ,P BASE Э
+ FORMER : 3, VLM ,WR PACK
+       , ITA , .ОБНУЛЯЕМ ССЫЛКУ
+       , WTC ,BEFOR B .В ПОСЛЕДНЕМ
+       , 132 ,NEXT PCT .ПАКЕТЕ
+C
+       , XTA ,DEB FLG .НЕТ ОТЛАДЧИКА
+       , UZA ,E WR
+ L     :10, VZM ,E WR .ПОВТОР.СЧИТЫВ.
+       10, 032 ,
+       , ASN ,64+24
+       10, UTC ,OT F .ДЛЯ ОТЛАДЧИКА
+       , ATX , .ДЛЯ ОТЛАДЧИКА
+       10, UTM ,-1
+       , UJ ,L
+ E WR  : , BSS ,
+       , BSS ,
+       , XTA ,=7707 0000 0001 0002
+       , *50 ,IN E50 .КОНЕЦ ЗАПИСИ
+       , STI ,13
+       , STI ,7
+       , STI ,6
+       , STI ,5
+       , STI ,4
+       , STI ,3
+       , STI ,2
+       , STI ,1
+       13, UJ ,
+C-------------------------------
+C
+C-------------------------------
+ P BASE Э: , BSS ,1
+ BEFOR B : , BSS ,1
+ NUM P   : , BSS ,1
+C
+ OT F    : , BSS ,300
+ PR PR1  : , Z00 ,TXT
+       , Z00 ,TXT+8
+       , Z00 ,
+       8, Z00 ,
+ TXT    : , GOST,27HТУ К-71 ЗАВЕРШИЛА РАБО-
+C       ТУ ПО
+       , CONT,24H ПPИKAЗY ПPEПOДABATEЛЯ
+C       '172.
+ PR PR2  : , Z00 ,TXT1
+       , Z00 ,TXT1+3
+       , Z00 ,
+       8, Z00 ,
+ TXT1   : , GOST,24HРАССИНХРОНИЗАЦИЯ ЗАПИ-
+C       И '172.
+       , END ,
+ ROTOCM D: , NAME,
+ DEB FLG : , BSS ,
+ ENG     : , BSS ,
+C-------------------------------
+C ЗАПИСЬ СООБЩЕНИЯ В БУФЕР ДЛЯ ПЕРЕДАЧИ
+C НА ОДНУ ИЗ СМ-2 ОТ ГЗ.
+C
+C ОБРАЩЕНИЕ :
+C CALL ROTOCMD(MASH,ARRAY,N),
+C ГДЕ: MASH - НОМЕР СМ-2, ДЛЯ КОТОРОЙ
+C        ГОТОВИТСЯ СООБЩЕНИЕ;
+C      ARRAY = МАССИВ СООБЩЕНИЯ;
+C      N - ДЛИНА СООБЩЕНИЯ (СЛОВ).
+C
+C ЕСЛИ MASH=0, ТО СООБЩЕНИЕ РАЗМНОЖА-
+C ЕТСЯ ДЛЯ ВСЕХ 3-Х СМ-2.
+C-------------------------------
+ BUF COM : , SUBP,
+ LINE IN : , SUBP,    .УКАЗАТЕЛЬ ЗАПИСИ
+ LINE OUT: , SUBP,    .УКАЗАТЕЛЬ ЧТЕНИЯ
+C
+ CH PS   :LC,BLOCK,CH MPB,CPS(4)
+ IN E50  : , EQU ,133B
+C
+       , STI ,9 .N
+       , STI ,10 .ARRAY
+       , STI ,11 .MASH
+ RQ TO CM: , BSS ,
+       , ITS ,13
+       , ITS ,1
+       , ITS ,2
+       , ITS ,3
+       , ITS ,4
+       , ITS ,7
+       7, BASE,*
+C
+       , XTS ,DEB FLG
+       , U1A ,CONT
+C ОФОРМЛЯЕМ СТРУКТУРУ КОЛЬЦЕВОГО БУФЕРА
+C ДЛЯ СООБЩЕНИЯ ИЗ БЭСМ-6.
+C
+       12, VTM ,-2
+       13, VTM ,
+ LL     :13, UTC ,
+       14, VTM ,BUF COM+7 .ССЫЛКА НА СЛЕД.
+       , ITA ,14
+       14, VTM ,-98
+ LL1    :14, UTC ,08
+       13, UTC ,   .СДВИГ ПО 100 НА
+C       КАЖДУЮ МАШ.
+       , UTC ,BUF COM+6
+       , ATX ,
+       , ARX ,=1 .СЛЕД.-ССЫЛКА
+       14, VLM ,LL1
+       13, UTC ,
+       14, VTM ,BUF COM+6
+       , ITA ,14
+       13, UTC ,99
+       , UTC ,BUF COM+6
+       , ATX ,
+       13, UTM ,100
+       12, VLM ,LL
+       , ATX ,DEB FLG
+C
+ CONT  : , BSS ,
+       4, VTM ,0 .ДЛЯ ОДНОЙ МАШИНЫ
+       11, XTA , .MASH
+       , ATX ,MASH
+       , U1A ,L1 .НОМ.МАШИНЫ ЗАДАН
+       4, VTM ,-2 .НА ВСЕ 3 МАШИНЫ
+ L2    : 4, UTC ,3
+       14, VTM , .УСТАНАВЛИВАЕМ
+       , ITA ,14 .СВОЙ НОМ.МАШИНЫ
+       , ATX ,MASH .ДЛЯ ТОЛС D
+ L1    : , ITA ,
+       , ATX ,KS .ДЛЯ КОНТР.СУММЫ
+       9, WTC , .N
+       1, VTM ,
+       10, MTJ ,2 .ARRAY
+       3, VTM ,MASH
+ L     : 2, XTA ,
+       , ARX ,KS
+       , ATX ,KS .КОНТР.СУММА
+       , ITS ,3
+       , ITS ,2
+       13, VJM ,TO LC
+       2, UTM ,1
+       1, UTM ,-1
+       1, V1M ,L .ПО СООБЩЕНИЮ
+       , ITS ,3
+       , XTS ,AKS
+       13, VJM ,TO LC .КОНТР.СУММА
+       4, VLM ,L2 .ПО МАШИНАМ
+       , STX ,
+       , STI ,7
+       , STI ,4
+       , STI ,3
+       , STI ,2
+       , STI ,1
+       , STI ,13
+       13, UJ ,
+C
+C-------------------------------
+ T TOCM D: , ENTRY,
+C
+C ЗАПИСЬ ТЕКСТА В БУФЕР ДЛЯ ПЕРЕДАЧИ
+C НА ОДНУ ИЗ СМ-2 ОТ ГЗ.
+C ОБРАЩЕНИЕ: КАК ДЛЯ RQ TO CMD,
+C ДЛИНА СООБЩЕНИЯ - В СИМВОЛАХ.
+C НЕ БАЗИРУЕТСЯ ↑ ↑ ↑
+C
+C-------------------------------
+       , STI ,9 .КОЛ-ВО СИМВ.
+       , STI ,10 .ADDR.OF ARRAY
+       , ATI ,11 .MASHINS NUMBER
+       9, XTA , .N
+       , ATI ,9
+       13, UTC ,
+       9, VZM , .N=0 - RETURN
+       9, UTM ,-40 .MAXIMAL MEAN.
+       , ITA ,9
+       , UTC ,=4 0000 .NEGATIV RES.
+       , AAX ,  .YES
+       , U1A ,L5 .THE 40 SYMBOLS
+       9, VTM ,0
+ L5    : 9, UTM ,40 .RESTORY
+       10, MTJ ,8 .ДЛЯ ПЕЧАТИ НА ВЫ-
+C       ХОДЕ
+       14, VTM , .FOR WORDS COUNTE
+C       R
+ L4    : 12, VTM ,-2 .FOR ONE BESM-WOR
+C       D
+ L3    : 9, UTM ,-1 .NOT ONE SYMBOL
+       9, V1M ,NOT 1 .NOT ONE SYMBOL
+       10, XTA , .TEXT OUT USER
+       12, WTC ,SHIFT+2
+       , ASN ,64
+       , UTC ,=17 7400
+       , AAX ,
+       14, UTC ,FLD
+       , ATX ,  .FOR OUTPUT
+       14, UTM ,1 .SYMBOLS QUANT.
+       , UJ ,EX TT .TO RQTOCM
+ NOT 1 : 9, UTM ,1 .RESTORY
+       10, XTA , .USERS TEXT
+       12, WTC ,SHIFT+2
+       , ASN ,64
+       , UTC ,=17 7777
+       , AAX ,
+       14, UTC ,FLD
+       , ATX ,  .TO RES-T
+       14, UTM ,1 .RES-T WORD COUN
+C       TER
+       9, UTM ,-2 .= 2 SYMB.
+       9, VZM ,EX TT .=IS ALL
+       12, VLM ,L3
+       10, UTM ,1
+       , UJ ,L4
+ EX TT : , ITA ,13
+       , ITS ,8
+       , ITS ,10
+       , ITS ,
+       , CALL,PRINT8
+       , ATI ,13
+       10, VTM ,FLD B .BEG.OF REQUEST
+       , ITA ,14
+       , UTC ,FLD B+1
+       , ATX ,  .QUANT.OF PARAM.
+       14, UTM ,2 .FULL LENGCH OF R
+C       EQUEST
+       , ITA ,14
+       , UTC ,LENG
+       9, STX ,
+       9, VTM ,ENG
+       , UJ ,RQ TO CM
+C
+C-------------------------------
+ TO LC : , BSS ,
+C-------------------------------
+C
+C ЗАПИСЬ ОДНОГО СЛОВА СООБЩЕНИЯ В БУФЕР
+C ДЛЯ ПЕРЕДАЧИ НА ОДНУ ИЗ СМ-2.
+C
+C ОБРАЩЕНИЕ:
+C CALL TO LC(MASH,COD),
+C ГДЕ:MASH = НОМЕР СМ-2, ДЛЯ КОТОРОЙ
+C       ГОТОВИТСЯ СООБЩЕНИЕ;
+C COD = СЛОВО СООБЩЕНИЯ;
+C
+C-------------------------------
+C
+C УКАЗАТЕЛЬ ЗАПИСИ СТОИТ ПЕРЕД 1-Й
+C СВОБОДНОЙ СТРОКОЙ, УКАЗАТЕЛЬ ЧТЕНИЯ -
+C ПЕРЕД ПЕРВОЙ ЗАНЯТОЙ.
+C-------------------------------
+       , STI ,12 .АДРЕС СООБЩ.
+       , ATI ,
+       14, XTA , .НОМЕР МАШИНЫ
+       , ATX ,MASH
+       12, XTA , .КОД СООБЩЕНИЯ
+       , WTC ,MASH
+       14, VTM ,LINE IN-1.AДPEC YKAЗ. ЗA-
+C       ПИСИ
+       , WTC ,MASH
+       12, VTM ,LINE OUT-1.AДPEC YKAЗATE-
+C       ЛЯ ЧТЕНИЯ
+       14, WTC ,
+       , XTS ,  .АДР. СВОБ. СТРОКИ
+C       БУФЕРА, Т. Е.
+       , ATI ,11 .СЛЕД. ЗНАЧЕНИЕ
+C       УКАЗ. ЗАПИСИ
+       12, XTS , .ЗНАЧ. УКАЗАТЕЛЯ
+C       ЧТЕНИЯ
+       15, AEX ,
+       , AAX ,=7 7777
+       , U1A ,NO OVER .ПЕРЕПОЛНЕНИЯ НЕТ
+C ПЕРЕПОЛНЕНИЕ БУФЕРА СООБЩЕНИЯ - АВОСТ
+       , XTA ,MASH .ДЛЯ ОКНА
+       , CALL,OKNO
+       , *64 ,PRINT10
+       , *64 ,PRT
+       , *64 ,PRI
+       , *64 ,PRT1
+       8, VTM ,LINE IN+6
+       , *64 ,PRI1
+       8, VTM ,LINE IN+106
+       , *64 ,PRI1
+       8, VTM ,LINE IN+206
+       , *64 ,PRT1
+       , *64 ,PRINTK
+       , XTA ,CH MPB
+       , ASN ,64-6
+       , AAX ,=7700
+       , AOX ,=7705 0000 0000 0002
+       , *50 ,IN E50 .ОТКАЗ ОТ НЕРЕЗИА
+       , SJ ,
+ NO OVER: , STI , .КОД СООБЩЕНИЯ НА
+C       СУММАТОР
+       , ASN ,64-15
+       11, XTS ,
+       , AAX ,=7 7777 .ВЫДЕЛЯЕМ ССЫЛКУ
+       15, AOX , .+ КОД СООБЩЕНИЯ
+       11, ATX , .СООБЩЕНИЕ В БУ-
+C       ФЕР
+       , ITA ,11
+       , WTC ,MASH
+       , UTC ,LINE IN-1 .НОВОЕ ЗНАЧЕНИЕ
+       , STX , .УКАЗАТЕЛЯ ЗАПИСИ
+       13, UJ ,
+C---------------
+ BEG FLG: , BSS ,1
+ MASH   : , BSS ,1
+ KS     : , BSS ,1
+ AKS    : , Z00 ,
+       , Z00 ,KS
+ PRT    : , Z00 ,TEXT
+       , Z00 ,TEXT+6
+       , Z00 ,
+       8, Z00 ,
+ PRI    : , Z00 ,LINE IN
+       , Z00 ,LINE IN+5
+       2, 021 ,16
+       9, 021 ,2
+ PRT1   : , Z00 ,TEXT1
+       , Z00 ,TEXT1+3
+       , Z00 ,
+       8, Z00 ,
+ PRI1   : 8, Z00 ,99
+       8, Z00 ,16
+       2, 021 ,4
+       9, 021 ,4
+ TEXT   : , GOST,39HПЕРЕПОЛНЕН БУФЕР СООБЩ
+C       ЕНИЙ. УКАЗАТЕЛИ
+C       '172.
+ TEXT1  : , GOST,20HСОДЕРЖИМОЕ БУФЕРОВ:'172'
+C       2.
+ LENG   : , BSS ,1
+ FLD B  : , LOG ,11 .КОД КОМАНДЫ
+       , LOG ,  .КОЛ-ВО ПАРАМ.
+ FLD    : , BSS ,21 .ТЕКСТ
+ SHIFT  : , INT ,32
+       , INT ,16
+       , INT ,0
+ PRINT10: , Z00 ,TEX10
+       , Z00 ,TEX10+9
+       , Z00 ,
+       8, Z00 ,
+ TEX10  : , GOST,18HПРИ ВЫДАЧЕ КОМАНДА
+       , GOST,18HВ ОБЩУЮ ПАМЯТЬ '032' ЭЛ
+       , GOST,23HЕКТРОНИКИ-60'033' ИЗ
+C       ГЗ. '172'.
+ PRINTK : , Z00 ,TEK K
+       , Z00 ,TEK K+9
+       , Z00 ,
+       8, Z00 ,
+ TEK K  : , GOST,18HСООБЩИТЕ СИСТЕМНОМ
+       , GOST,18HУ ПРОГРАММИСТУ ИЛИ
+       , GOST,20H ПЕРЕЗАПУСТИТЕ ТУ. '172'
+C       2'.
+       , END ,
+ DATA   : , NAME,
+C ВЫДАЕТ ДД.ММ.ГГ.ГГ. В 2-Х СЛОВАХ
+       , STI ,14
+       , ITS ,13
+       , ITS ,13
+       14, MTJ ,13
+       , *50 ,114B .DATA
+       , *50 ,114B
+       , UTC ,=7777 7777 7600 0000
+       , AAX ,
+       15, ATX ,
+       , ASN ,64-13
+       , UTC ,=6H'3''17''0''1''17''0'
+       , AUX ,
+       , UTC ,=6H00.00.
+       13, ATX ,
+       , AOX ,
+       , UTC ,=6H'17''17''0''0''0''0'
+       , AUX ,
+       , UTC ,=6H00 G.
+       , AOX ,
+       13, ATX ,1
+C ПЕРЕСТАВИМ ЦИФРЫ ГОДА
+       , UTC ,=1776
+       , AAX ,
+       15, ATX ,  .ВТОРАЯ
+       13, AEX ,1 .ГАСИМ
+       13, ATX ,1
+       , UTC ,=0017 74 .ПЕРВАЯ
+       15, ATX ,
+       13, AEX ,1 .ГАСИМ
+       13, STX ,1
+       13, ASN ,64-8 .ПЕРВАЯ НА МЕСТО
+       13, AOX ,1
+       13, STX ,1
+       , ASN ,64+8
+       13, AOX ,1
+       13, STX ,1
+       , STI ,13
+       13, UJ ,
+       , END ,
+*end file
+``````
+еконец
