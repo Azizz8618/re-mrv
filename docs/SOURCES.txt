@@ -13,6 +13,11 @@ docs/rcd/rcd_src.txt
 docs/rcd/rcd_bittas.txt
 docs/rcd/rcd_int.txt
 docs/rcd/rcd_bitton.txt
+docs/rcd/rcd_real.txt
+docs/rcd/rcd_rstreg.txt
+docs/rcd/rcd_rdtab.txt
+docs/rcd/rcd_r48cod.txt
+docs/rcd/rcd_r16cod.txt
 docs/wcd/wcd_src.txt
 docs/wcd/wcd_48cod.txt
 docs/m7b/m7b_src.txt
