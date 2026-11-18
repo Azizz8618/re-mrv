@@ -14,7 +14,7 @@
 | 193–216 | WCD | `docs/wcd/` (2 подпрограммы) | 0 ошибок ×2 | не расшифровано: УСТ (193–201), TABLO (213–215) |
 | 217–223 | M7B | `docs/m7b/` (4 подпрограммы) | 0 ошибок ×4 | RMTOB, IMTOB, RBTOM, IBTOM |
 | 224–280 | PS | `docs/ps/ps_src.txt` (LPS1/PS1 + ONE/TWO) | 0 ошибок ×2 | не расшифровано: HD PS1–PS5, СБОР 1–5 (235–279) |
-| 281–302 | DEB (Fortran) | `docs/deb/deb_fortran_head.txt` (только шапка) | — | `*assembler` не компилирует Fortran; SPIGUN/DERD/DEWR |
+| 281–302 | DEB (Fortran) | `docs/deb/deb_fortran_src.txt` (654 стр., SPIGUN + DEWR/PZAVAR/DERD) | 0 ошибок через `*system` (Fortran-Dubna), `ЧИСЛО ОШИБ. ОПЕРАТОРОВ 0000` | стр.281–291 расшифрованы полностью; стр.294–301 (VIN/VIN16/VINRL/VTKOM/VTIS/VTB/WRDESK) не расшифрованы; `RZAVAR` = `PZAVAR` (OCR-гипотеза) |
 | 303–335 | DEB (МАДЛЕН) | `docs/deb/deb_src.txt` (560 стр., 16 подпрограмм) | 0 ошибок ×16 | таблица ссылок стр.335 списана |
 
 ## Внешние ссылки DOG (по данным `build/harness3.lst`)
@@ -23,7 +23,7 @@
 |---------|----------|--------|
 | `PRINT1…PRINT12`, `PRINTS`, `PRINTK` | MRV, стр.83–85 | ✅ закрыты в `docs/mrv/dog_plus_mrv.txt` |
 | `PRINT13…PRINT20` | DOG, стр.40–41 | ✅ закрыты в `docs/print13/dog_all_v2.txt`, 0 ошибок |
-| `SPIGUN`, `DERD`, `DEWR`, `RZAVAR` | DEB Fortran, стр.281–302 | ❌ Fortran не расшифрован |
+| `SPIGUN`, `DERD`, `DEWR`, `PZAVAR` | DEB Fortran, стр.281–291 | ✅ определены в `docs/deb/deb_fortran_src.txt` (0 ошибок); `RZAVAR` — ошибочная OCR-гипотеза, в скане `PZAVAR` |
 | `PRPR2`, `PRV*` | не найдены в OCR | ❌ гипотеза: утраченные листинги |
 | `WRITED` | WRI, стр.156 | ✅ закрыт в совместной сборке |
 | `RQTOCMD`, `TTOCMD` | WRI (`RQTOCM`, `ROTOCMD`, `TTOCM D`) | ⚠️ точного совпадения нет — нужного подтверждения |
@@ -40,8 +40,7 @@ PRINT-блок + WRI (6 модулей). Компиляция и загрузк�
 PRINT13…20 расшифрованы по стр.40–41 и вставлены в
 `docs/print13/dog_all_v2.txt` (1956 перфокарт, 0 ошибок); строки
 `ОТСУТСТВУЕТ PRINT13…PRINT20` из таблицы загрузчика исчезли.
-Остаются незакрытыми: `PRPR2`, `PRV*`, `SPIGUN`, `DERD`, `DEWR`,
-`RZAVAR` (Fortran-часть DEB, стр.281–302), `RQTOCMD`, `BUFCOM`,
+Остаются незакрытыми: `PRPR2`, `PRV*`, `RQTOCMD`, `BUFCOM`,
 `ОКNО` (латиница/кириллица), плюс символы сервиса ОС ДИСПАК.
 
 ## Проверка

@@ -1,0 +1,649 @@
+шифр 419999 зс5^
+лен 41(2048)^
+eeв1а3
+*name DEB
+*no list
+*full list
+*system
+      FUNCTION SPIGUN(SYSR,TEXT,RGZ,RPZ,FAB)
+C     SYSR   -СИСТЕМНЫЕ РЕГИСТРЫ ПЗ ПРИ АВОСТЕ,
+C     TEXT   -ТЕКСТ ДИАГНОСТИКИ ПЗ ПРИ АВОСТЕ,
+C     RGZ    -ИНДЕКСНЫЕ РЕГИСТРЫ ПО АВОСТУ В ПЗ,
+C     RPZ    -ИНДЕКСНЫЕ РЕГИСТРЫ ПЗ ПРИ АВОСТЕ,
+C     FAB    -НОМЕР СИТУАЦИИ ОТ ГЗ,
+      DIMENSION SYSR(7),TEXT(4),TEXT1(4),RGZ(15)
+      DIMENSION RGS(1),REGIS(15),KAR(200),RGM(1)
+      DIMENSION LPRIGL(2),WHO(7),KT(3)
+      COMMON/DEBUF/ILINE,ICLINE,DBTEX(14,50)
+      COMMON/DEBAR/DEBFLG,DESM(3),DESB(3),COM(3),
+     *BCOM(3),MFLD(1),IFLD(7)
+      DIMENSION LCARD(14),LC(14),IDCBT(4),ETABLE(45)
+      INTEGER DBTEX
+      INTEGER TLINE
+C? TLINE в скане не описан; вероятно, в неперенесённом COMMON.
+      COMMON/SHPS/SHPS(5)
+      COMMON/CHPS/CHPS(5)
+      INTEGER CHPS
+      DIMENSION NPS(5),SHIFR(2)
+      DATA(ETABLE=
+     *'RK ',011 021 021 000 000 0B,
+     *'RN ',011 021 021 000 000 0B,
+     *'RR ',021 000 000 000 000 0B,
+     *'RB ',011 021 000 000 000 0B,
+     *'RI ',011 021 021 000 000 0B,
+     *'RN16',011 021 021 000 000 0B,
+     *'RA ',012 051 051 000 000 0B,
+     *'E  ',022 000 000 000 000 0B,
+     *'WHO',022 000 000 000 000 0B,
+     *'GZ ',022 000 000 000 000 0B,
+     *'PZ ',022 000 000 000 000 0B,
+     *'REAL',011 021 000 000 000 0B,
+     *'STW',011 021 000 000 000 0B,
+     *'STR',011 021 000 000 000 0B,
+     *'STK',055 025 000 000 000 0B,
+     *'GO ',021 021 000 000 000 0B,
+     *'RET',022 000 000 000 000 0B,
+     *'KT ',022 000 000 000 000 0B,
+     *'MEM',012 021 022 000 000 0B,
+     *'WN ',011 021 022 000 000 0B,
+     *'TASK',022 000 000 000 000 0B,
+     *'INIT',022 000 000 000 000 0B,
+     *0B)
+C? В скане: ((NPS(I),I=1,5)=6HПВ ...,6HПС 1,6HПС 2,6HПС 3,6HПС 4)
+      DATA((NPS(I),I=1,5)='ПВ    ','ПС1   ','ПС2   ','ПС3   ','ПС4   ')
+C---- НАЧАЛЬНЫЕ УСТАНОВКИ И ВЫВОД ПЕРВОГО СООБЩЕНИЯ. --------------------
+      SPIGUN=0.
+      CALL VTWORK(ETABLE,LCARD,LC,IDCBT)
+      CALL CLOPEN(ETABLE,DBTEX(1,1))
+      ENCODE(30,110,DBTEX(1,1))
+      NWORK=2
+      CALL VTWRIT(DBTEX(1,1))
+      CALL VTWRIT('ПРИВЕТ')
+      ILINE=0
+      ICLINE=1
+      RETURN
+      ENTRY DEWR
+C     ПОЛУЧЕНО ПРЕРЫВАНИЕ ПО КОНЦУ ВЫВОДА СТРОКИ
+      PRINT 20
+   20 FORMAT(X,'КОНЕЦ ВЫВОДА')
+  100 CONTINUE
+      PRINT 21
+   21 FORMAT(X,'ВЫВОД')
+      IF(ILINE.EQ.0)GOTO 204
+      DO 205 I=1,14
+  205 DBTEX(I,ILINE)=0240501202405012B
+      ILINE=0
+  204 IF(ICLINE.EQ.0)GOTO 200
+      NWORK=2
+      CALL VTWRIT(DBTEX(1,ICLINE))
+      ILINE=ICLINE
+      IF(ICLINE.EQ.TLINE)GOTO 202
+      ICLINE=ICLINE+1
+      RETURN
+  202 ILINE=0
+      ICLINE=1
+      RETURN
+C     ПЕРЕХОД НА ВВОД
+  200 CONTINUE
+      PRINT 31
+   31 FORMAT(X,'ВВОД')
+      NWORK=1
+      CALL VTREAD(LCARD)
+      RETURN
+      ENTRY PZAVAR
+C     ВХОД ПО ИНИЦИАТИВЕ ЗАДАЧИ
+      CALL VTSTAT(I)
+      I=I+1
+      CALL OKNO
+      NWORK=NWORK
+      CALL OKNO
+C     ТЕРМИНАЛ: ЗАНЯТ СВОБОДЕН НЕИСПРАВЕН
+      GOTO(300,301,301,302,302)I
+  302 RETURN
+  300 GOTO(304,301)NWORK
+  304 CALL DRIN(I)
+      I=I
+      CALL OKNO
+      IF(I.EQ.6400000000007777B)GOTO 305
+      IF(I.EQ.1)GOTO 301
+      STOP
+  305 CALL VTSTAT(I)
+      I=I+1
+      CALL OKNO
+      IF(I.EQ.1)GOTO 304
+  301 I=FAB
+      CALL OKNO
+C     АВ МРВ  АВ ПС  СТОП ГРУЗИМ АВ ГЗ
+      GOTO(310,320,330,340,350)I
+C     АВОСТ В МРВ
+  310 ENCODE(12,311,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+  311 FORMAT(X,'АВОСТ В МРВ.')
+      CALL GSTISO(TEXT,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+      ENCODE(51,105,DBTEX(1,ILINE+1))(SYSR(I),I=1,5)
+      ILINE=ILINE+1
+      ENCODE(50,106,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+      GZ=0.
+      GOTO 100
+C     АВОСТ В ПС
+  320 ENCODE(12,321,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+      GOTO 100
+C? В скане строка FORMAT(X,'АВОСТ В ПС',O?)+TEXT(1) помечена как комментарий
+  321 FORMAT(X,'АВОСТ В ПС',O1)
+C     ЗАВЕРШЕНИЕ РАБОТЫ
+  330 ENCODE(43,331,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+  331 FORMAT(X,'ЗАВЕРШЕНИЕ РАБОТЫ ПО ПРИКАЗУ ПРЕ',
+     *9X,'АП',4X,'СУММАТОР',6X,'AY',8X,'РМР',
+     *'Э-КОД')
+  105 FORMAT(X,'ЗАВЕРШЕНИЕ РАБОТЫ ПО ПРИКАЗУ ПРЕ',
+     *9X,'АП',4X,'СУММАТОР',6X,'AY',8X,'РМР',
+     *'Э-КОД')
+      GOTO 100
+  106 FORMAT(X,O16,X,O3,X,O16,X,O5,X,O5)
+C     ЗАГРУЗКА ПС
+  340 IF(TEXT.NE.0.)GOTO 341
+      ENCODE(11,342,DBTEX(1,ILINE+1))
+      GOTO 344
+  341 ENCODE(11,343,DBTEX(1,ILINE+1))
+  344 ILINE=ILINE+1
+      ENCODE(11,343,DBTEX(1,ILINE+1))TEXT(1)
+      GOTO 100
+C     АВОСТ В ГЗ
+  350 ENCODE(11,351,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+  351 FORMAT(X,'АВОСТ В ГЗ')
+      CALL GSTISO(TEXT,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+      IL=ILINE+2
+      PRINT 352,(DBTEX(1,I),I=ILINE,IL)
+  352 FORMAT(X,3(A6))
+      ENCODE(51,105,DBTEX(1,ILINE+1))(SYSR(I),I=1,5)
+      ILINE=ILINE+1
+      PRINT 105
+      ENCODE(50,106,DBTEX(1,ILINE+1))(SYSR(I),I=1,5)
+      PRINT 106,(SYSR(I),I=1,5)
+      ILINE=ILINE+1
+      GZ=1.
+      GOTO 100
+  342 FORMAT(X,'ГРУЗИМ МРВ')
+  343 FORMAT(X,'ГРУЗИМ ПС',O1)
+  110 FORMAT(X,'РАБОТАЕТ ОТЛАДЧИК ОС К71-МПВ')
+      ENTRY DERD
+C     ВХОД ПО КОНЦУ ВВОДА.
+      PRINT 30
+   30 FORMAT(X,'КОНФИ ВВОДА')
+      CALL VTDESH(I)
+      I=I+1
+      GOTO(303,200,200)I
+  303 CONTINUE
+      IF(LC(1).NE.'   ')GOTO 107
+      IF(LC(1).EQ.'RK ')GOTO 1003
+      IF(LC(1).EQ.'RN ')GOTO 2003
+      IF(LC(1).EQ.'RB ')GOTO 4003
+      IF(LC(1).EQ.'RI ')GOTO 5003
+      IF(LC(1).EQ.'RN16')GOTO 6003
+      IF(LC(1).EQ.'RA ')GOTO 7133
+      IF(LC(1).EQ.'REAL')GOTO 12003
+      GOTO 100
+  101 ENCODE(6,102,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+      PRINT 102
+  102 FORMAT(X,'ОШИБКА')
+      GOTO 100
+  107 IF(CONTW.NE.0.)GOTO 20100
+C? В скане: IF(ALL(LCD(4).EQ.0)GOTO 101 - неразборчиво
+      IF(IDCBT(4).EQ.0)GOTO 101
+      IF(LC(1).EQ.'ERROR')GOTO 101
+      PRINT 1,(LC(I),I=1,5)
+    1 FORMAT(X,5(A6,X))
+      MM=IDCBT(4)
+C     ПЕРЕКЛЮЧАТЕЛЬ ДИРЕКТИВ:  RK RN RR RBYT RIso RN16 RA
+C                           5000 6000 7000 8000 9000 10000 11000 12000
+C                           WHO GZ PZ REAL STW STR STK GO 13000..16000
+C                           RET KT MEM WN TASK INIT 17000..22000
+      GOTO(1000,2000,3000,4000,
+     *5000,6000,7000,8000,9000,10000,11000,12000,
+     *13000,14000,15000,16000,17000,18000,19000,20000,
+     *21000,22000)MM
+C     ЧТЕНИЕ КОМАНДА
+ 1000 CALL IOCTTI(LC(2),NA)
+      CALL IOCTTI(LC(3),NSM)
+      NA=NA+NSM
+      CALL IOCTTI(LC(4),K)
+      IF(K.GT.192)K=192
+      KA=NA+K
+      IF(NA.EQ.KA)KA=NA+3
+ 1003 K=KA-NA
+      IF(K.GE.20)GOTO 1002
+      CALL RDPTK(NA,KA,KAR,GZ)
+      CALL VTK(KAR,NA,KA)
+      LC(1)=6H
+      GOTO 100
+ 1002 KAP=NA+19
+      CALL RDPTK(NA,KAP,KAR,GZ)
+      CALL VTK(KAR,NA,KAP)
+      NA=KAP+1
+      GOTO 100
+C     ЧТЕНИЕ КОНСТАНТ
+ 2000 CALL IOCTTI(LC(2),NA)
+      CALL IOCTTI(LC(3),NSM)
+      NA=NA+NSM
+      CALL IOCTTI(LC(4),K)
+      IF(K.GT.192)K=192
+      KA=NA+K
+      IF(NA.EQ.KA)KA=NA+3
+ 2003 K=KA-NA
+      IF(K.GE.20)GOTO 2002
+      CALL RDPTN(NA,KA,KAR,GZ)
+      CALL VTN(KAR,NA,KA)
+      LC(1)=6H
+      GOTO 100
+ 2002 KAP=NA+19
+      CALL RDPTN(NA,KAP,KAR,GZ)
+      CALL VTN(KAR,NA,KAP)
+      NA=KAP+1
+      GOTO 100
+C     ЧТЕНИЕ РЕГИСТРОВ
+ 3000 IF(GZ.EQ.0.)GOTO 3007
+      DO 3010 I=1,15
+ 3010 REGIS(I)=RGZ(I)
+      GOTO 3011
+ 3007 IF(FAB.EQ.0.)GOTO 3012
+      DO 3013 I=1,15
+ 3013 REGIS(I)=RPZ(I)
+      GOTO 3011
+ 3012 CALL GIVRGS(RGS)
+ 3011 IF(LC(2).NE.'      ')GOTO 3001
+      ENCODE(55,3002,DBTEX(1,ILINE+1))(I,I=1,9)
+      ILINE=ILINE+1
+      PRINT 3002,(I,I=1,9)
+ 3002 FORMAT(X,9(X,'И',I1,2X))
+      ENCODE(55,3003,DBTEX(1,ILINE+1))(REGIS(I),I=1,9)
+      ILINE=ILINE+1
+      PRINT 3003,(REGIS(I),I=1,9)
+ 3003 FORMAT(X,9(X,O6))
+      ENCODE(37,3004,DBTEX(1,ILINE+1))(I,I=10,15)
+      ILINE=ILINE+1
+      PRINT 3004,(I,I=10,15)
+      ENCODE(37,3005,DBTEX(1,ILINE+1))(REGIS(I),I=10,15)
+      ILINE=ILINE+1
+      PRINT 3005,(REGIS(I),I=10,15)
+ 3004 FORMAT(X,6(X,'I',I2,2X))
+ 3005 FORMAT(X,6(X,O5))
+      LC(1)=6H
+      GOTO 100
+ 3001 CALL IOCTTI(LC(2),NR)
+      ENCODE(10,3006,DBTEX(1,ILINE+1))NR,REGIS(NR)
+      ILINE=ILINE+1
+      PRINT 3006,NR,REGIS(NR)
+ 3006 FORMAT(X,'И',I2,'=',O5)
+      LC(1)=6H
+      GOTO 100
+C     ЧТЕНИЕ КОНСТАНТ ПОБАЙТНО.
+ 4000 CALL IOCTTI(LC(2),NA)
+      CALL IOCTTI(LC(3),NSM)
+      NA=NA+NSM
+      CALL IOCTTI(LC(4),K)
+      IF(K.GT.192)K=192
+      KA=NA+K
+      IF(NA.EQ.KA)KA=NA+3
+ 4003 K=KA-NA
+      IF(K.GE.20)GOTO 4002
+      CALL RDPTN(NA,KA,KAR,GZ)
+      CALL VTB(KAR,NA,KA)
+      LC(1)=6H
+      GOTO 100
+ 4002 KAP=NA+19
+      CALL RDPTN(NA,KAP,KAR,GZ)
+      CALL VTB(KAR,NA,KAP)
+      NA=KAP+1
+      GOTO 100
+C     ЧТЕНИЕ ISO-КОНСТАНТ
+ 5000 CALL IOCTTI(LC(2),NA)
+      CALL IOCTTI(LC(3),NSM)
+      NA=NA+NSM
+      CALL IOCTTI(LC(4),K)
+      IF(K.GT.192)K=192
+      KA=NA+K
+      IF(NA.EQ.KA)KA=NA+3
+ 5003 K=KA-NA
+      IF(K.GE.20)GOTO 5002
+      CALL RDPTN(NA,KA,KAR,GZ)
+      CALL VTI(KAR,NA,KA)
+      LC(1)=6H
+      GOTO 100
+ 5002 KAP=NA+19
+      CALL RDPTN(NA,KAP,KAR,GZ)
+      CALL VTI(KAR,NA,KAP)
+      NA=KAP+1
+      GOTO 100
+C     ЧТЕНИЕ 16-РАЗРЯДНЫХ КОНСТАНТ
+ 6000 CONTINUE
+      CALL IOCTTI(LC(2),NA)
+      CALL IOCTTI(LC(3),NSM)
+      NA=NA+NSM
+      CALL IOCTTI(LC(4),K)
+      IF(K.GT.192)K=192
+      KA=NA+K
+      IF(NA.EQ.KA)KA=NA+15
+ 6003 K=KA-NA
+      IF(K.GE.40)GOTO 6002
+      CALL RDPTN(NA,KA,KAR,GZ)
+      CALL VTN16(KAR,NA,KA)
+      LC(1)=6H
+      GOTO 100
+ 6002 KAP=NA+39
+      CALL RDPTN(NA,KAP,KAR,GZ)
+      CALL VTN16(KAR,NA,KAP)
+      NA=KAP+1
+      GOTO 100
+C     ЧТЕНИЕ МАССИВОВ ПО ИМЕНАМ (ТОЛЬКО ИЗ ПЗ)
+ 7000 CONTINUE
+      IF(GZ.EQ.1.)GOTO 101
+      IF(LC(2).EQ.'      ')GOTO 101
+      IF(DESF.NE.0.)GOTO 7100
+      CALL DESR(DESM(1),20)
+      DESF=1.
+ 7100 CONTINUE
+      CALL IOCTTI(LC(3),NSM)
+      CALL IOCTTI(LC(4),K)
+      IF(K.GT.192)K=192
+C     ОПИСАНИЕ ПАКЕТОВ ОТ 1-Й СМ
+      IF(LC(2).EQ.'DESKM1')GOTO 7001
+C     ОПИСАНИЕ ПАКЕТОВ ОТ 2-Й СМ
+      IF(LC(2).EQ.'DESKM2')GOTO 7002
+C     ОПИСАНИЕ ПАКЕТОВ ОТ 3-Й СМ
+      IF(LC(2).EQ.'DESKB1')GOTO 7003
+C     ОПИСАНИЕ ПАКЕТОВ ВО 2-Ю СМ
+      IF(LC(2).EQ.'DESKB2')GOTO 7005
+C     ОПИСАНИЕ ПАКЕТОВ В 3-Ю СМ
+      IF(LC(2).EQ.'DESKB3')GOTO 7006
+C     КОМАНДЫ ОТ 1-Й СМ
+      IF(LC(2).EQ.'COM1  ')GOTO 7007
+C     КОМАНДЫ ОТ 2-Й СМ
+      IF(LC(2).EQ.'COM2  ')GOTO 7008
+C     КОМАНДЫ ОТ 3-Й СМ
+      IF(LC(2).EQ.'COM3  ')GOTO 7009
+C     КОМАНДЫ В 1-Ю СМ
+      IF(LC(2).EQ.'BCOM1 ')GOTO 7010
+C     КОМАНДЫ ВО 2-Ю СМ
+      IF(LC(2).EQ.'BCOM2 ')GOTO 7011
+C     КОМАНДА В 3-Ю СМ
+      IF(LC(2).EQ.'BCOM3 ')GOTO 7012
+C     ОБЛАСТЬ ЗАПИСИ БЭСМ-6
+      IF(LC(2).EQ.'MFLD  ')GOTO 7013
+C     ОБЛАСТЬ ЧТЕНИЯ БЭСМ-6 (КОДЫ КОМАНДА ЗАБИТЫ 0-М)
+      IF(LC(2).EQ.'INFLD ')GOTO 7014
+      GOTO 101
+ 7001 NMASH=1
+      FIN=0.
+      NAR=1
+      GOTO 7101
+ 7002 NMASH=2
+      FIN=0.
+      NAR=2
+      GOTO 7101
+ 7003 NMASH=3
+      FIN=0.
+      NAR=3
+      GOTO 7101
+ 7004 NMASH=1
+      FIN=1.
+      NAR=1
+      GOTO 7102
+ 7005 NMASH=2
+      FIN=1.
+      NAR=2
+      GOTO 7102
+ 7006 NMASH=3
+      FIN=1.
+      NAR=3
+      GOTO 7102
+ 7007 NMASH=1
+      GOTO 7103
+ 7008 NMASH=2
+      GOTO 7103
+ 7009 NMASH=3
+      GOTO 7103
+ 7010 NMASH=1
+      GOTO 7104
+ 7011 NMASH=2
+      GOTO 7104
+ 7012 NMASH=3
+      GOTO 7104
+ 7013 NA=MFLD(1)
+      ENCODE(23,7108,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+ 7108 FORMAT(X,'ОБЛАСТЬ ЗАПИСИ БЭСМ-6:')
+      NA=NA+NSM
+      GOTO 7200
+ 7014 NA=IFLD(1)
+      ENCODE(24,7109,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+ 7109 FORMAT(X,'ОБЛАСТЬ ЧТЕНИЯ БЭСМ-6:')
+      NA=NA+NSM
+      GOTO 7200
+ 7101 NA=DESM(NAR)
+      KA=NA+199
+      CALL RDPTN(NA,KA,KAR,GZ)
+      CALL WRDESK(KAR,NMASH,FIN)
+      LC(1)=6H
+      GOTO 100
+ 7102 NA=DESB(NAR)
+      KA=NA+199
+      CALL RDPTN(NA,KA,KAR,GZ)
+      CALL WRDESK(KAR,NMASH,FIN)
+      LC(1)=6H
+      GOTO 100
+ 7103 NA=COM(NMASH)
+      NA=NA+NSM
+      ENCODE(20,7105,DBTEX(1,ILINE+1))NMASH
+      ILINE=ILINE+1
+ 7105 FORMAT(X,'ПАКЕТ КОМАНД СМ-2/',I1)
+      PRINT 7105,NMASH
+ 7200 KA=NA+K
+      IF(K.EQ.0)KA=NA+15
+ 7133 K=KA-NA
+      IF(K.GE.16)GOTO 7107
+      CALL RDPTN(NA,KA,KAR,GZ)
+      CALL VTN16(KAR,NA,KA)
+      LC(1)=6H
+      GOTO 100
+ 7107 KAP=NA+15
+      CALL RDPTN(NA,KAP,KAR,GZ)
+      CALL VTN16(KAR,NA,KAP)
+      NA=KAP+1
+      GOTO 100
+ 7104 NA=BCOM(NMASH)
+      NA=NA+NSM
+      ENCODE(24,7106,DBTEX(1,ILINE+1))NMASH
+      ILINE=ILINE+1
+ 7106 FORMAT(X,'ПАКЕТ КОМАНД ДЛЯ СМ-2/',I1)
+      PRINT 7106,NMASH
+      GOTO 7200
+C     КОНФИ ОТЛАДКИ
+ 8000 ENCODE(14,8001,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+      PRINT 8001
+ 8001 FORMAT(X,'КОНЕЦ ОТЛАДКИ')
+      CALL FINAL
+      GOTO 100
+C     СИСТЕМНЫЕ РЕГИСТРЫ
+ 9000 IF(FAB.EQ.0.)GOTO 9001
+      DO 9002 I=1,5
+ 9002 WHO(I)=SYSR(I)
+      GOTO 9003
+ 9001 CALL GIVRGM(RGM)
+ 9003 ENCODE(51,105,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+      PRINT 105
+      ENCODE(50,106,DBTEX(1,ILINE+1))(WHO(I),I=1,5)
+      ILINE=ILINE+1
+      PRINT 106,(WHO(I),I=1,5)
+      LC(1)=6H
+      GOTO 100
+C     ПЕРЕКЛЮЧЕНИЕ ОТЛАДКИ НА ГЗ
+10000 GZ=1.
+      ENCODE(19,10001,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+10001 FORMAT(X,'ПЕРЕКЛЮЧЕНИЕ НА ГЗ')
+      GOTO 100
+C     ПЕРЕКЛЮЧЕНИЕ ОТЛАДКИ НА ПЗ
+11000 GZ=0.
+      ENCODE(20,11001,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+11001 FORMAT(X,'ПЕРЕКЛЮЧЕНИЕ НА МРВ')
+      GOTO 100
+C     ЧТЕНИЕ ВЕЩЕСТВЕННЫХ ЧИСЕЛ
+12000 CALL IOCTTI(LC(2),NA)
+      CALL IOCTTI(LC(3),NSM)
+      NA=NA+NSM
+      CALL IOCTTI(LC(4),K)
+      IF(K.GT.192)K=192
+      KA=NA+K
+      IF(NA.EQ.KA)KA=NA+4
+12003 K=KA-NA
+      IF(K.GE.20)GOTO 12002
+      CALL RDPTN(NA,KA,KAR,GZ)
+      CALL VTNRL(KAR,NA,KA)
+      LC(1)=6H
+      GOTO 100
+12002 KAP=NA+19
+      CALL RDPTN(NA,KAP,KAR,GZ)
+      CALL VTNRL(KAR,NA,KAP)
+      NA=KAP+1
+      GOTO 100
+C     ЗАДАНИЕ АДРЕСА ОСТАНОВА ПО ЗАПИСИ.
+13000 CONTINUE
+      CALL IOCTTI(LC(2),NA)
+      CALL IOCTTI(LC(3),NSM)
+      NA=NA+NSM
+      CALL IOCTM
+      CALL USM35(NA,200000B)
+      GOTO 100
+C     ЗАДАНИЕ АДРЕСА ОСТАНОВА ПО ЧТЕНИЮ
+14000 CONTINUE
+      CALL IOCTTI(LC(2),NA)
+      CALL IOCTTI(LC(3),NSM)
+      NA=NA+NSM
+      CALL USM35(NA,100000B)
+      GOTO 100
+15000 CONTINUE
+      CALL IOCTTI(LC(2),NA)
+      CALL IOCTTI(LC(3),NSM)
+      NA=NA+NSM
+      CALL USM35(NA,10000B)
+      GOTO 100
+C     ПУСК ПОДЧИНЕННОЙ С АДРЕСА NA ИЛИ ПРОДОЛЖЕНИЕ ПОСЛЕ ОСТАНОВА.
+16000 CONTINUE
+C? Сканер не разобралliteral в IF(LC(2).EQ.'      ')GOTO 16001
+      IF(LC(2).EQ.'      ')GOTO 16001
+      CALL IOCTTI(LC(2),NA)
+      CALL IOCTTI(LC(3),NSM)
+      NA=NA+NSM
+      CALL GOTO(NA)
+      GOTO 100
+16001 CALL GOTO(0.)
+      GOTO 100
+C     ВЫХОД НА ПЕРЕЗАГРУЗКУ МРВ ПОСЛЕ АВОСТА.
+17000 GOTO 100
+C     ЗАПРОС АДРЕСОВ УСТАНОВЛЕННЫХ КОНТРОЛЬНЫХ ТОЧЕК.
+18000 CONTINUE
+      CALL RDM35(KT)
+      NMEM='NO    '
+      IF(DEBFLG.EQ.1.)NMEM=6HYES
+      ENCODE(45,18001,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+      PRINT 18001
+      ENCODE(43,18002,DBTEX(1,ILINE+1))KT,NMEM
+      ILINE=ILINE+1
+      PRINT 18002,KT,NMEM
+      GOTO 100
+18001 FORMAT(X,'ОСТ ПО КРА    ОСТ ПО СЧ    ОСТ ПО ЗАП MEMORY')
+18002 FORMAT(3X,O5,8X,O5,7X,O5,7X,A3)
+C     УСТАНОВКА РЕЖИМА ПРОСМОТРА ОБЛАСТИ ЗАПИСИ ЭЛЕКТРОНИКИ-60.
+19000 CONTINUE
+      IF(GZ.EQ.1.)GOTO 19001
+      FL=0.
+      IF(LC(2).EQ.'YES   ')FL=1.
+      CALL MEM(FL)
+      ENCODE(5,19002,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+      GOTO 19003
+19001 ENCODE(12,19004,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+      PRINT 19004
+19002 FORMAT(X,'ЕСТЬ')
+19003 GOTO 100
+19004 FORMAT(X,'РАБОТА В ГЗ')
+C     ЗАПИСЬ ВОСЬМЕРИЧНОГО КОДА ПО ЗАДАННОМУ АДРЕСУ.
+20000 CONTINUE
+      IF(GZ.EQ.1.)GOTO 20002
+      CALL IOCTTI(LC(2),NA)
+      CALL IOCTTI(LC(3),NSM)
+      NA=NA+NSM
+      CONTW=1
+      LPRIGL(1)=' КОД; '
+      LPRIGL(2)=012B
+      CALL VTINVI(LCARD,LPRIGL(1))
+      RETURN
+20002 ENCODE(12,19004,DBTEX(1,ILINE+1))
+      ILINE=ILINE+1
+      PRINT 19004
+      GOTO 100
+20100 CONTINUE
+      N=ISOCOD(LCARD)
+      IF(N.EQ.'ОШИБКА')GOTO 20005
+      CALL WRPTN(NA,N)
+20005 CONTW=0.
+      ENCODE(30,20004,DBTEX(1,ILINE+1))(LCARD(I),I=1,4)
+      ILINE=ILINE+1
+      PRINT 20004,(LCARD(I),I=1,4)
+20004 FORMAT(X,'ЗАП:',A6,A6,A6,A6)
+      GOTO 100
+C     ВЫДАЧА СОСТОЯНИЯ ЗАДАЧ ТУ
+21000 CONTINUE
+      CALL TODE
+      DO 21001 I=1,5
+      IF(SHPS(I).EQ.0.)GOTO 21001
+      CALL SHISO(SHPS(I),SHIFR(1))
+      IF(CHPS(I).EQ.0)GOTO 21002
+      NCH=48-CHPS(I)
+      ENCODE(28,21003,DBTEX(1,ILINE+1))NPS(I),SHIFR(1),SHIFR(2),NCH
+      ILINE=ILINE+1
+21003 FORMAT(X,A6,A6,A6,' КАНАЛ ',O2)
+      GOTO 21001
+21002 ENCODE(29,21004,DBTEX(1,ILINE+1))NPS(I),SHIFR(1),SHIFR(2)
+      ILINE=ILINE+1
+21004 FORMAT(X,A6,A6,A6,' НЕ ВЫБРАН')
+21001 CONTINUE
+22000 CONTINUE
+      GOTO 100
+C     ИСХОДНОЕ ВСЕЙ ТУ
+      END
+C КОНЕЦ FORTRAN-ЧАСТИ. Д А Л Ь Ш Е  В  P D F  (стр.292-293) — ЛИСТИНГ
+C КОМПИЛЯТОРА: ERRORS: 0, WARNINGS: 1 (WARN 001 IN 0518).
+C ЭНТРИЕС (стр.293): SPIGUN >00000<, PZAVAR >00071<,
+C                     DERD >00416<, DEWR >00030<.
+C КОММОНЫ: DEBUF >702<, DEBAR >21<, SHPS >21<, CHPS >5<.
+C ВНЕШНИЕ (стр.293): VTWORK, CLOPEN, VTWRIT, VTREAD, VTSTAT,
+C   IOCTTI, GIVRGS, DRIN, GIVRGM, OKNO, VTDE(SH), GSTISO, VTK,
+C   VTN, VTN16, VTNRL, VTI, VTB, RDPTK, RDPTN, DESR, WRDESK,
+C   USM35, IOCTM, RDM35, MEM, FINAL, ISOCOD, WRPTN, TODE, SHISO,
+C   GOTO, CALL, MEM, VTINVI.
+C p294  VIN(NET,MA,KA)  - разбор кадра, ENTRY VIN
+C p295  VIN16(...)      - 16-разрядный вариант, ENTRY VIN16
+C p296  VINRL(...)      - вещественные числа, ENTRY VINRL
+C p297  VTKOM(...)      - VTK..., COMMON/DEBUF/
+C p298  VTISOM(IAR,...) - ISOM-перевод, ENTRY VTIS
+C p299  VTB(MAR,...)    - табличный вывод, ENTRY VTB
+C p300-301 WRDESK(IDESK,NMASH,FIN) - разбор дескриптора, ENTRY WRDESK
+C (записаны в отдельном файле deb_fortran_aux.txt при необходимости)
+*execute
+*end file
+``````
+еконец
