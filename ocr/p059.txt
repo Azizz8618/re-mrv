@@ -1,0 +1,67 @@
+~ EX
+29-04-86
+АВТОКОД MADLEN
+#1 10729
+МКУОСОСО РЕОМОМ 3 + МАМЕ,
+MRV00100C .
+МУ осн err me
+MRV00120 MONAR r:LC,BLOCK,
+MRV00130 ‚ CONT, ARLT.HAYANO А-СПИСКА
+MRV00140 ‚ CONT, ОТЕТ. НАЧАЛО О-СПИСКА
+MRV00150 ‚ CONT, ТЕТ. НАЧАЛО F-CNACKA
+MRV00160 ‚ CONT, EXEC А.ТЕКУШИЙ А-ПРОЦ,
+MRV00170 ‚ CONT, EXEC О,ТЕКУШИЙ ры
+MRV00180 ‘ NT, EXEC Е.ТЕКУШИЙ FO ы
+MRVO019A Е СОТ, НТЕЗТКР. АДР, ИПП жд. ТЕСТА
+MRY00 200 Can nn nn nan nn 47777777777
+Mry00210C
+MRVOO220C — СТРУКТУРА И П ПРОЦЕССА:
+MRV00230C
+MRV00240 *0 >, BLOCK, МАМЕ Р.ИМЯ ПРОЧЕССА
+NRV00250 1, CONT, ASTART+AAPEC НАЧАЛА
+Мву00260 2, CONT» АЗТОР. АДРЕС ОСТАНОВКИ
+Mpy00270 3, СОТ» нЕХТ Р, СЛЕД , ПРОЦЕСС
+MRV00280 4, CONT,BRANCH.HOMEP ВЕТВИ
+MRV00290 5, CONT, INIT L,CTAPTOBOE СОБ-Е
+MRV00300 6, CONT, gUFF Р,БУФЕР ПРОЦЕССА
+МВУ00310 7, CONT, ЗТАСК, СОСТОЯНИЕ МАГАЗИНА
+MRV00320C---- + ----
+Mey00330 ИПП 115 : . syBP, „ИПП ПРОЦЕССОВ
+MRVO0340 EVENTS ; , SuBP, ‚ СПИСОК СОБЫТИЙ
+MRVOO3SO aDFCOM ; » ИВР,
+MRV00360 OKNO : 4 SUBP.
+MRV00370 ТАВ DIA : « SUBP,
+Mrv00380 TABRAS : « SBP.
+Мву003 90 С - 92 -- 2 nn eee ee
+MRVO040N EXEC $ с EOU „ЕТ . ЕХЕСА=1
+MRVO00410C
+MRVOO420 L KP >, €QU 38
+MRvV00430C
+Mry00440 In ЕЗО : ‚ Equ .1338 -WHO.CNORO 550
+MRV00450C
+MRy00460C--------- ее
+MRV00470C ANA СВЯЗИ ГЗ - ПЗ
+MRVO00480C
+MRy00490C МЕСТО НА ДИСКЕ ДЛЯ ХРАНЕНИЯ АБГОЛЮТНЫХ
+mRV00500¢ КОПИЙ ЗАДАЧ
+MRV00510 LINK tLC+BLOCK+READ DOG,+ CONT 006
+mRv00520 ‚ CONT-READ PM,READ PS(4)
+MRV90530C АДРЕСА ТОЧЕК ЗАПУСКА ЗАДАЧ
+mRv00540 ‚ CONT, STRT РМ, STRT pS (4)
+МРУ00550 + CONT. INT ЕЯВ.ОБРАБ. ПРЕРЫВАНИЙ
+В MPR
+MRVv00560 ‚ CONT,NUM PS.HOMEP ЗАПУСКАЕМОЙ
+ПОДСИСТЕМЫ
+MRV00570 ‚ СОМТ, АУ PS,HOMEP АВАРИЙНОЙ noa
+СИСТЕМЫ
+mRV00580 + CONT, WORK PS. НОМЕР ВЫПОЛНЯЕМОЙ
+ПОДСИСТЕМЫ
+MRV00590 ‚ CONT,END PS(4)
+MRV00600C
+Mrv00610 SH PS ЕС, BLOCK,
+MRVO0620C ТАБЛИЦА ШИФРОВ ПОДЧИНЕННЫХ ЗАДАЧ
+MRV00630 ‚ CONT, SH MPB(1)
+MRVO0640 ‚ CONT, SPS(A)
+MRVO0650C |
+MRV00660 CH PS ЕС, BLOCK,
+Mrv00670C ТАБЛИЦА КАНАЛОВ ПОДЧИНЕННЫХ ЗАДАЧ

@@ -1,0 +1,8 @@
+*.swp
+*.swo
+*~
+*.bak
+__pycache__/
+ocr/img/
+ocr/test/
+*.pdf

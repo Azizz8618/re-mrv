@@ -1,0 +1,18 @@
+ ONE     : , NAME,
+         : , *63 , 4
+         : , UTC , =10
+         : , AOX ,
+         : , UTC , ONE
+         : , ATX ,
+       13, UJ ,
+ TWO     : , ENTRY,
+         : , *63 , 4
+         : , UTC , =10
+         : , AOX ,
+         : , UTC , =10
+         : , AOX ,
+         : , UTC , ONE
+         : , A-X ,
+       13, UJ ,
+ ONE     : , BSS , 1
+         : , END ,

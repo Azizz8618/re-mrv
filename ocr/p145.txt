@@ -1,0 +1,75 @@
+WRTOOGSO #3 1 ‚ CONT,A TABL.AAPEC er
+ПА .
+8100660 #4 t+ CONT, ЕЕМС - АЛИНА А “hay,
+РАЗр Ny ~
+WY WRTOO670 «5 1 + CONT,C NUMB.MEPEAR Hi Coney
+КЕМ НО нана
+48100680 #6 1 + CONT, РЕРТОО - ПЕРИОД Bbigas bat y
+A и \ В
+я wRT00690C м =
+{ WR100700 бит FLD1y , ас ,1000 МАССИВЫ д р we
+| 98100710 бит FLO2; ‚Сс ,1200 MEMY TOY 8 hy - р
+i 48100720 ouT FLD31 ‚С 1000 apes Bathe 1 м
+ИНЬ А 0012 wi
+{ WRTOO730 М FL т/с ,4000 „для ТА ы :
+. 48100740 С Ky 0013 ы
+i WRT00750C — ДЛИНЫ И БАЗЫ ПАКЕТОВ ВЫДАЧИ По у мт .
+WRI00760 РОГ РАС ТС, В! ОСК, Е РАСКЕТСЗ) „АЛИНЫ МИН, vi
+WRIOO770C . 001
+WRT00780 she BAR ТЕС, ВОСК, РЕВ ЕЕб. ФЛАГ ОТЛАДКИ te
+WR100790 » CONT, (9) от
+wR100800 ‚ CONT,B COMC3) Sat
+WRT00810 ‚ CONT,M FLD + = 6622
+WRI00820 ‚ CONT, I FLDC7) и 6020
+=: LINE IN т, SUBP, ced A ATEN iT 0021
+WRI00840 LINE отр, SUBPy *И ЗАПИСИ БУ Nyy =
+КОМАНД, ED, 0022
+WRTO0O0850 ry E50 3 » РОЙ ,1338B -
+WRI00860¢ 0023
+WRIO0870 NEXT РСТ; + ЕСИ ‚ТВ . -, 000:
+WRT00880 MASH Г « EOU ,10B 0024
+WR100890 к PACK } » Бои .11B
+WRI100900 BEG COM т » Equ ‚128
+WR100910¢ 0025
+WRI00920 LENG £60; , ЕСИ ,32
+0000 0000 wr¥00930 8, BASE,* Е
+МР 10094 0С nee
+WR, OURS FG Meee Sm Mere тт о -
+WRT00960¢ С 0027
+WRI00970C ЗАПИСЬ КОМАНД в ОБЩУЮ ПАМЯТЬ.
+wR100980C¢ - 90
+WR100990 C~ nnn nnn nw nnn nn ene
+wR101000¢ : oose
+wrRr01010C УСТАНОВКА НАЧАЛЬНЫХ ЗНАЧЕНИЙ . -
+WRIO1920C 0031
+- WR1I01030 „ TTR ;
+0001 МР 101040 ’ ATX ,Р ВАЗЕ Э. БАЗА 1-ГО ПАКЕТ _
+. В 3-60 0032
+МЕ 101050 ’ ATX ,BEFOR В „БАЗА ПРЕДИД. nh
+= KETA ты
+0002 08101060 г 0033
+- wR101070 = ae a СЧЕТЧИК МАШИ ый |
+' '
+WR101080¢ 0034
+R101 = >
+о ЗАПИСЬ БЛОКА КОМАНД ANg ОДНОЙ МАШИНЫ 0035
+
+0003 WRI014110 wR РАСК 13, ute 3 =
+
+- МР 101120 46h yt! 0036
+
+0004 WR101130 ' -HOMEP МАШИНЫ о
+
+- 0132 wrr01440 ' Se is 0057
+
+ad 0005 wRT01150 ' agg iP BASE 9 -
+
+- 0024 мр101160 44 Pe ‚№ MASH (В ПАКЕТ Ыб
+WRI01470¢ Е ТИ И ANA CMW? -
+WRI01980¢ п 0044
+
+A re
+WR101190¢ BET AAA 960
+0006 WRI01290
+: ~ 0016 yrrorayg ' ХТА .STOP Е OT ОТЛАЧЧИКА
+‚ UZA ,WR 2

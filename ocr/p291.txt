@@ -1,0 +1,69 @@
+475 0680631019003 Goro 100
+476 0806520190) 04 FORMAY ( ,
+DEROOS SOC Х, РАБОТА в гз,
+090654 0С ЗАПИСЬ
+pER06550¢ МЕ Ha HORG КОДА ПО aaa
+477 Ев 0656020000 CONTIN, АДРЕСУ, ЗАЛАННОМУ
+478 DERO6570 РЕБ)
+479 0Ев06580 Chiy oes 6910 20002
+480 DEBN6590 CALL ОСТ Ее vay
+481 Неру NAmNASNSy COS) NSM)
+482 DER06610 CONTWe4
+; ER06620
+184 pEBO6SSO а ease КА
+85 0ЕВО6640 САГИ т в
+(86 02806650 RETURN УТ СЕСАВО; | РАС Ст)
+487 0ЕВО666020002 ТОО (12, 19004, ОВТЕЖСТ, te ENpedy)
+488 DEBN6674 TITNEETL INES)
+489 pER06680 PRINT 19004
+490 DER06690 GOTO 100
+491 0EB0670020100 CONTINUE
+492 nER06710 NETSOCOD(L CARD)
+493 pER06720 TFON. EQ. бНОШИБКА) GOTO 20005
+494 pER067350 CALL WR РТМ(МА, М)
+495 DEB0674020005 ConT weo,
+496 DER06750 и.
+' = О
+МЕЕТЕТМЕ*1
+497 0ЕВО6760 ТЕ ТМЕ ;
+4, CLCARD (1) 121,4
+oye ме SE is SAN: ROLAG LAG LAG)
+499 DERQ678920004 sake т .
+00 ПЕВО6790 о
+5 Е
+DEROABNNC р * = чу
+DER06810C — ВЫДАЧА СОСТОЯНИЯ ЗАДА
+eset 00 CONTINUE
+501 peste CAL, TODE
+502 0ЕВ06840 1001 1=1,5
+a DER06850 Oe eater ane о ie
+50% nep06860 + SHISOCSHPS (1) SHIER CI)
+505 0ЕВО6870 coc cHPS (1) .E0.0 GOTO 2
+506 8960 СНА 8 СИР СТ, ОВТЕХС Я , ELINE#1))NPS(T),
+507 ke pee ENCODE (28 a eee NCH
+508 DER06 SHTFR(1) +
+peB06910 "TLINESTLINE®! А6,' КАНАЛ * +02)
+50021003 ЕОЯМАТ (хи AG. AG: МЕ+ 1 МРТ),
+510 рЕВО69 30210 GoTo 21001 рб, ОВТЕХСИ ttf E¢
+511 pER06940 2 ENCODE (29, Rte)
+9502100 R(1)sSHIF р
+512 ПЕВО6 «SHIF +1 БРАН )
+nEROAI60 ri TNEwILINE Ab, Ab.’ НЕ ВЫ
+513 0ЕВО6970 1004 РОРМАТ СХ АВ,
+514 0Ея069802 001 continue
+515 peR0699021 сай
+ОЕВО7000С СХОАНОЕ ВСЕ
+АТН | INUF
+DERO? Cant
+516 De a0703022000 сото 100
+517 peBp07040
+DER07030C ЕМО
+518 n—eR070 re RESULTS
+т |
+RTRAN DrAGNos т
+FO 25; 1 1—N
+ВЕ МАМЕ: то THIS sTaTene
+4 |
+eRRORS: 0 55 No PAT
+00518 THERE
+WARN 001 IN _

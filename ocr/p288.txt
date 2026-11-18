@@ -1,0 +1,71 @@
+|
+| 20
+| AR1-
+34
+| 8 DEBOS
+ligt 34% ор GOTO 7103
+320 БЕВО 0 7010 NMASH®!
+32 04870 Goto 7104
+1 pERO4580 7011 a
+322 DERG нения
+И $25 рвы со Ш |
+| 324 НТ 7012 ММАЗНиз
+325 о URS GOTO 7104
+26 0804650 13 NaPMFLOCH) «ARO
+327 nbanaain ENCODE C23, ?ТОВ, ОВТЕХ (1, TLINEST))
+358 DELQ&6S0 7108 TU INEST LINES
+320 806660 08 FORMATCX, ' ОБЛАСТЬ ЗАПИСИ ЕЭСМ-6; *)
+330 NARNASNSM |
+DER04670
+S51 cecccaes 3 Gato 7200 f
+S35 о 7014 мА=1 FLOC1) .oR-0
+S55 beasiaas ENCODE (24, 7109 ‚ ОВТЕХС1 , IU TNE*1))
+334 0ЕВО4710 7109 eet od ab
+НЫ 09 ЕОВМАТСХ, ' ОБЛАСТЬ ЧТЕНИЯ БЭСм-6: ')
+р ae НАЕНА+Н$М
+337 3 GOTO 7200
+DERO4740 7101 & ~
+GSS а ЗАвОЕЗМ (НАК), ОВ. 0
+ыы КА=МА+ 199
+Sen: SEEDEY?S CALL RD PT NONArKACKAR?O,)
+36$ phecaree CALL WROESK(KAR, NMASH. FIN)
+342 0ЕВО4790 eh ао
+343 0804800 7102 4
+Suu DEBOSBIO NABDESBCNAR) OR, 0
+345 DEBOU820 ще
+Sis ЕВА CALL RD PT М(МА, КА’, KARO.)
+345 BEBO «820 CALL WROESKCKAR , ММА$Н, FIN)
+348 0ЕВ04850 bea 100
+349 4 =
+350 Benet Res 7103 ct hob lll lal
+351 pE&B04880 Enco мы 7
+352 0ЕВо4890 И ИСО ЗИ
+353 DEBOS Аи
+4 рН 7105 emul be ПАКЕТ КОМАНА СМ-2/°, 11)
+355 0604920 7200 ыы
+356 ОЕ }
+357 ОО, RISE LEG rar ee eneg et?
+aoc eg 1F(K,GE.162GOTO 7107
+фр те CALL RD РТ М(МА, КА, КАВ,О. )
+se pee ee) acral
+362 DEB04990 ОТО 700
+363 0Е805000 7107 КАРЕМА*15
+364 DEB05010 CALL RD
+é RD PT NCWAL КАР, КАВ,
+345 eb cALL RINT CRAM, МА, KAP)” 9
+МА=КАР* 1
+367 0ЕВО5040
+368 0ЕВО5050 7104 ОТ ИЕ МА
+369 0ЕВО2060 банана smn
+370 vER05070 о
+371 0ЕВО5080 ен |
+372 ПЕВО5090 7106 FOR "п
+НН ОВМАТСХ, 'ПАКЕТ КОМАНД АЛЯ См-2/',11)
+37% 0805110 oe it
+pEROS4120€ ;
+375 DERO5150 8000
+377 0ЕВ05170 PRINT 8
+37а DEBQSIRG 8001 Е te
+379 вЕВО5190 ALL ne ree
+380 0ЕВО5200 | ры
+GOTO 100

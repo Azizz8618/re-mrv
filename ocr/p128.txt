@@ -1,0 +1,61 @@
+TOSS 2505 КЕА1 4930 6
+REA1494 ‚ ITS 14 ы
+1046 ВАО 14, vis "330
+ВЕА 149 ‚ ITS 416
+1047 1014 ао ‚ CALL, Tt ТО CM ——-
+Вов с----- lan” »NO COM 2
+= ЕА14990С mate neem sce e mene e mere” й
+105
+у ВЕАТ5000 15 PS”:
+REA1SO10C АНР *_ RSS +
+REAIS020C 3 OC ГОТОВНОСТИ ПОАСИСТЕМЫ
+жк 0
+REA1505 ‚ ITA 13 $
+1051 1237 eal hose ‚ ATX o RV у
+1 REA15070 ВАН MAponS ©
+052 REA15080 i Add ~ WORE AS
+1053 REAI5O20 eer
+м ВЕА1 5100 1 A к
+68 seen Е 15110 ' uty 'УЕЗ pSw1.U3 m PB
+- weaned en утес ‚вок С0М12*2 :
+1055 1230 REA1S140 cmt
+- ВЕА 5150 14, УТМ ,MASH . ААРЕС HOM, МАМИНЫ
+1056 1256 8ЕА15160 а
+- ЕА15 170 14, Уутм «RUF 60м12
+1057 2473 ВЕА15180 ‚ 115 ‚14
+= REA15190 14, УТМ ›=3 „АЛИНА КОМАНАМ
+1060 REA15200 а
+= ‚ CALL» RQ TO См. КОМАНАУ НА cM
+1061 REA15210 XTA
+1962 Ren 5530 Aas
+poets a Wi
+(atten bic Lilo eee seat eeSete ея,
+. ВАТ 52506 ЕР
+й АПРОС 0 ГОТОВНОСТИ МРВ
+Saye ene К РАБОТЕ,
+6
+10 3 ВЕА1 5300 ; ЧТА 013
++66 ВЕА1 5310 ‚ ATX ›,В13
+4
+0 REA15320 ‚ ХТА ‚РАВ „КОД КОМАНАЫ :
+$ RpEA15330 ‚ AZX ,ByF COM6+2
+065 1230 Ван 14, УТМ ,MASH
+= A 1TS ‚14 fie >
+1066 1253 REa15360 14, VIM + QUF =
+- REA15370 ars 114 CONS-AOMAUY SATOTOBKA E>
+1067 2473 REA19380 14, УТМ 123 «>
+- REA15390 ‚ ITs «16 =
+1070 REA15400 " call, RaTOCM =
+1071 1230 REA15410 14, УТМ + MASH Е.
+- ВЕА1 5420 ‚ 11$ «14 Е
+1072 1741 ВЕА! 5430 14, VIM «START T =
+- ВЕА1 5440 ‚ 115,14
+1073 2515 REA19450 44, УТМ ,=14 ася
+= РЕА1 5460 ‚ ITS +14 7
+1074 REA19470 ‚ CALL,T TO CM
+1075 REA19480 ‚ ХТА + R13
+- REA15490 ‚ ATI +13
+1076 REA19500 13, Wo +
+ВЕА1 5510С
+О ssz0gemeener tn
+REA15530€

@@ -1,0 +1,61 @@
+Pa
+- м 12230
+9201 БАНИ Ure ‘ЕхЕСк  -0CBO5+ Р”ВЕТВЬ.
+= MRV12250 ‚ ATX ,
+0702 0412 May12260 / Us + LICONTR
+0703 м 1 70 . is .
+0703 1515 HEE He aR у ' ие ‚#71777 7777 0000 0000
+- MRV12290
+0704 м ; и. (700g —.ОТМЕНИ БУДИЛЬНИК
+0705 1507 mRrv12310 ‚ UTC 127777 7777 0000 0074.4,8
+СЕК
+ыы М 1
+0706 12330 ХО ‘77008 — „УСТ. БУДИЛЬНИК
+0707 MRV12340 1 #53 4178 „ЗАКР.ЗАД, ДО С0Ь.
+0710 0677 мву12350 ‚ US +o WTEST
+MRV12360C
+MRV12370C
+MRVIZ380 CHAE RRRRR RRR — КОНЕЦ WIEST
+MRV12390C
+Мву1 24006
+0711 MRV12410 FIN PRC ; JENTRY,
+0711 MRV12420 FIN PRC: » BSS ,
+MRV124630C--- nn ~~ nn nnn nn nnn
+Мву12440С ПРОЦЕСС ЖЕЛАЕТ ЗАБЛОКИРОВАТЬСЯ.
+MRV12450C ПРЕРЫВАНИЯ HE ЗАПРЕШАЕМ.,
+MRV124660 с - НН 7 7797777
+0711 0602 mrv12470 + WTC »pRIOR
+их MRV12480 ‚ WTC rExEe
+0712 MRV12490 > UTE oA START
+= Mpy12500 ‚ XTA, УСТАНАВЛИВАЕМ ПР
+ИЗНАК
+0713 1513 MRv12510 , UTC ща „БЛОКИРОВКИ ПРОЧЕ
+CCA
+- mMRV12520 1 АОХ +
+0714 0602 MRv12530 ‚ WTC ,PRIOR
+= МВУ1 2540 ‚ МТС ‚ЕХЕС
+0715 МВУ1 2550 + UTC +p STaRT .
+- mRV12560 1 ATX , i
+0716 Mrv12570 13% uj»
+My 12580 CR II III II II ISI OI I IOI te
+Мру12590С
+Мву1 26006
+0717 MRV12610 I FIELD : ,ENTRY,
+MRV12620 Crm чан
+MRV12630C ПРОЦЕСС ЖЕЛАЕТ ПОЛУЧИТЬ АДРЕС МАССИВА
+mMRV12640¢ СВОИХ ПАРАМЕТРОВ.
+MRV1265 0 Conn +5 eee
+0717 0602 Mry12660 » ТС sPRIOp
+Е MRV12670 ‚ WTC , EXEC
+0720 MRV12680 ‚ XTA + RUFF P
+- MRV12690 13, и. +
+MRV12700C
+0721 MRV12710 INT OFF : сЕМТВУ,
+MRV1 2720 Crane rn re en tt rt te eee eee et eee
+Mey12730C ПРОЦЕСС ЗАКРЫВАЕТ ПРЕРЫВАНИЯ
+МВУТ2740С- w enn nn nn en ee eee eee ene
+0721 0603 mRv12750 ‚ UTC + IN/OUT
+- MRV12760 ‚ xTS +
+0722 1612 mRV12770 ‚ UTC ‚СОРУТТ/О
+- mRV12780 + ATX ,
+0723 1477 MRv12790 ‚ ПТС #1

@@ -1,0 +1,63 @@
+27.04.84
+АВТОКОЯ SADLEN
+4.10.22
+WR103H20 RQTOCH : , NAME,
+WRIOS630C вы
+боны"
+WRTO3ESOC pEAANM
+weatg366nC ЗАПИСЬ СООБМЕНИЯ В РУФЕР АЛЯ ПЕ
+WR1O36706 НА ОДНУ ИЗ СМ-? OT МРЕ.
+м8 103680С
+WRTO3690C ОБРАШЕНИЕ ! )
+WRIO3700C CALL ПОТОМ (МАН АЯ, “КОТОРОЙ
+wrto3710C€ PAE: MAgH = НОМЕР СМ, А acwnll
+WRI03720C ГОТОВИТСЯ ay a
+WRI03730C ARRAY - МАССИВ СООБМЕНИ бан
+WRIO3740C N - АЛИНА COOBLEHMA
+WRIO03750C
+WRI03760C se oxem
+а ист
+WRI03780 INT OUT: , SUBPr
+WRIO3790C nyc
+WRIO3800 LINE IN : + ВР, „УКАЗАТЕЛЬ ны и.
+WRI03810 LINE от: › SUBPr „УКАЗАТЕЛЬ ЧТ
+WRYO3820C
+0000 wRI03830 « UTS 013
+- WRI03840 „ Ts 1 = -
+0001 wRI03850 CALL, INTOFF - 5B AOKUPTMPEPDIB -
+0002 WRI03860 и SYT 3
+* wry03870 ‚ str +13
+wrRyO388oCc
+0003 WRI03890 * Sth 9 TN
+- wRI03900 д STI wit® W ARRAY
+0004 WRI03910 » STI +91 „МАН
+0005 WRy03920 RQ TO СМ: ‚ Bss +
+0005 м8 103930 я 17$ „13
+= wR103940 = TTS al
+0006 WRI03950 „я PTS we
+- wR103960 ‚ 11$ «3
+0007 wRI03970 ‚ yTS .7
+= 0007 wRl03980 7, ВАЗЕ, *
+0010 wWRI03990 11, xTS , MASH
+- wR104000 ‚ ATX «MASH
+0011 0012 WRI04010 ‚ UIA ‚ЕТ „НОМ. МАШИНЫ ЗАДАН
+- wRy04020 pig] os .0-Й НОМЕР MAU,
+0012 wRI04030 №1 : , ITA,
+- WRI04040 ‚ АТХ ,KS ‚АЛЯ КОНТР, СУММЫ
+0013 48104050 9, Wre +
+- wR104060 1, VIM + TN
+0014 wR104070 10, mtd +2 .АВВАУ
+0015 8104080 № : 2, ХТА ,
+= WRI04090 ‚ ARX ,KS
+0016 wR104100 + ATX «KS . КОНТР. СУММА
+wRy104110¢
+wWR104120C ЗАПИСЬ ОДНОГО СЛОВА СООБЩЕНИЯ в БУФЕР
+WRIO4130C ДЛЯ ПЕРЕДАЧИ НА ОДНУ ИЗ СМ-2.
+WRIO4140C
+0017 WRI04150 12 : 2, ХТА , .КОД СООБЩЕНИЯ
+= 0116 WRI04160 ‚ WTC ,MASH
+0020 wR104170 3, УТМ ‚ЕТМЕ 1№-1.АДАРЕС УКАЗ, ЗА“
+nveu
+- 0116 WR704180 ‚ МТС »MASH
+0021 48104190 14, УТМ ,LINE ОЧТ-1. АДРЕС УКАЗАТЕ”
+4

@@ -1,0 +1,217 @@
+--- /home/azizz/old_dispak/re-dispak/МРВ/dog1.txt	2025-07-22 18:34:27.108456195 +0300
++++ dog_head.txt	2026-11-18 15:26:22.062708018 +0300
+@@ -1,111 +1,113 @@
+- PROGRAM :  ,NAME,
+-C-------------------------------------------
+-C ГОЛОВНОЙ РАЗДЕЛ СМО ТУ ДИАНА-К71
+-С НА БЭСМ-6
+-С-------------------------------------------
+-С
+-С МЕСТО НА ДИСКЕ ДЛЯ ХРАНЕНИЯ АБСОЛЮТНЫХ 
+-С КОПИЙ ЗАДАЧ
+- LINK	:LC,BLOCK,READ DOG,CONT DOG
+- 	   , CONT, READ PM, READ PS(4)
+-С
+-C АДРЕС ТОЧЕК ЗАПУСКА ЗАДАЧ
+-С
+-	   , CONT,STRT PM, STRT PS(4)
+-	   , CONT,INT ERR .ОБРАБ ПРЕРВЫВАНИЙ В МРВ
+-	   , CONT,NUM PS .НОМЕР ЗАГРУЖАЕМОЙ ПОДСИСТЕМЫ
+-	   , СONT,AV PS .НОМЕР АВАРИЙНОЙ ПОДСИСТЕМЫ
+-	   , CONT,WORK PS, НОМЕР ВЫПОЛНЯЕМОЙ ПОДСИСТЕМЫ
+-	   , CONT,END PS(4) .ФЛАГ ЗАВЕРШАЕМОЙ ПОДСИСТЕМЫ
+-	   , CONT,STOP F .ФЛАГ ЗАВЕРШЕНИЯ РАБОТЫ ТУ
+-C
+- SH PS	:LC,BLOCK,
+-C ТАБЛИЦА ШИФРОВ ПОДЧИНЕННЫХ ЗАДАЧ
+-	   , CONT,SH MPB(1)
+-	   , CONT,SPS(4)
+- CH PS	:LC,BLOCK,
+-C ТАБЛИЦА КАНАЛОВ ПОДЧИНЕННЫХ ЗАДАЧ
+-	, CONT,CH MPB(1)
+-	, CONT,CPS(4)
+-NAME PS :LC,BLOCK,
+-C ТАБЛИЦА ИМЕН РАЗДЕЛОВ ДЛЯ ПОДЧ. ЗАДАЧ
+-	, CONT,NAME MPB(1)
+-	, CONT,NPS(4)
+-PS*MASH :LC,BLOCK,
+-С ТАБЛИЦА СООТВЕТСТВИЯ :
+-С НОМЕР ПОДСИСТЕМЫ - НОМЕР МАШИНЫ
+-	, CONT,(4)
+-C
+-C	ДЛЯ СВЯЗИ МРВ С ОТЛАДЧИКОМ
++ PROGRAM :  , NAME,
++С-----------------------------------------------------------
++С
++С   Г О Л О В Н О Й   Р А З Д Е Л
++С   С М О   Т У   Д И А Н А - К 7 1
++С   Н А   Б Э С М - 6 .
++С
++С-----------------------------------------------------------
++С
++С   МЕСТО НА ДИСКЕ ДЛЯ ХРАНЕНИЯ АБСОЛЮТНЫХ
++С      КОПИИ ЗАДАЧ
++ LINK   :LC,BLOCK,READ DOG,CONT DOG
++        , CONT,READ PM,READ PS(4)
++С   АДРЕСА ТОЧЕК ЗАПУСКА ЗАДАЧ
++        , CONT,STRT PM,STRT PS(4)
++        , CONT,INT ERR.ОБРАБ. ПРЕРЫВАНИЙ В МРВ
++        , CONT,NUM PS.НОМЕР ЗАГРУЖАЕМОЙ ПОДСИСТЕМЫ
++        , CONT,AV PS.НОМЕР АВАРИЙНОЙ ПОД СИСТЕМЫ
++        , CONT,WORK PS.НОМЕР ВЫПОЛНЯЕМОЙ ПОДСИСТЕМЫ
++        , CONT,END PS(4).ФЛАГ ЗАВЕРШАЕМОЙ ПОДСИСТЕМЫ
++        , CONT,STOP F.ФЛАГ ЗАВЕРШЕНИЯ РА БОТЫ ТУ
++С
++ SH PS  :LC,BLOCK,
++С   ТАБЛИЦА ШИФРОВ ПОДЧИНЕННЫХ ЗАДАЧ
++        , CONT,SH MPB(1)
++        , CONT,SPS(4)
++ CH PS  :LC,BLOCK,
++С   ТАБЛИЦА КАНАЛОВ ПОДЧИНЕННЫХ ЗАДАЧ
++        , CONT,CH MPB(1)
++        , CONT,CPS(4)
++ NAME PS :LC,BLOCK,
++С   ТАБЛИЦА ИМЕН РАЗДЕЛОВ ДЛЯ
++С      ПОДЧИНЕННЫХ ЗАДАЧ
++        , CONT,NAME MPB(1)
++        , CONT,NPS(4)
++ PS*MASH :LC,BLOCK,
++С   ТАБЛИЦА СООТВЕТСТВИЯ :
++С   НОМЕР ПОДСИСТЕМЫ - НОМЕР МАШИНЫ
++        , CONT,(4)
++С
++С   ДЛЯ СВЯЗИ МРВ С ОТЛАДЧИКОМ
++С
+  *DEBAR* :LC,BLOCK,DEB FLG
+- 	, CONT,DES M(3)
+-	, CONT,DFS B(3)
+-	, CONT,COM(3)
+-	, CONT,V FLD(8)
+-C
+-C ДЛЯ ВЫВОДА РАЗДЕЛОВ НА АДРЕС 2000В
++        , CONT,DES M(3)
++        , CONT,DES B(3)
++        , CONT,COM(3)
++        , CONT,BCOM(3)
++        , CONT,M FLD(8)
++С
++С   ДЛЯ ВЫВОДА РАЗДЕЛОВ НА АДРЕС 2000В
+ С
+  FRI FO : , LC  ,0
+- L2000	: , EQU ,1770B-FRI FO
++ L2000  : , EQU ,1770B-FRI FO
+  C2000  : , LC  ,L2000
+-C
+-C	НАЧАЛО ЗАГРУЗКИ
+-С---------------------------
++С-----------------------------------------------------------
+ С
+  NEW DOG : ,ENTRY,
+-C
+-C ЗАПУСКАЕМ D O G :
+-	, XTS ,DOG
+-	, XTS ,
+-	, CALL,LOAD CALL
+-C
+-C ЗАПУСКАЕМ РАЗДЕЛ МРВ ИЛИ ПОДСИСТЕМЫ
+-С ДЛЯ ЗАГРУЗКИ
++С
++С   ЗАПУСКАЕМ  D O G :
++        , XTS ,DOG
++        , XTS ,
++        , CALL,LOAD CALL
++С
++С   ЗАПУСКАЕМ РАЗДЕЛ МРВ ИЛИ ПОДСИСТЕМЫ
++С      ДЛЯ ЗАГРУЗКИ
+ С
+  LOAD PS : , BSS ,
+- 	   , WTC ,NUM PS
+-	   , XTS ,NAME PS
+-	   , XTS ,
+-	   , CALL,LOADCALL
+-C
+-C ВОССТАНАВЛИВАЕМ СОСОЯНИЕ ГЛАВНОЙ 
+-С ЗАДАЧИ ДЛЯ ПРОДОЛЖЕНИЯ РАБОТЫ DOG'A
+-C
+-	1, VTM ,-30
+- L    :  , BSS ,
+-        1, UTC ,31
+-       14, VTM ,
+-         , ITA ,14
+-	 , AOX ,READ DOG
+-	 , ITS ,14
+-	 , ASN ,64-30
+-       15, AOX ,
+-         , AOX ,=:001
+-	 , ATX ,INF READ
+-	 , TAPE,INF READ
+-	1, VLM ,L
+-       13, VTM ,LOAD PS
+-         , WTC ,CONT DOG
+-	 , UJ  ,
+-C
+-C
+- DOG :	    , TEXT,8HDOG
++        , WTC ,NUM PS
++        , XTS ,NAME PS
++        , XTS ,
++        , CALL,LOADCALL
++С
++С   ВОССТАНАВЛИВАЕМ СОСТОЯНИЕ ГЛАВНОЙ
++С   ЗАДАЧИ ДЛЯ ПРОДОЛЖЕНИЯ РАБОТЫ DOG'A.
++С
++       1, VTM ,-30
++ L     :  , BSS ,
++       1, UTC ,31
++      14, VTM ,
++        , ITA ,14
++        , AOX ,READ DOG
++        , ITS ,14
++        , ASN ,64-30
++      15, AOX ,
++        , AOX ,=:001
++        , ATX ,INF READ
++        , TAPE,INF READ
++       1, VLM ,L
++      13, VTM ,LOAD PS
++        , WTC ,CONT DOG
++        , UJ  ,
++С
++С
++ DOG    :   , TEXT,8HDOG
+  INF READ : , BSS ,1
+- 	    , DATA,
++        , DATA,
+  L PROMON : , TEXT,8HLPS1
+-            , TEXT,8HLPS2
+-	    , TEXT,8HLPS3
+-	    , TEXT,8HLPS4
+- R DOG    : , LOG ,50 0000
+-            , LOG ,50 0040
+-	    , LOG ,50 0040
+-	    , LOG ,50 0040
+-	    , LOG ,50 0040
+-	    , LOG ,50 0040
+-	  :1, SET ,R DOG
+-	   1,     ,READ DOG
+-	  :5, SET ,R PM
+-	   1,     ,READ PM
+-	   5, SET ,LPROMON
+-	   1,     ,NAME PS
+-	    , END ,
++        , TEXT,8HLPS2
++        , TEXT,8HLPS3
++        , TEXT,8HLPS4
++ R DOG  : , LOG ,50 0000
++ R PM   : , LOG ,50 0040
++        , LOG ,50 0040
++        , LOG ,50 0040
++        , LOG ,50 0040
++        , LOG ,50 0040
++      :1, SET ,R DOG
++       1,     ,READ DOG
++      :5, SET ,R PM
++       1,     ,READ PM
++       5, SET ,LPROMON
++       1,     ,NAME PS
++        , END ,

@@ -1,0 +1,70 @@
+| BSB
+1oKoA _MADLE таза
+АВ (1, 10.72) ‘ , said =
+DEB104
+2900 0000 DEB10435 150 Cop
+ЕВ1 0440 J
+0001 2ЕВ1 0450 8, NAME, гв
+. DER10460 . atte 04,4
+0002 0ЕВ10470 12, My 12
+._ 0032 peat Vie : ia й “tee
+0003 ЕВ1 0490 + aay (26H код
+Me ere ie ‘ ‘UTA "POH Qe,
+00 810510 2, xq TERROR ве,
+~ 0032 DEB10S29 i tee 22 77> +5
+0005 DEB10530 ‚ aay 2298
+9006 ее 2, phage ated
+055 + ХА “ERROR © "N27
+- 0032 10560 в м 12 7 Org:
+0007 DEB10570 ' ААХ р
+é DEB10580 + UIA ‘ee О',
+9010 DEB10590 12, хтА | RRor 177+ 0200
+4 DEB1060N р АРХ J s6Hr у»,
+0011 ОЕВ1 0610 12 ATX РЕЗ ak ree
+- pER10620 (XT 1 nee
+0012 pEB10630 т hs HEOWTPE pe ry
+- 07810640 caw oo “Or те
+0013 DER10650 } ate PRES
+к. ОЕВ1 0660 12, ' ВЕ$
+014 ХТА ,2
+0 рЕВ1 0670 ' АРХ „=бн’
+с 0ЕВ1 0680 + ASN il Te eee Ae A TO
+0015 DEB10690 at abe mm
+sate DER10700 1 ATX jpEs
+neue ye 12, УТА ,3
+- £510720 1 ASN 1646
+ant? DEB1N73n + ААХ 18? ы
+я DEB10740 1 АОХ RES
+anen DEBIn75¢4 ' ibe PRES
+- DEB10760 ‚ AyX pmOH 7579" 7% 7!
+: ripest
+0021 ато ‚ АОХ ,26H0000 0 "7
+- 12, АТХ
+0022 0Eg10780 xT f
+DER10790 ‚ ХТА › RES
+. DEB10800 а
+a ЕВ! 0810 и ae
+108 + AOX +#6H000 00
+sani о 20 12, ATX of
+ы 0ЕВ1 0830 ‚ ХТА rRES
+002g DEB10840 ‚ ASN ,64=30
+ks DEBI0850 ‚ AUX СЫ
+— DER10860 ‚ АОХ ,260н00 600
+ы 0ЕВ10870 42, ATX 12
+0027 p£&B10880 ‚ ХТА ‚РЕЗ
+0ЕВ1 0890 | AgN 164745 ,
+ue DEB10900 , AUX a рее"
+ры. DER 10910 1 АОХ 18
+00 10920 12, ATK 8
+pEB10930 ‚ RTA ofS
+003 nEB10940 13, US "6 HoWMBKA
+"ae DEB10950 ERROR ‘у, eee 8
+0033 DER10960 es
+: DER 10970 1,
+0052 $5 1
+pep10980 RES ; но
+ "ТРУКТ ОЕВ1 0990 ‘
+УРА ПОДПРОГРАММ ;
+ЗАГОЛОВОК 00001
+ПЬПЗНАЧЕНИЯ 00000
+м 00000

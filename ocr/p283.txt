@@ -1,0 +1,70 @@
+в. © 36 - ых
+32 .
+о te hea Ве
+067 0ЕВО1340 311 НОВА т
+068 а Call се" B MPB +)
+078 570 а
+0 ECS ake
+ae ОВ не
+ats, 076019 ОС, ВТ
+f ХТ tines, - nm
+073 DERO1400 Ен : 1454 *WROTSRL TE
+074 0ЕВО1410 67=0. +
+O75 пЕВ01420 S010 199
+DERO1430¢
+DER01440¢ ABocr в he
+076 001450 320 ENCODE (12 ;
+Е: Е TERY неь ат,
+078 pened 32x S070 105
+079 nEBO$ 5 FORMATS 7 ‚
+DEB01490¢ " ABOCT в пе 107)
+DER01500¢ ЗАВЕРШЕНИЕ р ;
+АБОТЫ ту
+я во ЩИ TLINE*1))
+081 0ЕВО1520 LINE tapes у Е
+082 pEB01539 GOTO 100
+O83 DEBOISED За) МАТОК, ЗАВЕРШЕНИЕ РАБОТЫ ПО ПРИКАЗУ Пр;
+ПОДАВАТЕЛЯ › )
+084 DERO1550 105 FORMAS(y,+ СУМАТРА ВАТ в Г ,
+0Е801560 а ее И "ПУ", 8Х, pip
+085 DERO157Q 106 в,
+DERO1sg0¢
+DERO1S90¢ ЗАГРУЗКА nc
+086 DeR01600 340 TE CTEXT NEO.) Garg 341
+087 DEBO1619 GOTO. bea "4, DTeKCTy TL tyce4y y
+088 DER01620 GOTO Ba
+089 DEB01639 34, Е treed OTEK вья тет
+990 пЕВО1640 344 ТТ ТЕТЕ
+091 2ЕВО1650 GOTO 100
+DER01660¢ ,
+DERO1670¢ ABOcCT Br .
+992 DERD1689 350 ОЕ 1.351 ОВТЕХСТ Ен ›
+093 0ЕВО1690 ae уро
+994 0ЕВО1700 351 РОВМАТУХ, АВОС
+095 DERO1710 CALL ЗО <ТЕХТ, DBTEXCTy TL INES)
+996 dERO1729 tere
+097 DEB01730 TLEILINE® }
+098 0Е501740 bt АТВ ине,
+| 099 DER01759 352 РОВМАТСХ, и
+100 0ЕВО1760 ENCODEC51, 105, ОВТЕХ (1, ТЕТЕ
+| 101 2ЕВО1770 О ТЕ
+102 0ЕВО1780 т SE*1)) CsyeRciy its
+"ОВТЕХСТ, TL Iupaey (SYsR
+103 DERO1799 ESCODE(S0,106,D ei uly
+| (1),1=1,5)
+104 2ЕВО1800 PRINT УВЕ
+105 DERO1R10 TLINESTL
+{ 106 DEBRA 1824 67=1.
+107 2801830 GOTO 100
+| DERO1g40¢ +P PY3UM мрв’)
+108 DER01850 342 oe ‘eae gh ne'+o1) ТИРЕ
+179 0801860 343 FORMAT Xe PABSTAES ОТЛАДЧИК OC K747
+110 0801870 110 FORMATCX,
+DEBO1880¢ ebastet oot: anak 8
+DERO1890c~--
+DERO1900¢
+14 DEB01919 ENTRY D ERD
+DEBO1929¢ 0 КОНЦУ ВВОДА,
+2280193 0С ВХОД n
+; DEROI940C
+a he |

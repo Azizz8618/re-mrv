@@ -1,0 +1,63 @@
+|
+- 0434 MRVO7210 ИЛА ‚РЕЗ
+0430 1204 мву07620 : nee а
+ыы MRVO7230 1 #64,
+0431 1206 MRyo7240 ‚ ИТС ,yPRI2
+- Мву0 7250 ‚ #64 5
+. 0432 MRV07260 ‚ CALL,OKHO
+ыыы MRVO7270 7 ER 9
+4 “ ь
+rep ike. мото № О eae ВИ
+С ,=7 7
+? MRVO7300 : ie 1 ‚СНИМАЕМ ПРИЗНАК
+0435 0602 MRV07310 ‚ МТС , PRIOR ‚ ПРОГРАММНОГО |
+= NRVO7320 ‚ ИТС + EXEC ПРЕРЫВАНИЯ П
+0436 sis MRVO7330 ‚ RIN 9 ‚ ЦЕССА
+= RV07340 ‚ UTA REST
+0437 1204 Mry07350 ‚ ИТС ‚ТРВТ!
+MRv07360 1 *64 4
+0440 1206 Мру07370 ‚ ИТС ,IPRt2
+- MRVO73g0 ‚ 664,
+0441 MRVO7390 + Calls ОКНО
+0442 MRVO7400 ; Pas
+044% MRV07410 ВЕЗ1 > 4 BSS +
+0443 MRV07420 1, VTM ,-14
+0444 MRVO7430 11 гов '
+0444 0602 Мру07440 3 Pee ‚РЕТОВ
+= 1200 MRV07450 ‚ wre ‚А ЕТЕЕО-1
+0445 MRV07460 1, XTA +19 .2-16И,Р.-
+= MRV07470 1; ATI +16
+0446 0444 MRV07480 1, УМ ot
+= 0602 MRV07490 , WTC ,pRIOR
+0447 1200 mRv07500 “ wtC [A FIELD-1
+- MRV0O7510 ‚ XTA ›
+0450 mRV07520 Я’ op AEE ol
+> 0602 mRV07530 + WTC «PRIOR
+0451 1527 MRVO07540 ‚ UTC ‚ВЕС А-1 “РЕЖИМ Ay
+- Мру07550 УТ
+MRV07560C ОТКРЫВАЕМ ПРЕРЫВАНИЯ И УХОДИМ НА
+mRvo07570C ПРОДОЛЖЕНИЕ ПРОЦЕССА.
+0452 мку07 580 1 ITA.
+- 0603 MRV07590 ‚ UTC + TN/OUT
+0453 Mav07600 ‚ ATX ,
+= мв\07610 13; UTS ;
+0454 MRVO?O20 13, VIM + .В ПРОЦЕСС
+ы mRVO07630 ‚ cCALL+OKHO 3
+0455 0602 MRv07640 ‚ TC ‚РЕТОВ
+> Мру07650 1 tt ‚ EXEC
+0456 MRV07660 ‚ RTA 5
+г 1464 mRy07670 $ ИТ. ст!
+0457 mRV07680 1 RTX |
+- 1453 mRV07690 ‚ UTC ,pRINTI2
+0460 Mevo7700 1 *64 ,
+0461 1236 MRy07710 © ИТС »PRINTK
+& мву07 720 1 #64,
+0462 mRv07730 + ITA +
+- 0633 mRVO7740 eld +REST
+MRVO775 0 Caer ernment entre rene enna en nnn ewnnend -----
+MRVO7760C
+MRVO7770 NEW PROC: ‚ BSS .
+0665 mRVO??BOC
+mRvo7790C ГОТОВИМ НОВЫЙ ПРОЦЕСС ТЕКУЧЕЙ ВЕТВИ!
+Mrvo7800C
+EEO CEE EE Eo vAE

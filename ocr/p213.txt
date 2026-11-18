@@ -1,0 +1,72 @@
+АВТОКОд MAD
+(1.10.72?) ma
+wODO0g 720
+WODOB7 30 Cre eho 3 ene
+wCDO8?40C meee eel NAME OO Ky
+WODOB7S0 cna AANA няне... ,
+WCODO876n¢ week NOOR MALY tee
+WOn08F50C Sie au АЛЯ Unepo ть. \
+WCODOS8780¢ UNODA нь Тльло ^
+WCDO8790¢ ЕТса fine Rane KAR Ц 4+.
+WCDO8800¢ НОМЕРА В ПоовлЕнии М®ФРОВЫХ ТАБЛО
+wCDO8810¢ ВЕСТЬ РАе АС Сив ь ЕДА |
+wCD0RR20 вс Е Утро ПАЕМОР стл }
+60088306 и, 0 мА coor &
+wWed0R8 АБЛИЦ * ЗАКОДИРО ММ НОМЕРОМ,
+weDoBesoe ТЕМАХ ИИ ел Ин,
+WCDO8860C SEPA Xr MEPECHNAWT ES В ПРО в а
+4 | OM `
+oc ВИ
+WED08890¢ п ТАБЛИЦЫ ПР и
+4600890 РОГРАММ БАСТАВЛЯЮТ
+‘ oc СЛЕДУЮЩЕЙ СЯ в ВИДЕ МАО
+WCn08910C т ` СТРУКТУРЫ } ADLENs
+м6008920С ТАВ: , МАМЕ |
+46008 930с 11700, ,
+wp08940C +200 „т В ТАВ
+ОЕ +700 + KLMN
+DOgg,0C "700 +<4M }
+6 ' Я ПЕРЕМ
+wODo897AC ‚200 с<имя п Ge EHXHOA> к x
+wed08980¢ а ЕРЕМЕННОЙ>
+60089906 ment дя на ее те ararertart
+woDQ9 mith weston «Semcon ass nthe sik мо
+pee eee Ем, и ze
+460090206 оба
+W 9 АЯ WHCT
+0904 0Е АИ Е. и твУВий GRMUATO ee
+= -2 НОМЕРУ П ПРИНЯТОМУ ОТ
+9060 БЭсм-6. АРАМЕТР ИЗ ВЫЧИСЛЯЕМЫХ НА
+п c
+Keo le Me м -
+WcoD09070c — ОТВЕТСТВЕННО Е ом
+#009080 © TAB ), HOF ny Ten aMGER МАССИВА
+wepog090c — ТАБЛИЦУ ИРОВАННЫХ НА ДАННУЮ a
+wep09100C Т R TAB - АДРЕС МАС
+460091106 — ЗАСЛАНЫ НОМЕР ACCUBArB КОТОРЫЙ
+An МЕРА ВЫЗЫВАЕМЫХ ПАРАМ ТР \
+weop09120C ana КАЖАОГО ТАБЛО АРАМЕТРОВ
+weop09130C у ;
+60091405
+0 ТОКА р В
+м 1 ни т -
+6009 60 *0 : ‚ ВЕОСК'А BLOCK. ААРЕС DAYANA pno" i= =
+wepo9170 ‚ CONT, NUM 2$, НОМЕР ПОДСИСТЕМЫ =
+wCOD09180 а cONT, 4 PROG, «АРЕС ПРОГРАММЫ
+weop09190 ‚ СОМТ,А ТАВК, АДРЕС ТАБЛИЦЫ ke
+weop09200 ‚ CONT) LENG. АЛИНА БЛОКА Sane? aS
+wop09210 ‚ CONTrC NUMB+HOMEP БЛОКА (ПЕРЕ” И r
+ДАННЫЙ ) |=
+Сы | =
+мб009 ppteeersensen Tg 1000 гы .
+0338 ouT FLol: ' te 1000 |
+мс009240 OUT rio2; 7 LC ‚1200
+wep09250 OUT #103: № te ‚1000
+мсро926 Ас реет"
+at ere An
+0 1 +9 „АДРЕС ОПИСАТЕ
+000 мс009280 j SEP BNOKA Кода
+= weoo9290 ‚ AT, 110 ‚м МАШ, BOM:
+$ ‚15
+0001 wep09300 ei i
+- wep09319 ' 7

@@ -1,0 +1,60 @@
+— 276 _ == eas а. сие,
+р
+АВТОКОД MADLE
+(1.10.72)
+DEBI3739 FINAL Ber Oaths
+2813740 LINK не вМАМЕ,
+ОЕВ1 37506 "BLOCK READ 00
+DEB13760 АДРЕСА TOUC ONT READ peor CONT DOG
+DEB13779 cs ЗАПУСКА и? PS(4)
+' CONT, stry
+ро РМ, 5Т
+DER137 * CONTOINT ERR tore)
+80 halite ПРЕРЫВАНИЙ
++ CONT: MPB
+DEG13799 “NUM PS,HOMEP ОБСЛУЖИВАЕМО
+ne 3200 + CONT, AV р Й ПОДСИСТЕМЫ
+813810 ‚ tans БАВАРИЯ в nc
+‚ CONT:
+0ЕВ13 820 omen meee ЗАВЕРМАЕМО
++ CONT, ПОДС" СТЕМЫ
+0000 0007 DEB13839 STOP Е,ФИАГ ЗАВЕРШЕНИЯ РА
+Ел DEB1384q ‚ UTC ,=7 ie ie
+001 DEB13850  ХТА ,
+= ОЕВ1 3860 ’ ATX STOP Е
+0002 DEB13870 + TTA ,13
+- DEB13880 Mie VON ТОР F
+0003 0006 DEB13890 sat cre tea
+- DEB13900 + ee
+0004 pEB13910 a ee:
+. 1 CALL+pESw „СЛОВО B ПЗ
+0005
+ы РЕВ1 3920 ‚ АТ! 13
+РЕВ! 3930 1$, Ud
+РЕВ! 3970 + END ›
+СТРУКТУРА  ПОДПРОГРАММЫ:
+ЗАГОЛОВОК 00001
+ОБОЗНАЧЕНИЯ 00015
+* 00000
+i 00000
+ИДЕНТИФИКАТОРЫ 00000
+КОМАНДЫ 00006
+ГРУППА BSS 00000
+КОНСТАНТЫ о
+ДАННЫЕ 000
+РАССЫЛКИ 00000 м aay
+число ПЕРФ. 0023 число ОШИБ. ОПЕРАТОРОВ 0000
+ТАБЛИЦА ССЫЛОК
+. 4 00004
+DESW aus one coher 2
+LINK Le О 000 0000" 9005
+sTOPF = 0
+= 4 !
+НЕ ИСПОЛЕЗОВАНЫ „.
+wee ee = 00000 STRTpM = 000
+wus р 00
+00000 06 2 00000 strTPs = 0000
+Avps = 00000 EADPM 5 ead wORKPS = 90000
+EyDPS 00000
+INTERR =
+™™

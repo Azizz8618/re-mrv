@@ -1,0 +1,61 @@
+MRVOOOOOC ne
+0304 mRv06010 ‚ ХТА @AY Г?
+- 1155 yRV06020 ’ utc «BUF С0м7*2
+0365 MRv06030 « ATX @ ы
+7 MRYy06040 ‚ WTC WORK PS НОМЕР МАШИНЫ
+0366 MRV06050 14, vTM ,NUM MoT.
+- MRV06060 ‚ 11$ 91% ие
+0367 1153 MRYv06070 14, УТМ ,BUF CO
+- MRV06080 ‚ 97S «14
+0370 1501 mRv06090 14, УТМ ›,=3
+® MRV06100 e EFS te :
+0371 MRV06110 ‚ CALL+RO TO Ct
+MRV06120C aux BAGKA*
+MRV06130C — ПБНУЛЯЕМ ЕЕ АТРИБУТЫ B ОБЩИХ BM
+MRVO6140C
+0372 MRV06150 # ITA © р
+- MRV06160 ‚ МТС ‚АМ P АРТА
+0373 mRV06170 | ure +STRT PS-1- TONKA CT
+- MRV06180 er RTh м
+0374 MRYV06190 ‚ МТС ‚АУ PS .
+rn MRV06200 ‚ ATX +SH PS
+0375 MRy06210 ‚ wre ‚АМ PS
+ы MRV06220 ‚ ATX ‚СН PS
+0376 MRV06230 ; ATX {NUM PS
+- MRV06240 ‚ ATX ,WORK PS ы
+р ЦЕСС
+0377 0711 Mayoe2so 13, yJM ‚РТН Рас „ЗАКРОЙ ПРО
+MRV06260¢
+MRVO6270C СООБЩАЕМ О ПРОИСШЕДШЕМ В 006
+MRVO6280C
+0400 1506 MRV06290 ‚ UTC ,=4 0000
+и MRV06300 ‚ XTA ‚,
+. ПРОГР.
+0401 MRy06310 ‚ #53 4218 „ОБ ’ЯВЛЯЕМ
+СОБЫТИЕ Ana ГЗ
+MRV06320C
+MRV06330C — ВОЗВРАТ из ПРЕРЫВАНИЯ БУДЕТ в COOT~
+МВУ06340С ВЕТСТВУЮШИЙ HD PS+ КОТОРЫЙ ЗАВЕР”
+MRV06350C WATCA по 0-м АТРИБУТАМ ПС.
+MRVO6360C
+0402 0050 Мву06370 + и) NEXT FV
+МЕУ063 8 0С= = = == Е Е=Е=ЕЕЗЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕСЕЕТЕЕЕЕ
+wRV06390C
+0403 MRVOA400 TIMER : + BSS ,
+MRvV06410C
+MRYV 06420 Crear nn nr ent rete n nn sen nan
+MRV06430C ПРИШЛО ПРЕРЫВАНИЕ ОТ БУДИЛЬНИКА,
+мВ 4-4 nn nee
+MRV06450C
+0403 1507 mMRV06460 RTIM : + UTC ›,=7777 7777 0000 0074.4.8
+СЕК.
+re MRv06470 ‚ XTA , .
+0404 мву06480 + *50 +77008 SET TImMOyT
+0405 0050 MRV06490 ‚ UJ NEXT EV
+MRVOOSOOC
+0406 MRV06510 ERROR : г RSS 6
+MRV005 20 Crna trent nnn nr nn nen en ene eee
+MRVO6O530C НЕИЗАЕСТНО, ЧТО ТАКОЕ СЛУЧИЛОСЬ.
+MRV005G0 С - = = en nn nn eee eee
+MRVO6S5OC
+0406 MRV06560 + CaALL+OKHO

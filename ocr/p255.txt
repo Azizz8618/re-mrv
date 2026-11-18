@@ -1,0 +1,72 @@
+aKOA MADLEN Ри
+Deo. 72) ' a »
+2590¢ а : . к. “ *
+BS 26008 — NAME, 4 “ ie
+PS 12610С OUECE ang Sar \ |
+PS 12620 (1кк 'YCKA МОДЕЛИ пез \ }
+PS 12630 *LC BLOCK, ReaD ee \
+PS 1264n¢ i Reuters DOG, CONT Dog \ |
+PS 12650 ^АРЕСА ОЕ ЕАО РМ, READ bares | wa 1}
+‘ PS 12660 я СКА ЗАДАЧ 4 ||
+' CONT, INT ET STRT 254) ;
+PS 12670 RROBP AR. ПРЕРЫВАНИЙ |
+‚ CONT, В МРВ }
+PS 12680 NUM ви ^ >ЗАГРУЖАЕМОЙ , }
++ CO АСИСТЕМЫ
+Pe 42556 NTrAV Р5.НОМЕР АВАРИЙНОЙ Nog { | |
++ CONT. wor СИСТЕМЫ
+' К PS НОМЕР ВЫПОЛНЯЕМОЙ
+PS 12700
++ CONT, ЕКО ПОДСИСТЕМЫ | \
+we TEND 2344). Agr ЗАВЕРМАЕ= $ i |
+PS 12710С МОй ПОДСИСТЕМЫ | }
+Ps 12720C |1}
+Ps 12730 SH Ps 116, BLOCK . а
+PS 1274 H ‹ Г
+ne ао" ТАБЛИЦА ШИФРОВ ПОДЧИНЕННЫХ ЗАДАЧ 4 }
+у ‚ СОМТ,$Н МРВС1) ы
+PS 12760 + CONT: SPS(4) р
+pS 12770¢ |
+PS 12780 CH PS: Le, BLock, | ‘
+PS 12790C TA UA KA :
+БЛИЦА КАНАЛОВ ПОДЧИНЕННЫХ ЗАдАЧ |
+Ps 12800 + CONT, CH ВС) “
+Ps 12810 ‚ CONT, CPS(4) |
+PS 12820С
+PS 12830 PS*MASH :LC,BLOCK,
+PS 12840 ‚ CONT, NUM MASH(4) ь
+ps 12850C В
+PS 12860 /SyS/ т, 9 Ще 89 t
+Ps 12870С (6) х
+р 2880 *sYSTEM*:LC, ВЕОСК, TIME . :
+PS 12890 к CONT HERM о . ,
+ps 12900 ‚ CONT, NREG PS(4 '
+ps 12910¢ СИСТЕМ
+ps 12920C ПРИЗНАКИ готовности ПОДСИСТЕ
+р5 12930 yeS PS + « LO! Е
+PS 12940C вр ANS ЗАС. НАЧ. УСЛ.
+Ps 12950 DAT Psd > + SUED! =
+p§ 12960 REST т a aaa :
+ps 129706---77-7777 с
+ps 129806 utc #3
+0000 ps 12990 ‚ОХТА 1SH_NPB
+м ps 13000 ‚ uzA + REST P
+ps 13010
+0001 ps 13020C «(GTS ‚ТМЕ wR :
+‘ a 0136 PS 13030 $ ХТА ‹ 0 0 .
+0002 ps 13060 Е UIA ne yg yee
+- ^ 0010 PS 13050 iS: И,
+рб 13060 ‚ТА (1 1
+0003 м ‚м ZAP
+ы ps 13070 131 VIN 1
+80 1 !
+4 0140 ps 130 р -15
+0004 0 13090 | ASN 64
+7 AO* + 400 q
+ps 13100 15, 214000 0 ¥ з
+0005 PS 43110 Е ure Ft $
+” ‚ AOX , R
+0006 0147 oe ne pre ENF м }
+- : АТХ '
+0007 0136 PS 13140 _—
+. PS 43150

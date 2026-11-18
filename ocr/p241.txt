@@ -1,0 +1,68 @@
+— рр че
+yA MADLEN 29.04.4
+ae 4
+ps 06910 HD PS2 x
+‘ ps 06920С t+ МАМЕ,
+ps 069$0С п
+р5 069406 РОЦЕСС ans ЗАПУСКА МОДЕЛИ ПС?
+‘ ps 06950 LINK ated F
+ps 06960 :1А,ВГОСК, READ DOG, CONT 006
++ СОМТ, READ РМ, ВЕАО р$(4)
+’ ae cae АДРЕСА ТОЧЕК ЗАПУСКА ЗАДАЧ
+PS 06990 ‚ CONT,STRT РМ, STRT ps(4)
+6 3 ‚ CONT, INT FRR, ОБРАБ. ПРЕРЫВАНИЙ
+В МРВ
+ps 07000 ‚ CONT,NUM 2$, НОМЕР ЗАГРУЖАЕМОЙ
+‘ ПОАСИСТЕМЫ
+ps 07010 ‚ СОМТ, АУ ps. НОМЕР АВАРИЙНОЙ Noa
+t СИСТЕМЫ
+PS 07020 ‚ CONT,WORK PS, HOME P ВЫПОЛНЯЕМОЙ
+. ПОАСИСТЕМЫ
+f Ph 07030 ‚ CONTe END PS(4).oMar SABEPWAES
+мой ПойСИСТЕМЫ
+Ps 07040 ‚ CONT, STOP Е
+‘ ps 07050С
+ps 07060C
+{ ps 07070 SH PS ЕС, BLOCK,
+ps 07080С ТАБЛИЦА иИФРОВ ПОДЧИНЕННЫХ ЗАДАЧ
+; Ps 07090 ‚ CONT+sH МРВС1)
+¢ PS 07100 ‚ CONT, $Р5 (1)
+ps 07110С
+ps 07120 CH PS LC, BLOCK,
+( ps 07130С ТАБЛИЦА КАНАЛОВ ПОДЧИНЕННЫХ ЗААЛЧ
+ps 07140 ‚ СОМТ,СН МРВ (1 )
+( Ps 07150 ‚ CONT, CPS (4)
+ps 07160С
+ps 07170 PS*MASH :LC,BLOCK,
+( ps 07180 CONT, NUM MASH C4)
+ps 07190C
+ps 07200 /sySs/ : oy Le 140
+‘ ps 07210C
+Ps 07220 egy gTEMet LC, BLOCK, TIME (6? -
+4 ps 07230 j CONT, NERR (
+. ps 07240 ‚ CONT NREG ps4)
+ps 07250C
+( ps 07260C ПРИЗНАКИ ГОТОВНОСТИ ПОДСИСТЕМ
+ps 07270 УЕЗ PS * ' tc #4
+pe 07280С Яя ЗАС. НАЧ. УСЛ,
+¢ Pe 07290 DAT Ps2 # ' 5иВР, „аля 3M
+ps 07300 REST о, SUBP, denen ener serene
+‹ ps Ye
+ps 07320C 2
+5 07330 $ UTE: *
+‹ оо 4 07340 ‚ ХТА 1 SH MPB
+2 ps " yza a REST
+0001 ps 07350
+- 0137 Ps 07370 Ura,
+} 0002 ps 07380 МА №0 0
+- ^ 0010 PS 07390 М ,/5У$/*1
+4 13, УТ я
+0003 р$ 07400 * ТА at
+é - pe ОРТО 13, vTM ON 7АР!
+0004 0141 pS 07420 irs ft
+- ps 07430 АМ ‚68-15
+é 0005 Р5 07440 15, АОХ !
+- ps 07450 Г yre "214000 0100
+‘ 0006 0151 Р$ 07460 "nox +
+Ps 07470 ; gre + wk
+aw 0007 0137 PS 07480

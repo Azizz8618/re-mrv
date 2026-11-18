@@ -1,0 +1,84 @@
+РАНО
+10 но ыы
+| 18
+} 19 ИВО т
+EF ) COMMQL TENE Urner £0. 06,8
+1 DIMEN /DERUE/ РК IDE SK |
+SION LIne ›^, NMASY
+ay ‹ Naso IDESKi 200). Cline Hh
+| 5 TFCE LEQ "),10(6) OBTEX (16154)
+b PRINT 17 > бОТО $
+74! EWCODE CS АИ
+| \ 26( TILING Tig 1 ОВТЕХ (4
+: GOTO ¢ МЕХ 1 *TLINE +19) yma
+еГ( ММАЗН
+ЕВО828( ы ыы 1, ММА
+х H
+ЕВОЗСУ( Tee С54, 1, ОВТЕ
+208300 6 bee ЕЕ Энн
+ЕВОЯ310 )=ТОЕЗКС1 ЕР
+DR (1).08.0
+808320 INT 2,15(1) ›
+ENCODE(34
+| EB08330 ILIN 2+ DBTEX (1
+> EF 340 Е=1 1НЕ+1 "ТАТМЕ+1))10С1)
+›ЕВ08350 ТЕ (1041). Е0,0
+$50 PRINT 4 OO RETURK }
+Е В0836( 0
+Aide PRINT 7
+FROG IE
+ENCODE(58,7
+neR08380 у ‚Г, ОВТЕХ (1
+Е заза ТЕ ТМЕРТЕТМЕ+ 1 "ТЕТМЕ+1 ))
+PRINT 8
+2 ERnAR4HO
+700 EnCODE(58
+‚ DEROR410 18, DBTEX(
+eee ILTNESTLINES1 1.1. ТмЕ+1))
+EF 4 PRINT 9
+¢ р 8450 N Oe (
+ЕВ ane Fea Е (38,9, ОВТЕХ (1, ТАТМЕХ1
+ge Raat LTNE=TLINGS1
+4 PRINT 12
+4. DO 3 1=2,200.7
+8470 ID (1) =ТРЕЗК(Т). 08.0
+ER08450 Do 13 J51,4
+DEBOBS? 13 Ip(J*IIEIDESK( It) OR. 0
+ЕВО8500 МВ=МВ*+1
+, —ER0R510 TAPFID(1) #2
+eROR520 TSTPHTDESK(1*6)-OR,O
+De 8530 PRINT Gi МВ, LOC) + ТАР, ТОС2) ,
+Ев 08540 *10(3),10(4),10(5), 1065)
+¢ 255( ENCODECSS, 6, ОВТЕХ С ILINEST) о ВТО СА
+1062),
+20256( +105) LOCH 1045010052
+f 8570 ТЕТМЕ=1ЬТМЕ* 1
+2 258 ( PRINT 14 ,15$ТР р
+808590 PRT FECES, (hahioTeNch ОИ 7 TATE
+202000 ТЕТМЕЕТЕТМЕ+1
+ПЕРО 61 С PRINT 12 ,
+777 ГВ
+$ 0Е^А0862С NBBENB- АМО. 7
+в) RETURN
+НР TECIDESK CT) . ВО. МВ) м
+£R08640 3 CONTINUE | caine ПАКЕТА ПРИЕМА ДАННЫХ"
+4 sad FO МАТ( ЭХ, © son Cheer?
+ER 650 4 R cM nf 701,94 CM-2 У
+ЕВ08660 В СХ, ОПИСАНИЕ, MAKE TA ВЫДАЧИ BANS
+44 — 14 FORMAT (ЭХ, : ИСТ см-5,') р
+Ер08680 0° OF BER ОЛИЧЕСТВО pnokoB В ПАКЕТЕ ® №
+) ' v4
+EROROOC 2 poRMAT OSX! к 12) . +94
+) р 5.0 7’, 06, ! 7
+сем и!
+: en0a700 b FORMATS + ^' : a ah 13,! i ба:
+я 1,03! у
+, fe I ©, 056 ) .
+€n087)1 veut anpectHoner!
+, cee EHOMEP LOTT БИОКАТ "о ‚
+05808720 7 FORMAT с I АДРЕС 14 i aeent 0 ¢ 3}
+nEROR7SO i ane ppnokAter=" оное ы
+DEROB740 8 FORMA hm ТАБЛИЦЫТ ET ap. 1
+, ПРОГРА п! А6Р.
+ПЕр0я750 ve pMaTcxe'! n/
+92 pneEROR760 9 FO

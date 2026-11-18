@@ -1,0 +1,63 @@
+ННУОНА SOE ТАК КАК ppoube?  НИТАЕТЕЯ АЛУМЕНИНМИ |
+NMavOhaedl
+O04 МНУОНАЙ| » ull Е ТЫТЕЯ
+0503 МНУОВАКО х
+“ 0571 МН У08 490 j aly ‚РУ кУ1 БЫЛО ПРЕРМВАНИ!
+МПУОКУОО( ,
+МКУОВУТ ОС ЕСЛИ ИГ БЫЛО ПРЕРЫНАНИЯ, ТО РАЗРЕШАЕ!
+MAVONS РОС ПРЕРЫВАНИЯ И ВЫХОДИМ Wh a
+МВУОВУЗОС
+O504 MRVONSAO ; \
+. 0603 HRVOKSSO i И му НО OT ED, ПРЕРЫВАНИЯ
+0505 HRVOKSON ‚ ATK и
+. NRVONS7O 19, Ud |!
+Мну О(
+MRVOBS ОС == жжшнинию ини ними ии имении e samenkawens
+NRVOBOOOE
+0506 МКУОВОТО FORMER Br , BOS 4
+МПУОВО2О ( Г,
+МВУОВОЗОС НАЧАЛЬНЫЕ ДЕЙСТВИЯ ПЕРЕД ЗАПУСКОМ FPOUEE EA
+MRVOHGAOE
+0506 06028 MRVO8650 ‚ WTl , PAYOR
+MRVOBGOHO ‘ м,
+0507 МВУОВО 70 a ire ‘ameter „ИМП 1*ГО во ВЕТИИ
+- NRVOBOBO ‚ УТ |
+0510 NRVO8690 14, UTC pxEC ‚ ДЛЯ ИСПОЛИЕНИЯ
+mie MRVOBZOO ‚ ATS 34
+0511 MRVOB710 th, wre hyll MOM Mg MnP y tl
+x Мву08 720 ‚ ХТА оНЕХТ р, СПИСОК АКТИЙНЫХ
+0512 MRV0g7 30 14, UTC „АЙЕТ=1 , ПРОЦЕССОВ ВЕТВИ
+- MRVOB74O0 Atk |
+0513 0472 mRYVOB750 ‚ Ud «START В
+HRVOB 0-ти"
+MRVOB770€
+0514 МАУО8780 NEXT в : 6 ASS 4
+MeyO8790C
+Мку08800С ПЕРЕХОД К СЛЕДУЮЩЕЙ ВЕТВИ
+MRVOBBIOC
+0514 0602 mRV08B20 ‚ UTC +PRIOR
+м MRV08850 + XTA +
+0515 1477 mRV08B40 ‚ UTC 8)
+- mRV06850 ‚ ARX +
+0516 0602 MRv08B860 ‚ ИТС PRIOR
+= Мру08 870 © ATK ,
+0517 0412 MRyO8BRO ‚ ud sLICONTR
+MRVOBBIDC
+MRVOBIDNC
+MRVOBI10C HAA Oe КОНЕЦ МОНИТОРА ПРОЦЕССОВ hha
+MRVOBI2OC
+0520 MRy08930 EyIINTO : + BES +
+MRVOBI4OC ОБ’ЯВЛЯЕМ СОБЫТИЕ ОТ ИМЕНИ СИСТЕМЫ
+0520 0605 м8Уу08950 ‚ Ud cr eVIINT
+MRVOKOG6OC
+0521 mry08970 ЕУТЕУТ : | 855,
+MRVOBIBOC ОБ’ЯВЛЯЕМ СОБЫТИЕ ПО КОДУ ПРЕРЫВАНИЯ
+Мру08 99060 ОТ ИМЕНИ СТАРТОРАВШЕГО ПРОЦЕССА,
+МРУОЯОООС
+0521 0604 мву09010 , ute ‚ INTER KOA ПРЕРЫВАНИЯ
+- mryvo902d ‚ XTA ,
+0522 1511 mMRVO9050 ‚ ure »#:0001 „= ‘ПИСАТЬ’,
+= MRVOID4A ‚ AAX ‚,
+0523 0525 Mrv09050 ‚ РА sev"
+- 1512 MRYy09060 14, УТМ ‚,=1!11 ‚ЕАМ Ww
+0524 0531 MRVv09070 ‚ Us СЕТ

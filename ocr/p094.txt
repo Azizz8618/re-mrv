@@ -1,0 +1,69 @@
+ь vs х
+ть nie 2 ]
+мВУТ ВА doe ny Ci a
+7 0147 МИТАЬАО STARTe 1, у .
+4 му По" пи ‘ -
+мазо с пусти," ` —_-
+0152 maviaapo ararTs to! " ф . ——
+> яву ВАЯОС нет" 5 ис A mA,
+{ вк оОЕ пу fie Hut ы ‘ `
+| 0155 мку1 8500 КТАЙТЬ ' ' bbe i - : =
+| М аз20С need wat OW GED ge is 2s
+} 0100 meviasgo extn ' ‘ wes оао Pent ennes as)
+May Во и > и р ``.
+ы mevrassoe of cre wat SAR OW W Wig ys
+р 0163 meviaseo axrte 1 © ASS г ewewenn cre
+МТ вое" aa ИВО а .
+МИС пе" Wea r sanaKONN Wg ies
+O66 waviasoo exits roo ass 3 eee
+Мо Во тете" "7 и
+MpysQotoe ПСА wae QAR OWUNWN AY
+RV ‘ A
+0171 NRVIBAPO ГХТТА wy ASS 3
+РУ 8 nee EOE ewe,
+му ООС ПРЕРЫВАНИЕ ОоТбвязи ^^
+0174 Mavi8ag0 LYNE EV "№ ASS 3
+Mey AbbO Crem Инь, Чи
+oF MayiBoroc NAN AAO SASH ЧТЕНИЯ ^ |
+177 МПУТВояО SEANS ВЕ, nss ,5 /
+NAVIBG90 (owns а а И CNRS e eis
+му! 8700С НАЧАЛО ФАЗЫ ЗАП ом и
+0202 Мку1 8710 SEANS М т № ASS oS "cy :
+Мру1 Вост ян. у
+Меу1 87306 balay
+0205 Mpy 18760 1 oy RSS ‚8
+Мру 1 B75 0 Cann тн ня неее н e
+P Мру1 8760С mS
+0210 Мру1 8770 1 + BSS 23
+р МВУ1 В7ВОС- нения e nent на =
+0213 MRV18790 END F Pg REAL 105 Tame
+MRVIBROO CA MAME Ae ee
+mev18810¢ ate
+MRV18820C
+0214 "
+MRV18830 EVENTS § SENTRY,
+HAVIGR60 Cocermeen eer neat ecm seen eawe
+mevi8e50C Cnhyto нь
+вр бы СовБытия
+0214 MRV1BB70 1 aSS 1 не.
+| 0215 МРУ1 8880 |1 ПВ ‚ ПУСТО
+| ба Мру1 8890 + 700 * etant ,
+| 6 м #1
+|]
+| 0217 MRV1 8920 3 у ' age START 2
+2 ,
+0220 МРУ1 8940 [4 ‚ ЗТАВТ 3
+7 Мру1 8950 tos a ‚
+0221 Мру1 8960 £5 + 700 ,START 4
+* MRV18970 bo 700,
+pA 0222 МпУ1 8980 Гб ‚ #700 „ЕЖХТ 1
+р МПУ1 899 () 1 + 700 ,
+0223 MRV19000 (7 ‚ 700 ,EXIT 2
+и Mrv19010 1 г 700,
+» . 0224 Мву1 9020 F109 + 700 ,Exty 3
+Е 0225 Mrv1993%0 } * 700 ,
+} 7 MRV19040 [11 + 700 ‚ЕХТ 4
+me MRV19050 1, 700 ,
+ит MRV19060 p42 1 700 ,LINE ey
+0227 Мпу1 9070 to 700,
+Mav190R80 F413 1 700 ,SEANS р
