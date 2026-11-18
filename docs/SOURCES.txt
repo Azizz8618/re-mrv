@@ -1,0 +1,20 @@
+# Компилируемые исходники (по одному на строку, пути от корня репозитория)
+# Для обновления: добавить новый исходник после успешной сборки build_one.sh.
+docs/dog_head.txt
+docs/dog2_compilable.txt
+docs/dog_all.txt
+docs/mrv/mrv_core.txt
+docs/mrv/dog_plus_mrv.txt
+docs/rea/rea_src.txt
+docs/wri/wri_src.txt
+docs/rcd/rcd_src.txt
+docs/rcd/rcd_bittas.txt
+docs/rcd/rcd_int.txt
+docs/rcd/rcd_bitton.txt
+docs/wcd/wcd_src.txt
+docs/wcd/wcd_48cod.txt
+docs/m7b/m7b_src.txt
+docs/m7b/m7b_run.txt
+docs/ps/ps_src.txt
+docs/deb/deb_src.txt
+docs/integration/dog_mrv_wri.txt
