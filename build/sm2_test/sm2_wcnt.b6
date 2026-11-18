@@ -1,0 +1,60 @@
+шифр 419999 зс5^
+лен 41(2048)^
+eeв1а3
+*name SM2WCNT
+*no list
+*assembler
+ W       : , NAME,
+ CNTPC1  : , LC  ,32
+ CNT     : , EQU ,CNTPC1
+С   МОДИФИЦИРУЕМ ТАБЛИЦУ СЧЕТЧИКОВ ДЛЯ
+С   ПРОГРАММ ПЕРЕКОДИРОВКИ ДАННОЙ П С
+ 14, VTM ,-31
+ L       : 14, WTC ,CNT+31
+ 12, VTM ,1
+         , ITA ,12
+ 14, WTC ,CONST+31
+ 12, UTM ,
+ 12, VIM ,L1
+         , ITA ,
+ L1      : 14, ATX ,CNT+31
+ 14, VLM ,L
+ 13, UJ ,
+ CONST   : , BSS ,
+         , INT ,-1
+         , INT ,-2
+         , INT ,-3
+         , INT ,-4
+         , INT ,-5
+         , INT ,-6
+         , INT ,-7
+         , INT ,-8
+         , INT ,-9
+         , INT ,-10
+         , INT ,-11
+         , INT ,-12
+         , INT ,-13
+         , INT ,-14
+         , INT ,-15
+         , INT ,-16
+         , INT ,-17
+         , INT ,-18
+         , INT ,-19
+         , INT ,-20
+         , INT ,-21
+         , INT ,-22
+         , INT ,-23
+         , INT ,-24
+         , INT ,-25
+         , INT ,-26
+         , INT ,-27
+         , INT ,-28
+         , INT ,-29
+         , INT ,-30
+         , INT ,-31
+         , INT ,-32
+         , END ,
+*execute
+*end file
+``````
+еконец

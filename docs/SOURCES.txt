@@ -35,3 +35,8 @@ docs/ps/hdps1.txt
 docs/deb/deb_src.txt
 docs/integration/dog_mrv_wri.txt
 docs/integration/mrv_all.txt
+docs/sm2_test/sm2_wint.txt
+docs/sm2_test/sm2_program.txt
+docs/sm2_test/sm2_wcnt.txt
+docs/sm2_test/sm2_combined.txt
+docs/sm2_test/sm2_test_run.txt

@@ -1,0 +1,19 @@
+ФОРМ-ГЛР (24.04.81) — стр. 6 PDF; подпрограмма PRNT(M)
+Транскрипция листинга Fortran-Dubna (не МАДЛЕН).
+
+001  TST03290   SUBROUTINE PRNT(M)
+002  TST03300   DIMENSION M(100)
+003  TST03310   PRINT 1,(M(I),I=11,26)
+004  TST03320   PRINT 1,(M(I),I=27,42)
+005  TST03330   PRINT 1,(M(I),I=43,58)
+006  TST03340   PRINT 1,(M(I),I=59,74)
+007  TST03350 1 FORMAT(X,16(X,O6))
+008  TST03360   PRINT 2
+009  TST03370   RETURN
+010  TST03380 2 FORMAT(X,10('='))
+011  TST03390   END
+
+Примечание: в скане 'O6' неразличимо с '06'; сохранено как O6
+(восьмеричный формат БЭСМ-6 Fortran). Строка 'STATEMENT RELATIVE
+ADDRESSES OF STATEMENTS (OCTAL)' и таблица входов ниже — служебная
+информация листинга, не исходный текст.

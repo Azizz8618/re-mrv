@@ -16,6 +16,7 @@
 | 224–280 | PS | `docs/ps/ps_src.txt` (LPS1/PS1 + ONE/TWO), `docs/ps/sbor{1,2,3,4}.txt`, `docs/ps/hdps1.txt` | 0 ошибок ×7 | 2026-11-18: добавлены СБОР 1–4 и HD PS1 (`build/ps_more/`); не расшифровано: HD PS2–PS5, LPS2–LPS5, PS2/PS3. Отдельного «СБОР 5» нет — стр.277–279 = СБОР 4 |
 | 281–302 | DEB (Fortran) | `docs/deb/deb_fortran_src.txt` (654 стр., SPIGUN + DEWR/PZAVAR/DERD) | 0 ошибок через `*system` (Fortran-Dubna), `ЧИСЛО ОШИБ. ОПЕРАТОРОВ 0000` | стр.281–291 расшифрованы полностью; стр.294–301 (VIN/VIN16/VINRL/VTKOM/VTIS/VTB/WRDESK) не расшифрованы; `RZAVAR` = `PZAVAR` (OCR-гипотеза) |
 | 303–335 | DEB (МАДЛЕН) | `docs/deb/deb_src.txt` (560 стр., 16 подпрограмм) | 0 ошибок ×16 | таблица ссылок стр.335 списана |
+| **отд. PDF, 1–7** | **ТЕСТ СВЯЗИ С СМ-2** (3 модуля МАДЛЕН + Fortran + дамп) | `docs/sm2_test/` (`sm2_wint.txt`, `sm2_program.txt`, `sm2_wcnt.txt`, `sm2_test_run.txt`, `sm2_combined.txt`) | **0 ошибок ×3 + запуск: E50=0, `КОНЕЦ ЗАДАЧИ`** | `ТЕСТ_СВЯЗЬ_СМ-2.pdf`; 43→0 ошибок в W INT; адреса сверены с таблицей ссылок; стр.6 — Fortran `PRNT`, стр.7 — дамп; подробности `docs/sm2_test/README.md` |
 
 ## Внешние ссылки DOG (по данным `build/harness3.lst`)
 
@@ -56,6 +57,23 @@ HD PS1) эти строки заменены комментариями; без 
 по 01000 последний такой модуль вместо головного PROGRAM. Подробности,
 порядок модулей, адреса и исключённые исходники —
 `docs/integration/README.md`. `mrv_all.txt` добавлен в `docs/SOURCES.txt`.
+
+### Тест связи с СМ-2 и запуск
+
+`docs/sm2_test/` — расшифровка 7 стр. `ТЕСТ_СВЯЗЬ_СМ-2.pdf` (МАДЛЕН
+`W INT` / `PROGRAM` / `W'`, плюс Fortran `PRNT` на стр.6 и дамп стр.7).
+Отдельные модули и joint-вариант `sm2_combined.txt` компилируются с
+0 ошибок; запуск через `dispak -t` завершается `КОНЕЦ ЗАДАЧИ`, `E50 = 0`
+(`build/sm2_test/sm2_trace.txt`). Адреса совпали с таблицей ссылок PDF
+(`OUTFLD1=0066₈`, `CNTPC1=0071₈`, `M=0100₈`).
+
+МРВ целиком (`build/integration/mrv_all.b6`) тоже запущен с `-t`:
+`КОНЕЦ ЗАДАЧИ`, `E50 = 0`, трасса — `build/integration/mrv_all_trace.txt`.
+
+`build/integration/mrv_sm2.b6` — формальная joint-сборка МРВ + теста:
+компилируется без ошибок, но загрузчик dispak берёт `PROGRAM` теста
+(`START`, WINT, W) и не кладёт в память модули МРВ; единственная
+незакрытая ссылка — `PRNT` (Fortran, отдельная сборка).
 
 Предыдущая промежуточная сборка — `docs/integration/dog_mrv_wri.txt`
 (DOG + WRI, `build/integration/final_joint.lst`); в ней PRINT13…20 ещё

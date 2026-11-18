@@ -1,0 +1,92 @@
+шифр 419999 зс5^
+лен 41(2048)^
+eeв1а3
+*name SM2PROG
+*no list
+*assembler
+ PROGRAM : , NAME,
+ OUTFLD1 : , LC  ,300
+         , XTA ,=110
+         , ATX ,ABL
+         , XTA ,=1
+         , ATX ,NPS
+ 14, VTM ,TYC
+         , ITA ,14
+         , ATX ,ATB
+         , XTA ,=41
+         , ATX ,LN
+         , XTA ,
+         , ATX ,CNUM
+ 14, VTM ,-2
+         , ITA ,14
+ 14, VTM ,ABL
+         , ITS ,14
+         , CALL,WINT
+ 14, VTM ,OUTFLD1
+         , ITS ,14
+         , CALL,PRNT
+ 1, VTM ,-33
+ L       : , CALL,W
+ 14, VTM ,-63
+ L1      : , ITA ,
+ 14, UTC ,63
+         , ATX ,OUTFLD1+10
+ 14, VLM ,L1
+ 14, VTM ,-2
+         , ITA ,14
+ 14, VTM ,ABL
+         , ITS ,14
+         , CALL,WINT
+ 14, VTM ,OUTFLD1
+         , ITS ,14
+         , CALL,PRNT
+ 1, VLM ,L
+         , SJ ,
+ ABL     : , BSS ,1
+ NPS     : , BSS ,1
+ APR     : , BSS ,1
+ ATB     : , BSS ,1
+ LN      : , BSS ,1
+ CNUM    : , BSS ,1
+С===========================================================
+ TYC     : , Z00 ,R1    .0
+ N1      : , Z01 ,R2    .0
+ N2      : , Z02 ,R3    .1
+ N3      : , Z03 ,R4    .1
+ N4      : , Z04 ,R5    .2
+ N5      : , Z05 ,R6    .2
+ N6      : , Z06 ,R7    .3
+ N7      : , Z07 ,R8    .3
+ N8      : , Z10 ,R9    .4
+ N9      : , Z11 ,R10   .4
+ N10     : , Z12 ,R11   .5
+ N11     : , Z13 ,R12   .5
+ N6A     : , Z14 ,R13   .6
+ N7A     : , Z15 ,R14   .6
+ N7B     : , Z16 ,R15   .7
+         , Z17 ,R16   .7
+ N15     : , Z02 ,R1
+         , Z00 ,
+         , Z00 ,
+         , Z00 ,
+ R1      : , INT ,1
+ R2      : , INT ,2
+ R3      : , INT ,3
+ R4      : , INT ,4
+ R5      : , INT ,5
+ R6      : , INT ,6
+ R7      : , INT ,7
+ R8      : , INT ,8
+ R9      : , INT ,9
+ R10     : , INT ,10
+ R11     : , INT ,11
+ R12     : , INT ,12
+ R13     : , INT ,13
+ R14     : , INT ,14
+ R15     : , INT ,15
+ R16     : , INT ,16
+         , END ,
+*execute
+*end file
+``````
+еконец
