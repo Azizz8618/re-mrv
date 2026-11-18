@@ -10,10 +10,10 @@
 | 59–101 | MRV — `MONAR`, PRINT-блок | `docs/mrv/mrv_core.txt` | 0 ошибок | PRINT1–12, PRINTS, PRINTK закрыли externals DOG; PRINT13–20 закрыты в `docs/print13/dog_all_v2.txt` (DOG, стр.40–41) |
 | 102–142 | REA — `READ` | `docs/rea/rea_src.txt` (1513 стр.) | 0 ошибок, `ЧИСЛО ОШИБ. ОПЕРАТОРОВ 0000` | 49 → 0 ошибок; 367 селекторов вместо меток, таблицы перенесены перед кодом (однопроходный транслятор) |
 | 143–167 | WRI | `docs/wri/wri_src.txt` (1078 стр., 6 модулей) | 0 ошибок ×6 | WRITE, RQTOCM, RUFCOM, WRITE D, ROTOCM D, DATA; `WRITED` закрыт. В скане пропущены оригинальные стр.161–162 |
-| 168–192 | RCD | `docs/rcd/` (4 подпрограммы) | 0 ошибок ×4 | не расшифровано: REAL (179–187), фрагменты 170–176, 178, 190 |
+| 168–192 | RCD | `docs/rcd/` (9 подпрограмм) | 0 ошибок ×9 | REAL, RSTREG (стр.170+172–174), R D TAB, R48COD, R16COD расшифрованы; стр.171, 190 — схемы/таблицы, кода нет |
 | 193–216 | WCD | `docs/wcd/` (2 подпрограммы) | 0 ошибок ×2 | не расшифровано: УСТ (193–201), TABLO (213–215) |
 | 217–223 | M7B | `docs/m7b/` (4 подпрограммы) | 0 ошибок ×4 | RMTOB, IMTOB, RBTOM, IBTOM |
-| 224–280 | PS | `docs/ps/ps_src.txt` (LPS1/PS1 + ONE/TWO) | 0 ошибок ×2 | не расшифровано: HD PS1–PS5, СБОР 1–5 (235–279) |
+| 224–280 | PS | `docs/ps/ps_src.txt` (LPS1/PS1 + ONE/TWO), `docs/ps/sbor{1,2,3,4}.txt`, `docs/ps/hdps1.txt` | 0 ошибок ×7 | 2026-11-18: добавлены СБОР 1–4 и HD PS1 (`build/ps_more/`); не расшифровано: HD PS2–PS5, LPS2–LPS5, PS2/PS3. Отдельного «СБОР 5» нет — стр.277–279 = СБОР 4 |
 | 281–302 | DEB (Fortran) | `docs/deb/deb_fortran_src.txt` (654 стр., SPIGUN + DEWR/PZAVAR/DERD) | 0 ошибок через `*system` (Fortran-Dubna), `ЧИСЛО ОШИБ. ОПЕРАТОРОВ 0000` | стр.281–291 расшифрованы полностью; стр.294–301 (VIN/VIN16/VINRL/VTKOM/VTIS/VTB/WRDESK) не расшифрованы; `RZAVAR` = `PZAVAR` (OCR-гипотеза) |
 | 303–335 | DEB (МАДЛЕН) | `docs/deb/deb_src.txt` (560 стр., 16 подпрограмм) | 0 ошибок ×16 | таблица ссылок стр.335 списана |
 
@@ -50,5 +50,6 @@ cd /home/azizz/Yandex.Disk/re-mrv
 bash scripts/check_all.sh
 # OK docs/m7b/m7b_src.txt
 # OK docs/ps/ps_src.txt
+# OK docs/ps/sbor1.txt .. sbor4.txt, docs/ps/hdps1.txt (build/ps_more/)
 # ... 0 ошибок
 ```

@@ -18,5 +18,10 @@ docs/wcd/wcd_48cod.txt
 docs/m7b/m7b_src.txt
 docs/m7b/m7b_run.txt
 docs/ps/ps_src.txt
+docs/ps/sbor1.txt
+docs/ps/sbor2.txt
+docs/ps/sbor3.txt
+docs/ps/sbor4.txt
+docs/ps/hdps1.txt
 docs/deb/deb_src.txt
 docs/integration/dog_mrv_wri.txt
