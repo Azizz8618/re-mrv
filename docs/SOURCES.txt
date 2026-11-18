@@ -3,6 +3,8 @@
 docs/dog_head.txt
 docs/dog2_compilable.txt
 docs/dog_all.txt
+docs/print13/print13_src.txt
+docs/print13/dog_all_v2.txt
 docs/mrv/mrv_core.txt
 docs/mrv/dog_plus_mrv.txt
 docs/rea/rea_src.txt
