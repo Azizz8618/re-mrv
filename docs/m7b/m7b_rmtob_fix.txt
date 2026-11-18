@@ -1,0 +1,77 @@
+ RMTOB   : , NAME,
+С  --------------------------------------------------------
+С     ПЕРЕВОД ВЕЩЕСТВЕННОГО ЧИСЛА M7000
+С     В ПРЕДСТАВЛЕНИЕ БЭСМ-6:
+С
+С        CALL RMTOB(B,M)
+С
+С        B - число в бэсм-формате,
+С        M - число в формате M-7000.
+С  --------------------------------------------------------
+         : , BLOCK,BASE,B,M
+ BAS : , EQU ,BASE
+         : , STI ,M
+         : , ATI ,B
+         : , RTE ,77B
+         : , ATX ,REG
+         : , NTR ,2
+         : , XTA ,=14          .ДЛЯ ПОЛОЖИТЕЛЬНО
+С                            .ГО
+ B, ATX ,                     .ПОРЯДКА
+ M, XTA ,1                    .МЛ.РАЗРЯДЫ ЧИСЛА
+         : , ASN ,64+24
+         : , ATX ,R BITS
+         : , AAX ,=377         .POWER
+         : , ASN ,64+1         .БЕЗ ЗНАКА
+         : , ATX ,POWER
+         : , YTA ,            .ЗНАК ПОРЯДКА
+         : , UZA ,PLUS
+         : , ITA ,            .ОТРИЦАТ.ПОРЯДОК
+ B, ATX ,                     .В РЕЗУЛЬТАТ
+         : , XTA ,POWER        .В ДОП.КОДЕ
+         : , ARX ,=100         .СМЕЩЕНИЕ НА 64
+         : , ATX ,POWER        .В БЭСМ-ВИДЕ
+ PLUS    : , BSS ,
+         : , XTA ,POWER
+         : , AAX ,=100
+         : , UIA ,BIG P
+         : , XTA ,POWER
+         : , ASN ,64-41
+ B, AOX ,
+ B, ATX ,                     .В РЕЗУЛЬТАТ
+         : , XTA ,R BITS
+         : , AAX ,=17 7400
+         : , ASN ,64-8
+ M, AOX ,
+         : , ASN ,64-1
+         : , AAX ,=37 7777 7740 0000  .МАНТИССА
+ B, AOX ,                             .СА БЭСМ
+         : , A+X ,
+ EXIT : B, STX ,
+         : , XTR ,REG
+     13, UJ ,
+ BIG P   : , BSS ,
+ M, XTA ,
+         : , ATX ,M1
+ M, XTA ,1
+         : , ATX ,M1+1
+         : , *64 ,PNFJT
+         : , *64 ,PRINT
+         : , XTA ,=R1.E19
+         : , UJ ,EXIT
+ REG     : , BSS ,1
+ R BITS  : , BSS ,1
+ POWER   : , BSS ,1
+ PRINT   : , Z00 ,TEXT
+         : , Z00 ,M1+1
+     2, 040 ,16
+     8, 022 ,1
+ TEXT    : , GOST,6НСЛИШКО
+         : , GOST,6НМ БОЛЬ
+         : , GOST,6НОЕ ЧИ
+         : , GOST,6НСЛО В
+         : , GOST,6НRMT0B'172'
+ M1      : , LOG ,
+         : , LOG ,
+ PNFJT  : , BSS , 1        .ВНЕШНИЙ СИМВОЛ ОРИГИНАЛА
+         : , END ,
