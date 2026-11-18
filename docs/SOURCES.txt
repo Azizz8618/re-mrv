@@ -20,6 +20,10 @@ docs/rcd/rcd_r48cod.txt
 docs/rcd/rcd_r16cod.txt
 docs/wcd/wcd_src.txt
 docs/wcd/wcd_48cod.txt
+docs/wcd/wcd_ust.txt
+docs/wcd/wcd_real.txt
+docs/wcd/wcd_16cod.txt
+docs/wcd/wcd_tablo.txt
 docs/m7b/m7b_src.txt
 docs/m7b/m7b_run.txt
 docs/ps/ps_src.txt
