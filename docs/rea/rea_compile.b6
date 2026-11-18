@@ -1,0 +1,1521 @@
+шифр 419999 зс5^
+лен 41(2048)^
+eeв1а3
+*name REA
+*assembler
+C==============================================================
+C МОДУЛЬ READ (REA) — ПЕРЕКОДИРОВКА И РАССЫЛКА ДАННЫХ
+C РЕКОНСТРУКЦИЯ ПО ЛИСТИНГУ СПО_тексты.pdf, СТР.102-142
+C ИСХОДНЫЙ ЛИСТИНГ: АВТОКОД MADLEN (1.10.72), 27.04.86
+C ЧИСЛО ОШИБ. ОПЕРАТОРОВ В ОРИГИНАЛЕ: 0000 (СТР.137)
+C КАРТЫ REA00090 ... REA20350; ТАБЛИЦА ССЫЛОК — СТР.137-142
+C==============================================================
+ READ : , NAME,
+C--------------------------------------------------------------
+C ВОССТАНОВЛЕННЫЕ ВНЕШНИЕ СИМВОЛЫ (ТАБЛИЦА ССЫЛОК СТР.137-142)
+ INTRT    : ,BSS ,1
+ RG       : ,BSS ,1
+ RAV      : ,BSS ,1
+ NSTEP    : ,BSS ,1
+ ABCOM    : ,BSS ,1
+ SYSER    : ,BSS ,1
+ LSTFFLD  : ,BSS ,1
+ LRR      : ,BSS ,1
+ RAR      : ,BSS ,1
+ NEXT     : ,BSS ,1
+ NEXTB    : ,BSS ,1
+ TEXET    : ,BSS ,1
+ SWPZ     : ,BSS ,1
+ CLP      : ,BSS ,1
+ BLOCK C  : ,BSS ,1
+C--------------------------------------------------------------
+ DESK M1 :LC,BLOCK,QBLM1,TDESKM1(200)
+ DESK M2 :LC,BLOCK,QBLM2,TDESKM2(200)
+ DESK M3 :LC,BLOCK,QBLM3,TDESKM3(200)
+ *0      : ,BLOCK,A BLOCK
+ *1      : ,CONT,NUM PS
+ *2      : ,CONT,A PROG
+ *3      : ,CONT,A TABL
+ *4      : ,CONT,LENG
+ *5      : ,CONT,C NUMB
+ *6      : ,CONT,PERIOD
+ DESK B1 :LC,BLOCK,QBLB1,TDESKB1(200)
+ DESK B2 :LC,BLOCK,QBLB2,TDESKB2(200)
+ DESK B3 :LC,BLOCK,QBLB3,TDESKB3(200)
+ LINK    :LC,BLOCK,READ DOG,CONT DOG
+         : ,CONT,READ PM,READ PS(4)
+         : ,CONT,STRT PM,STRT PS(4)
+         : ,CONT,INT ERR
+         : ,CONT,NUM PC
+         : ,CONT,AV PS
+         : ,CONT,WORK PS
+         : ,CONT,END PS(4)
+ SH PS   :LC,BLOCK,
+         : ,CONT,SH MRV(1)
+         : ,CONT,SPS(4)
+ CH PS   :LC,BLOCK,
+         : ,CONT,CH MRV(1)
+         : ,CONT,CPS(4)
+ NAME PS :LC,BLOCK,
+         : ,CONT,NAME MRV(1)
+         : ,CONT,NPS(4)
+ *DEBAR* :LC,BLOCK,DEB FLG
+         : ,CONT,DESM(3)
+         : ,CONT,DES R(3)
+         : ,CONT,S COM(3)
+         : ,CONT,RECOM(3)
+         : ,CONT,MFLD(1)
+         : ,CONT,IFLD(7)
+ YES PS  : ,LC ,4
+ T WDT M : ,LC ,10
+ T WDT K : ,LC ,10
+ T WDT Y : ,LC ,10
+ T WDT O : ,LC ,10
+ T WREG M: ,LC ,40
+ T WREG K: ,LC ,40
+ INFLD   : ,LC ,2048
+ PAGE    : ,PC ,1024
+ T WREG Y: ,LC ,40
+ T WREG O: ,LC ,40
+ PNT PAC :LC,BLOCK,L PACKET(3)
+         : ,CONT,B PACKET(3)
+ /SYS/   : ,LC ,40
+ *SYSTEM*:LC,BLOCK,
+         : ,CONT,HR.ЧАС
+         : ,CONT,MIN.МИНУТА
+         : ,CONT,SEK.СЕКУНДА
+         : ,CONT,N.STEP.НОМЕР ШАГА
+         : ,CONT,REG.PFG.ЗАЩИТЫ
+         : ,CONT,INTR PT.PG. ПРЕРЫВАНИЯ
+         : ,CONT,NERR PS(4)
+         : ,CONT,NREG PS(4)
+ IN E50  : ,EQU ,133B
+ NNM     : ,EQU ,6B
+ NEXT PCT: ,EQU ,7B
+ N MASH  : ,EQU ,10B
+ N PACK  : ,EQU ,11B
+ BEG COM : ,EQU ,12B
+ MAX COM : ,EQU ,-16B
+ BAS     : 7,BASE,*
+ RAB     : ,LOG ,
+ BUF COM5: ,LOG ,5
+         : ,LOG ,1
+ BUF COM6: ,LOG ,6
+         : ,LOG ,1
+ BUF COM12: ,LOG ,12
+         : ,LOG ,1
+ TABL DM : ,LOG ,
+         : ,Z00 ,
+         : ,Z00 ,DESK M1
+         : ,Z00 ,
+         : ,Z00 ,DESK M2
+         : ,Z00 ,
+         : ,Z00 ,DESK M3
+ TABL DB : ,Z00 ,
+         : ,Z00 ,DESK B1
+         : ,Z00 ,
+         : ,Z00 ,DESK B2
+         : ,Z00 ,
+         : ,Z00 ,DESK B3
+ PR TXT  : 11, Z00 ,
+ 11, Z00 ,5
+         : ,Z00 ,
+ 8, Z00 ,
+ TEXT    : ,GOST,6HПРИЕМ'172'
+         : ,Z00 ,TEXT
+         : ,Z00 ,TEXT
+ 8, Z00 ,
+ TEXT 1  : ,GOST,31HМНОГО ПАРАМЕТРОВ'172'
+ TEXT 2  : ,GOST,31HПЛОХАЯ КС'172'
+ TEXT 3  : ,GOST,31H0-Й НОМЕР У СМ-2'172'
+ TEXT 4  : ,GOST,31HНОМЕР МАШ.>3'172'
+ TEXT 5  : ,GOST,31HССЫЛКА>3777В'172'
+ TEXT 6  : ,GOST,16HКОД КОМАНДЫ БОЛЬ
+         : ,CONT,15HШЕ ДОПУСТИМОГО'172'
+ TEXT 7  : ,GOST,18HОШ.КОНТРОЛЯ НОМЕРА
+         : ,CONT,15H БЛОКА:ШАХ.КОД'172'
+ TEXT 8  : ,GOST,19HОБРАБОТАННАЯ ЧАСТЬ
+         : ,CONT,12HОБЛАСТИ:'172'
+ TEXT 9  : ,GOST,31HПРОПУЩЕН ШАГ ПО ЧТЕНИЮ
+         : ,CONT,5H'172'
+ TEXT10  : ,GOST,31HПРОПУЩЕНА ЧАСТЬ ИНФ.П
+         : ,CONT,15H О ЧТЕНИЮ'172'
+ INPR1  : 11,Z00 ,
+ 13, Z00 ,10
+ 2, Z00 ,16
+ 9, 021 ,4
+ T PS    : ,ISO ,8HНЕТ ПС '0'
+ T NF    : ,ISO ,13HЮШ.НОМ.ФОТО:'0'
+ T SE    : ,TEL ,24HБб: ПОВТОРИТЕ ФОТО
+         : ,BSS ,
+ FLD FOTO1: ,LOG ,50 0100
+           ,LOG ,50 0104
+           ,LOG ,50 0110
+           ,LOG ,50 0114
+           ,LOG ,50 0120
+           ,LOG ,50 0124
+           ,LOG ,50 0130
+           ,LOG ,50 0134
+           ,LOG ,50 0140
+           ,LOG ,50 0144
+           ,LOG ,50 0150
+           ,LOG ,50 0154
+           ,LOG ,50 0160
+           ,LOG ,50 0164
+           ,LOG ,50 0170
+           ,LOG ,50 0174
+ FLD FOTO2: ,LOG ,50 0200
+           ,LOG ,50 0204
+           ,LOG ,50 0210
+           ,LOG ,50 0214
+           ,LOG ,50 0220
+           ,LOG ,50 0224
+           ,LOG ,50 0230
+           ,LOG ,50 0234
+           ,LOG ,50 0240
+           ,LOG ,50 0244
+           ,LOG ,50 0250
+           ,LOG ,50 0254
+           ,LOG ,50 0260
+           ,LOG ,50 0264
+           ,LOG ,50 0270
+           ,LOG ,50 0274
+ FLD FOTO3: ,LOG ,50 0300
+           ,LOG ,50 0304
+           ,LOG ,50 0310
+           ,LOG ,50 0314
+           ,LOG ,50 0320
+           ,LOG ,50 0324
+           ,LOG ,50 0330
+           ,LOG ,50 0334
+           ,LOG ,50 0340
+           ,LOG ,50 0344
+           ,LOG ,50 0350
+           ,LOG ,50 0354
+           ,LOG ,50 0360
+           ,LOG ,50 0364
+           ,LOG ,50 0370
+           ,LOG ,50 0374
+ FLD FOTO4: ,LOG ,50 0400
+           ,LOG ,50 0404
+           ,LOG ,50 0410
+           ,LOG ,50 0414
+           ,LOG ,50 0420
+           ,LOG ,50 0424
+           ,LOG ,50 0430
+           ,LOG ,50 0434
+           ,LOG ,50 0440
+           ,LOG ,50 0444
+           ,LOG ,50 0450
+           ,LOG ,50 0454
+           ,LOG ,50 0460
+           ,LOG ,50 0464
+           ,LOG ,50 0470
+           ,LOG ,50 0474
+ ST REДI : ,Z00 ,
+         : ,Z00 ,FLD FOTO1
+         : ,Z00 ,FLD FOTO2
+         : ,Z00 ,FLD FOTO3
+         : ,Z00 ,FLD FOTO4
+         : ,Z00 ,
+         : ,Z00 ,
+ TEX PS  : ,ISO ,6HПС/С 1
+         : ,ISO ,6HПС/С 2
+         : ,ISO ,6HПС/С 3
+         : ,ISO ,6HПС/С 4
+ REF CNT  : ,LOG ,
+         : ,LOG ,
+         : ,LOG ,
+         : ,BSS ,
+ TEX FT  : ,ISO ,6H ФТ 1
+         : ,ISO ,6H ФТ 2
+         : ,ISO ,6H ФТ 3
+         : ,ISO ,6H ФТ 4
+         : ,ISO ,6H ФТ 5
+         : ,ISO ,6H ФТ 6
+         : ,ISO ,6H ФТ 7
+         : ,ISO ,6H ФТ 8
+         : ,ISO ,6H ФТ 9
+         : ,ISO ,6H ФТ10
+         : ,ISO ,6H ФТ11
+         : ,ISO ,6H ФТ12
+         : ,ISO ,6H ФТ13
+         : ,ISO ,6H ФТ14
+         : ,ISO ,6H ФТ15
+         : ,ISO ,6H ФТ16
+ PRINT1  : ,Z00 ,TEX1
+         : ,Z00 ,TEX1+8
+         : ,Z00 ,
+ 8, Z00 ,
+ TEX1    : ,GOST,18HПРОЦЕСС READ.БОЛЬШ
+         : ,GOST,18HЕ 3-Х МАШИН В ПАКЕ
+         : ,GOST,16HТЕ ДЛЯ БЭСМ-6.'172'
+ PRINT2  : ,Z00 ,TEX2
+         : ,Z00 ,T2
+         : ,Z00 ,
+ 2, 107 ,1
+ 8, 000 ,0
+ TEX2    : ,GOST,18HПРОЦЕСС READ.НУЛЕВ
+         : ,GOST,18HАЯ ДЛИНА БЛОКА В О
+         : ,GOST,18HПИСАНИИ ПРИ ПРИЕМЕ
+         : ,GOST,23H БЛОКА ОТ МАШИНЫ
+         : ,GOST,5H'172'
+ T2      : ,BSS ,1
+ PRINT3  : ,Z00 ,TEX3
+         : ,Z00 ,TEX3+12
+         : ,Z00 ,
+ 2, 074 ,1
+         : ,000 ,0
+         : ,076 ,
+ 8, Z00 ,
+ TEX3    : ,GOST,18HПРОЦЕСС READ.КОЛИЧ
+         : ,GOST,18HЕСТВО БЛОКОВ В ОПИ
+         : ,GOST,18HСАНИИ ПАКЕТА ОТ МА
+         : ,GOST,6HШИНЫ '172'
+ T3      : ,LOG ,1
+         : ,GOST,10HРАВНО 0.'172'
+ PRINT4  : ,Z00 ,TEX4
+         : ,Z00 ,T4
+         : ,Z00 ,
+ 2, 100 ,1
+ 8, 000 ,0
+ TEX4    : ,GOST,18HПРОЦЕСС READ.НУЛЕВ
+         : ,GOST,18HАЯ ДЛИНА БЛОКА ПРИ
+         : ,GOST,18H ПРИЕМЕ ОПИСАНИЯ П.
+         : ,GOST,16HАКЕТА ОТ МАШИНЫ'172'
+ T4      : ,BSS ,1
+ PRINT5  : ,Z00 ,TEX5
+         : ,Z00 ,TEX5+5
+         : ,Z00 ,
+ 8, Z00 ,
+ TEX5    : ,GOST,18HПОЛУЧЕНА КОМАНДА '032'
+         : ,GOST,15HИСХОДНОЕ ТУ '033'-'172'
+ PRINT6  : ,Z00 ,TEX6
+         : ,Z00 ,TEX6+12
+         : ,Z00 ,
+ 8, Z00 ,
+ TEX6    : ,GOST,18HПРОЦЕСС READ.СБОЙ
+         : ,GOST,18HПРИ ВЫПОЛНЕНИИ КОМ
+         : ,GOST,18HАНДЫ '032' ПУСТИ ПС'033'
+         : ,GOST,5H'172'
+         : ,GOST,24HАРЕС ВОЗВРАТА РАВЕН 0.
+         : ,GOST,5H'172'
+ PRINT7  : ,Z00 ,TEX7
+         : ,Z00 ,TEX7+13
+         : ,Z00 ,
+ 8, Z00 ,
+ TEX7    : ,GOST,18HПРОЦЕСС READ.ОШИБК
+         : ,GOST,18HА ПРИ ОБМЕНЕ СЛОВО
+         : ,GOST,18HМ С ПОДЧИНЕННОЙ ЗА
+         : ,GOST,18HАЧЕЙ ПРИ ФОТОГРАФ
+         : ,GOST,11HИРОВАНИИ.'172'
+ PRINT8  : ,Z00 ,TEX8
+         : ,Z00 ,TEX8+15
+         : ,Z00 ,
+ 8, Z00 ,
+ TEX8    : ,GOST,18HПРОЦЕСС READ.ОШИБК
+         : ,GOST,18HА ПРИ ОБМЕНЕ СЛОВО
+         : ,GOST,18HМ С ПОДЧИНЕННОЙ ЗА
+         : ,GOST,18HАЧЕЙ ПРИ ВОСПРОИЗ
+         : ,GOST,21HВЕДЕНИИ ФОТОГРАФИИ.'172'
+ PRINTK  : ,Z00 ,TEXX
+         : ,Z00 ,TEXX+9
+         : ,Z00 ,
+ 8, Z00 ,
+ TEXX    : ,GOST,18HСООБЩИТЕ СИСТЕМНОМУ
+         : ,GOST,18HУ ПРОГРАММИСТУ ИЛИ
+         : ,GOST,20H ПЕРЕЗАПУСТИТЕ ТУ.'17'
+         : ,GOST,2H2''
+ START T : ,ISO ,15HСТАРТ БЭСМ-6
+ N STP6  : ,BSS ,4
+ N STPPS : ,BSS ,4
+ CELL    : ,BSS ,1
+ T TT    : ,BSS ,7
+ DAT     : ,BSS ,2
+ INF W   : ,BSS ,1
+ INF WR  : ,BSS ,1
+ CNT     : ,BSS ,1
+         : ,XTA ,=4 0002
+         : ,ATX ,INTRT
+         : ,ITA ,
+         : ,ATX ,P BASE Э
+         : ,ATX ,P BASE B
+         : ,ATI ,1
+         : ,ATI ,2
+ PRPR    : ,NTR ,3
+ CONT PCT: ,BSS ,
+         : ,WTC ,P BASE Э
+         : ,032 ,NEXT PCT
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+         : ,ATX ,P BASE Э
+         : ,WTC ,P BASE B
+         : ,UTC ,INFLD+NEXT PCT
+         : ,ATX ,
+         : ,WTC ,P BASE B
+ 1, UTM ,RECOM
+         : ,ITA ,1
+         : ,AAX ,=7 4000
+         : ,UZA ,C*P
+ 11, VTM ,TEXT5
+ 12, VJM ,ERR PR1
+         : ,UJ ,ABRET
+ C*P     : ,XTA ,P BASE Э
+         : ,UZA ,ALL IN
+         : ,ITA ,1
+         : ,WTC ,P BASE B
+         : ,UTC ,INFLD+NEXT PCT
+         : ,ATX ,
+         : ,ATX ,P BASE B
+         : ,*64 ,PRINT1
+         : ,*64 ,PRINTK
+         : ,SJ ,
+ RD PACK : ,BSS ,
+         : ,ITA ,
+ 14, VTM ,-11B
+         : ,WTC ,P BASE B
+ 12, UTC ,INFLD+17B
+         : ,ATX ,
+ 14, VLM ,CL P
+         : ,032 ,5
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+         : ,AEX ,INTRT
+ 11, VTM ,TEXT10
+ 12, VTM ,EXIT
+         : ,ITA ,ERR PR2
+         : ,WTC ,P BASE Э
+         : ,032 ,NNM
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+         : ,WTC ,P BASE B
+         : ,UTC ,IN FLD+NNM
+         : ,ATX ,
+         : ,WTC ,P BASE Э
+         : ,032 ,N MASH
+         : ,ASN ,64+24
+         : ,AAX ,=7 7777
+         : ,ATX ,MASH
+         : ,WTC ,P BASE B
+         : ,UTC ,IN FLD+N MASH
+         : ,ATX ,
+ 1, VTM ,N MASH
+         : ,ITA ,RP1
+ 3, UTM ,3
+ 3, VZM ,RP2
+         : ,CALL ,OKHO
+ 11, VTM ,TEXT3
+ 12, VJM ,ERR PR1
+         : ,UJ ,ABRET
+ RP2     : 3, UTM ,-3
+         : ,032 ,1
+         : ,ASN ,64+32
+         : ,AAX ,=377
+         : ,AOX ,=10
+         : ,ATX ,HR
+         : ,032 ,2
+         : ,ASN ,64+24
+         : ,ATX ,MIN
+         : ,AAX ,=377
+         : ,AOX ,=10
+         : ,ATX ,SEK
+         : ,XTA ,MIN
+         : ,ASN ,64+8
+         : ,AAX ,=377
+         : ,AOX ,=10
+         : ,ATX ,MIN
+         : ,032 ,3
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+         : ,ATX ,NSTEP
+         : ,032 ,4
+         : ,ASN ,64-8
+         : ,AUX ,=377 0377
+         : ,ATX ,RG
+         : ,032 ,5
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+         : ,ATX ,INTRT
+         : ,AAX ,=4 0000
+ 11, VTM ,TEXT 9
+ 12, VTM ,EXIT
+         : ,UZA ,ERR PR2
+         : ,UJ ,CONT PCT
+ RP1     : ,XTA ,MASH
+         : ,AOX ,=17 0000
+         : ,CALL ,TO STK
+         : ,AAX ,=7777
+         : ,AAX ,=17 7774
+         : ,UZA ,RP3
+         : ,CALL ,OKHO
+ 11, VTM ,TEXT4
+ 12, VJM ,ERR PR1
+         : ,UJ ,ABRET
+ RP3     : ,WTC ,P BASE Э
+         : ,032 ,N PACK
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+         : ,WTC ,P BASE B
+         : ,UTC ,IN FLD+N PACK
+         : ,ATX ,MASH
+         : ,WTC ,MASH
+         : ,AEX ,CNT PCK
+         : ,UZA ,CONT PCT
+         : ,WTC ,MASH
+         : ,AEX ,CNT PCK
+         : ,WTC ,MASH
+         : ,ATX ,CNT PCK
+ 1, VTM ,
+ TO MEM  : ,BSS ,
+         : ,ITA ,
+         : ,ATX ,CONT SM
+         : ,WTC ,P BASE Э
+ 1, 032 ,BEG COM
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+         : ,UTC ,P BASE B
+ 1, UTC ,IN FLD+BEG COM
+         : ,ATX ,
+         : ,WTC ,MASH
+         : ,WTC ,ABCOM-1
+ 1, ATX ,
+         : ,UZA ,CONT P
+ 14, UTM ,1
+         : ,ATI ,14
+         : ,ATX ,RAV
+         : ,ARX ,CONT SM
+         : ,ATX ,CONT SM
+ 14, UTM ,MAX COM
+         : ,ITA ,14
+         : ,AAX ,=4 0000
+         : ,ITA ,NORM COD
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,BUF COM4
+         : ,ITS ,14
+ 14, VTM ,14
+         : ,ITS ,14
+         : ,CALL ,RQ TO CM
+ 11, VTM ,TEXT6
+ 12, VJM ,ERR PR
+         : ,UJ ,ABRET
+ NORM COD: ,BSS ,
+         : ,WTC ,P BASE Э
+ 1, 032 ,BEG COM
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+         : ,WTC ,P BASE B
+ 1, UTC ,IN FLD+BEG COM
+         : ,ATX ,
+         : ,WTC ,MASH
+         : ,WTC ,ABCOM-1
+ 1, ATX ,
+         : ,UZA ,NEXT COM
+         : ,ATI ,2
+         : ,ARX ,CONT SM
+         : ,ATX ,CONT SM
+         : ,ITA ,2
+         : ,AAX ,=17 7400
+         : ,UZA ,RD PAR
+         : ,CALL ,OKHO
+ 11, VTM ,TEXT1
+ 12, VJM ,ERR PR
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,BUF COM3
+         : ,ITS ,14
+ 14, VTM ,=2
+         : ,ITS ,14
+         : ,CALL ,RQ TO CM
+         : ,UJ ,ABRET
+ RD PAR  : ,BSS ,
+ 1, WTC ,P BASE Э
+ 1, 032 ,BEG COM
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+         : ,WTC ,P BASE B
+ 1, UTC ,IN FLD+BEG COM
+         : ,ATX ,
+         : ,WTC ,MASH
+         : ,WTC ,ABCOM-1
+ 1, ATX ,
+         : ,ARX ,CONT SM
+         : ,ATX ,CONT SM
+ 2, UTM ,-1
+ 2, VJM ,RD PAR
+ NEXT COM: ,BSS ,
+ 7, UTM ,2
+         : ,WTC ,P BASE Э
+ 1, 032 ,BEG COM-1
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+         : ,WTC ,P BASE B
+ 1, UTC ,INFLD+BEGCOM
+         : ,ATX ,
+         : ,WTC ,MASH
+         : ,WTC ,ABCOM-1
+ 1, ATX ,-1
+         : ,AEX ,CONT SM
+         : ,AAX ,=17 7777
+         : ,UZA ,TO MEM
+ 11, VTM ,TEXT2
+ 12, VJM ,ERR PR
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,BUF COM3
+         : ,ITS ,14
+ 14, VTM ,=2
+         : ,ITS ,14
+         : ,CALL ,RQ TO CM
+         : ,UJ ,AB RET
+ ERR PR  : ,*64 ,PR TXT
+         : ,WTC ,P BASE B
+ 11, VTM ,IN FLD
+         : ,WTC ,P BASE B
+ 1, UTC ,IN FLD
+ 13, VTM ,-1
+         : ,*64 ,INPR1
+ 13, UJ ,
+ ERR PR1 : ,*64 ,PR TXT
+ 11, VTM ,IN FLD
+         : ,WTC ,P BASE B
+ 1, UTC ,IN FLD
+ 13, VTM ,
+         : ,*64 ,INPR1
+ 12, UJ ,
+ ERR PR2 : ,*64 ,PR TXT
+ 12, UJ ,
+ CONT P  : ,BSS ,
+         : ,WTC ,MASH
+         : ,WTC ,TABL DM-1
+ 4, VTM ,
+         : ,WTC ,
+ 5, VTM ,
+ 5, VZM ,CONT PCT
+ 4, UTM ,1
+ 1, MTJ ,2
+ 14, UTM ,7
+ 5, UTM ,-1
+ DATA CKL: ,BSS ,
+ 5, VZM ,CONT PCT
+ 4, WTC ,A BLOCK
+ 1, VTM ,
+ 4, UTC ,LENG
+ 12, VTM ,
+ 1, J+M ,12
+         : ,WTC ,P BASE Э
+ 12, 032 ,
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+ 15, ATX ,
+ 4, AEX ,C NUMB
+         : ,WTC ,P BASE B
+ 12, UTC ,IN FLD
+         : ,STX ,
+ 4, ATX ,C NUMB
+         : ,WTC ,P BASE B
+ 12, UTC ,IN FLD
+         : ,XTA ,
+         : ,UZA ,NEXT
+ 4, XTA ,C NUMB
+         : ,AEX ,=5 7400
+         : ,AAX ,=17 7400
+         : ,ITA ,ERR CNB
+ 4, ATI ,12
+         : 14, UIA ,BLOCK C
+         : ,CALL ,OKHO
+         : ,XTA ,MASH
+         : ,ATX ,T2
+         : ,*64 ,PRINT2
+ 11, VTM ,TEXT 8
+ 12, VJM ,ERR PR
+         : ,UJ ,ABRET
+ ERR CNB : ,CALL ,OKHO
+ 11, VTM ,TEXT 7
+         : ,*64 ,PR TXT
+         : ,UJ ,NEXTBLC
+ BLCK C  : ,BSS ,
+         : ,WTC ,P BASE Э
+ 1, UTC ,
+ 8, VTM ,
+         : ,UTC ,P BASE B
+ 1, UTC ,IN FLD
+ 9, VTM ,
+ 12, J+M ,1
+ BLC CKL : 8, 032 ,
+ 9, ATX ,
+ 12, UTM ,-1
+ 8, UTM ,1
+ 9, UTM ,
+ 12, VTM ,BLC CKL
+ 1, UTM ,1
+ 1, MTJ ,2
+ NEXTBLC: 4, UTM ,7
+ 5, UTM ,-1
+         : ,UJ ,DATA CKL
+ ALL IN  : ,BSS ,
+         : ,032 ,5
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+ 11, VTM ,TEXT10
+ 12, VTM ,EXIT
+         : ,AEX ,INTRT
+         : ,U1A ,ERR PR2
+         : ,XTA ,=7707 0000 0004 0002
+         : ,*50 ,IN E50
+ 1, VTM ,IN FLD
+ B PACK  : ,BSS ,
+ 1, XTA ,N MASH
+         : ,ATX ,MASH
+         : 14, UIA ,NP1
+ 1, UTC ,BEG COM
+ 2, VTM ,
+ B COM   : ,BSS ,
+ 2, XTA ,P GO
+         : ,UZA ,P GO
+         : ,ATI ,3
+         : ,ATX ,RAR
+ 2, ATX ,
+ 2, UTM ,1
+         : ,ITA ,2
+         : ,ITA ,2
+         : ,ATX ,F W C
+ 2, WTC ,2
+ 2, UTM ,2
+         : ,ITA ,2
+         : ,ATX ,N C A
+         : ,ITA ,1
+         : ,ATX ,P BASE B
+ TO GO   : ,BSS ,
+ 3, UTC ,
+ 13, VJM ,SW COM
+         : ,XTA ,P BASE B
+         : ,ATI ,1
+         : ,XTA ,N C A
+         : ,ATI ,2
+         : ,UJ ,B COM
+ P GO    : ,BSS ,
+         : ,WTC ,MASH
+         : ,WTC ,TABL DM-1
+ 4, VTM ,
+ 4, WTC ,
+ 5, VTM ,
+ 5, VZM ,NP1
+ PC CKL  : 4, UTM ,1
+ 4, WTC ,A PROG
+ 13, VTM ,
+ 13, VZM ,NEXTB
+ 4, WTC ,A TABL
+ 13, VTM ,
+ 13, VZM ,NEXTB
+ 4, WTC ,A BLOCK
+ 12, VTM ,
+ 4, WTC ,LENG
+ 12, UTM ,
+ 12, UTC ,
+ 1, XTA ,
+         : ,UZA ,NEXTB
+ 5, ITA ,
+ 1, ATX ,
+ 4, WTC ,NUM PS
+         : ,UTC ,REF CNT-1
+         : ,UZA ,NO REF
+         : ,ARX ,=1
+         : ,AAX ,=37
+ 4, ATX ,NUM PS
+         : ,ATX ,REF CNT-1
+         : ,UJ ,NP1
+ NO REF  : ,BSS ,
+         : ,ITS ,1
+         : ,ITS ,4
+ 4, WTC ,A PROG
+ 13, VJM ,
+ NFXT B  : ,BSS ,
+ 4, UTM ,7
+ 5, UTM ,-1
+ 5, VTM ,PC CKL
+ NP 1    : 1, WTC ,NEXT PCT
+ 1, VTM ,
+ 1, VZM ,EXIT
+ 1, UTM ,IN FLD
+         : ,UJ ,B PACK
+ AB RET  : ,032 ,5
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+         : ,AEX ,INTRT
+ 11, VTM ,TEXT10
+ 12, VTM ,EXIT
+         : ,U1A ,ERR PR2
+ AB RET1 : ,XTA ,=7707 0000 0004 0002
+         : ,*50 ,IN E50
+ EXIT    : ,ITA ,
+         : ,CALL ,REST
+ SW COM  : ,BSS ,
+ *0      : 13, UJ ,
+ *1      : ,UJ ,DESK IN
+ *2      : ,UJ ,DESK OUT
+ *3      : 13, UJ ,
+ *4      : ,UJ ,FIN PS
+ *5      : ,UJ ,INIT 0
+ *6      : ,UJ ,STEP PS
+ *7      : ,UJ ,FOTO
+ *10     : ,UJ ,RE FOTO
+ *11     : 13, UJ ,
+ *12     : 13, UJ ,
+ *13     : ,UJ ,IS PS
+ *14     : ,UJ ,IS MRV
+ *15     : ,UJ ,N REG
+ DESK IN : ,BSS ,
+         : ,WTC ,MASH
+         : ,WTC ,TABL DM-1
+ 3, VTM ,
+ 4, VTM ,SUB L R
+ 5, VTM ,TAB L R
+ DI 1    : ,WTC ,F W C
+ 5, VTM ,
+ 1, UTM ,1
+ 1, XTA ,
+         : ,AAX ,=77
+         : ,U1A ,DI2
+         : ,CALL ,OKHO
+         : ,XTA ,MASH
+         : ,ATX ,T3
+         : ,*64 ,PRINT3
+         : ,*64 ,PRINTK
+         : ,SJ ,
+ DI 2    : 3, ATX ,
+         : ,ATI ,2
+ 1, UTM ,1
+ 3, UTM ,1
+ LOOP DI : 1, XTA ,
+ 3, ATX ,A BLOCK
+ 1, XTA ,1
+         : ,ASN ,64+12
+ 3, ATX ,NUM PS
+ 1, XTA ,1
+         : ,ASN ,64+6
+         : ,AAX ,=77
+         : ,ATI ,14
+ 14, VZM ,DI 4
+ 14, UTC ,
+ 4, ATX ,-1
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+ 3, ATX ,A PROG
+ 1, XTA ,1
+         : ,AAX ,=77
+         : ,ATI ,14
+ 14, UTC ,
+ 5, XTA ,-1
+         : ,ASN ,64+24
+         : ,AAX ,=17 7777
+ 3, ATX ,A TABL
+ DI 4    : 1, XTA ,2
+         : ,AAX ,=7777
+         : ,U1A ,DI 3
+         : ,CALL ,OKHO
+         : ,XTA ,MASH
+         : ,ATX ,T4
+         : ,*64 ,PRINT4
+         : ,*64 ,PRINTK
+         : ,SJ ,
+ DI 3    : 3, ATX ,LENG
+ 1, XTA ,2
+         : ,ASN ,64+12
+ 3, ATX ,PERIOD
+ 1, UTM ,3
+ 3, UTM ,-1
+ 2, UTM ,LOOP DI
+ 2, VTM ,
+         : ,XTA ,RAV
+         : ,ATX ,BUF COM6+2
+         : ,ITA ,13
+         : ,ITS ,
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,BUF COM6
+         : ,ITS ,=3
+ 14, ITS ,14
+         : ,CALL ,RQ TOCM
+         : ,STI ,
+         : ,STI ,13
+ 13, UJ ,
+ DESK OUT: ,BSS ,
+         : ,ITA ,13
+         : ,ITS ,13
+         : ,WTC ,MASH
+ 3, VTM ,TABL DB-1
+ 4, VTM ,SUB L W
+ 5, VTM ,TAB L W
+ 13, VJM ,DI 1
+ 1, XTA ,-3
+ 1, UTC ,-3
+         : ,ARX ,2
+         : ,AAX ,=7777
+         : ,ARX ,=5
+         : ,WTC ,MASH
+         : ,UTC ,L PACKET-1
+         : ,STX ,
+         : ,ATI ,13
+ 13, UJ ,
+ INIT 0  : ,BSS ,
+         : ,XTA ,=7777
+         : ,ATX ,AV PS
+         : ,CALL ,OKHO
+         : ,XTA ,=4 0000
+         : ,*53 ,21B
+         : ,*64 ,PRINT5
+         : ,SJ ,
+ FIN PS  : ,BSS ,
+ 7, WTC ,F W C
+ 7, VTM ,
+         : ,ITA ,13
+ 1, XTS ,
+         : ,CALL ,OKHO
+         : ,UZA ,IS
+ 1, WTC ,
+         : ,XTA ,SH PS
+         : ,UZA ,IS
+ 1, XTA ,RAB
+ 1, UTC ,END PS-1
+         : ,ATX ,AV PS
+         : ,ITA ,1
+         : ,CALL ,EVENT 1
+ IS      : ,XTA ,RAB
+         : ,ATX ,BUF COM6+2
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,BUF COM6
+         : ,ITS ,14
+ 14, VTM ,=3
+         : ,ITS ,14
+         : ,CALL ,RQ TO CM
+         : ,STI ,
+         : ,ATI ,13
+ 13, UJ ,
+ STEP PS : ,BSS ,
+         : ,ITA ,13
+         : ,ATX ,R13
+         : ,WTC ,F W C
+ 1, VTM ,1
+ 1, XTA ,1
+         : ,UZA ,ERR SPS
+ 1, WTC ,
+         : ,XTA ,SH PS
+         : ,UZA ,ERR SPS
+ 1, XTA ,
+         : ,AEX ,WORK PS
+         : ,AAX ,=7
+         : ,UZA ,ERR SPS
+         : ,XTA ,NSTEP
+ 1, WTC ,
+         : ,AEX ,N STP6-1
+         : ,UZA ,RET SPS
+         : ,XTA ,RAB
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,BUF COM6
+         : ,ITS ,14
+ 14, VTM ,=3
+         : ,ITS ,14
+         : ,CALL ,RQ TO CM
+         : ,ITA ,1
+         : ,CALL ,EVENT 1
+         : ,XTA ,NSTEP
+ 1, WTC ,
+         : ,ATX ,N STP6-1
+ RET SPS : ,XTA ,R13
+         : ,ATI ,13
+ 13, UTC ,
+ 13, VTM ,
+         : ,*64 ,PRINT6
+         : ,*64 ,PRINTK
+         : ,SJ ,
+ ERR SPS : ,BSS ,
+         : ,XTA ,RAB
+         : ,ATX ,BUF COM5+2
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,BUF COM5
+         : ,ITS ,14
+ 14, VTM ,=3
+         : ,ITS ,14
+         : ,CALL ,RQ TO CM
+         : ,UJ ,RET SPS
+ FOTO    : ,BSS ,
+         : ,ITA ,13
+         : ,ITS ,
+         : ,WTC ,F W C
+ 1, VTM ,1
+ 1, XTA ,3
+         : ,ATI ,3
+         : ,UZA ,ERR PS
+         : ,ATI ,14
+ 14, UTM ,-5
+         : ,ITA ,14
+         : ,AAX ,=7 7770
+         : ,AEX ,=7 7770
+         : ,U1A ,ERR PS
+         : ,ITA ,3
+         : ,ASN ,64-2
+         : ,ATI ,2
+ 2, UTM ,/SYS/
+         : ,ITA ,2
+ 15, ATX ,
+ 15, ASN ,64-15
+ 15, AOX ,=14000 0100
+         : ,AOX ,INF WR
+         : ,ATX ,-3
+ 4, UTM ,-3
+ LRW     : 13, VTM ,INF WR
+ 3, XTA ,SH PS
+         : ,UZA ,ERR PS
+         : ,*62 ,52B
+         : ,AEX ,=7 7777
+         : ,UZA ,ISS
+         : ,CALL ,OKHO
+         : ,*64 ,PRINT7
+         : ,*64 ,PRINTK
+         : ,UJ ,SYS ER
+ ISS     : ,XTA ,INF WR
+         : ,ARX ,=10 0001
+         : ,ATX ,INF WR
+ 4, VLM ,LRW
+ 1, XTA ,1
+         : ,ATI ,1
+         : ,UZA ,ERR NF
+         : ,ATI ,14
+         : ,AAX ,=7 7760
+         : ,UZA ,ISS1
+         : ,ITA ,14
+         : ,AEX ,=20
+         : ,U1A ,ERR NF
+ ISS1    : 3, WTC ,LST F FLD-1
+ 1, XTA ,-1
+ 14, VTM ,PAGE
+         : ,ITS ,14
+         : ,ASN ,64-20
+ 15, AOX ,
+         : ,ATX ,INF W
+         : ,ITA ,
+         : ,ATX ,CNT
+ 2, XTA ,1
+         : ,UZA ,ERR PS
+         : ,ATI ,4
+ 2, XTA ,1
+         : ,UZA ,ERR PS
+         : ,ATI ,5
+         : ,XTA ,RAB
+         : ,ATX ,BUF COM6+2
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,BUF COM6
+         : ,ITS ,14
+ 14, VTM ,=3
+         : ,ITS ,14
+         : ,CALL ,RQ TO CM
+ 3, XTA ,TEX PS-1
+         : ,ATX ,T TT+1
+ 13, VJM ,TO BUF
+ 1, XTA ,TEX FT-1
+         : ,ATX ,T TT+2
+ 13, VJM ,TO BUF
+ 6, VTM ,
+ 14, VTM ,DAT
+         : ,ITS ,14
+         : ,CALL ,ATA
+         : ,XTA ,DAT
+         : ,ATX ,T TT+3
+ 13, VJM ,TO BUF
+         : ,XTA ,DAT+1
+         : ,ATX ,T TT+4
+ 13, VJM ,TO BUF
+         : ,XTA ,HR
+         : ,CALL ,OCT T DEC
+         : ,ASN ,64-33
+         : ,XTS ,MIN
+         : ,CALL ,OCT T DEC
+         : ,ASN ,64-8
+         : ,AAX ,=6H'0''0''0''0''177''177''0'
+ 15, AOX ,
+         : ,AOX ,=6H'0''0''0''0''0''0'
+         : ,ATX ,T TT+5
+ 13, VJM ,TO BUF
+ LOOP TP : ,BSS ,
+ 6, UTC ,
+ 4, XTA ,
+ 13, VJM ,TO BUF
+ 5, UTM ,-1
+ 6, UTM ,1
+ 5, VIM ,LOOP TP
+ 2, XTA ,2
+         : ,UZA ,ERR PS
+         : ,ATI ,4
+ 2, XTA ,3
+         : ,UZA ,ERR PS
+         : ,ATI ,5
+ 14, VTM ,CELL
+         : ,ITA ,14
+         : ,ASN ,64-15
+ 4, UTC ,
+ 14, VTM ,
+         : ,ITS ,14
+ 15, AOX ,
+         : ,AOX ,=14000 0100
+         : ,ATX ,INF WR
+ LOOP ПЗ: ,BSS ,
+ 13, VTM ,INF WR
+ 3, XTA ,SH PS
+         : ,*62 ,52B
+         : ,AEX ,=7 7777
+         : ,UZA ,IS RPZ
+         : ,*64 ,PRINT7
+         : ,*64 ,PRINTK
+         : ,UJ ,SYS ER
+ IS RPZ  : ,XTA ,CELL
+         : ,XTA ,CELL
+         : ,CALL ,OKHO
+ 13, VJM ,TO BUF
+         : 14, UIA ,INF WR
+         : ,ARX ,=1
+         : ,ATX ,INF WR
+ 6, UTM ,1
+ 5, UTM ,-1
+ 5, VIM ,LOOP ПЗ
+ 13, VJM ,TO T
+         : ,XTA ,=6HБ:3П
+         : ,UJ ,DRF FT
+ TO BUF  : ,BSS ,
+         : ,WTC ,CNT
+         : ,UTC ,PAGE
+         : ,ATX ,
+         : ,XTA ,CNT
+         : ,ARX ,=1
+         : ,ATX ,CNT
+         : ,AAX ,=2000
+ 13, UZA ,
+ TO T    : ,TAPE ,INF W
+         : ,ITA ,CNT
+         : ,ATX ,CNT
+         : ,XTA ,INF W
+         : ,ARX ,=1
+         : ,ATX ,INF W
+ 13, UJ ,
+ RE FOTO : ,BSS ,
+         : ,ITA ,13
+         : ,ITS ,13
+         : ,WTC ,F W C
+ 1, VTM ,1
+ 1, XTA ,3
+         : ,ATI ,3
+         : ,UZA ,ERR PS
+         : ,ATI ,14
+ 14, UTM ,-5
+         : ,ITA ,14
+         : ,AAX ,=7 7770
+         : ,AEX ,=7 7770
+         : ,U1A ,ERR PS
+         : ,ITA ,3
+         : ,ASN ,64-2
+         : ,ATI ,2
+ 2, UTM ,/SYS/
+         : ,ITA ,2
+ 15, ATX ,
+         : ,ASN ,64-15
+ 15, AOX ,
+         : ,AOX ,=14000 0100
+         : ,ATX ,INF WR
+ 4, VTM ,INF WR
+ IP2     : 13, VTM ,INF WR
+ 3, XTA ,SH PS
+         : ,UZA ,ERR PS
+         : ,*62 ,52B
+         : ,AEX ,=7 7777
+         : ,UZA ,ISSS
+         : ,CALL ,OKHO
+         : ,*64 ,PRINT8
+         : ,*64 ,PRINTK
+         : ,UJ ,SYS ER
+ ISSS    : ,XTA ,INF WR
+         : ,ARX ,=10 0001
+         : ,ATX ,INF WR
+ 4, VLM ,LRR
+ 1, XTA ,1
+         : ,ATI ,1
+         : ,UZA ,ERR NF
+         : ,ATI ,14
+         : ,AAX ,=7 7760
+         : ,UZA ,ISSS1
+         : ,ITA ,14
+         : ,AEX ,=20
+         : ,U1A ,ERR NF
+ ISSS1   : 3, WTC ,LST F FLD-1
+ 1, XTA ,-1
+ 14, VTM ,PAGE
+         : ,ITS ,14
+         : ,ASN ,64-20
+ 15, AOX ,
+         : ,AOX ,=1001
+         : ,ATX ,INF W
+         : ,ITA ,
+         : ,ATX ,CNT
+ 2, XTA ,
+         : ,UZA ,ERR PS
+         : ,ATI ,4
+ 2, XTA ,1
+         : ,UZA ,ERR PS
+         : ,ATI ,5
+ 3, XTA ,TEX PS-1
+         : ,ATX ,T TT+1
+ 1, XTA ,TEX ET-1
+         : ,ATX ,T TT+2
+         : ,TAPE ,INF W
+ 13, VJM ,OUT BUF
+ 3, AEX ,TEX PS-1
+         : ,U1A ,NO FT
+ 13, VJM ,OUT BUF
+ 1, AEX ,TEX FT-1
+         : ,U1A ,NO FT
+ 13, VJM ,OUT BUF
+         : ,ATX ,T TT+3
+ 13, VJM ,OUT BUF
+         : ,ATX ,T TT+4
+ 13, VJM ,OUT BUF
+         : ,ATX ,T TT+5
+ 6, VTM ,
+ CYCL TP : ,BSS ,
+ 13, VJM ,OUT BUF
+ 6, UTC ,
+ 4, ATX ,-1
+ 5, UTM ,-1
+ 6, UTM ,1
+ 5, VIM ,CYCL TP
+ 2, XTA ,2
+         : ,UZA ,ERR PS
+         : ,ATI ,4
+ 2, XTA ,3
+         : ,UZA ,ERR PS
+         : ,ATI ,5
+ 14, VTM ,CELL
+         : ,ITA ,14
+         : ,ASN ,64-15
+ 4, UTC ,
+ 14, VTM ,
+         : ,ITS ,14
+ 15, AOX ,
+         : ,AOX ,=0000 0100
+         : ,ATX ,INF WR
+ 6, UTM ,
+ CYCL ПЗ: 13, VJM ,OUT BUF
+ 13, ATX ,CELL
+ 3, VTM ,INF WR
+ 3, XTA ,SH PS
+         : ,*62 ,52B
+         : ,AEX ,=7 7777
+         : ,UZA ,SWPZ
+         : ,CALL ,OKHO
+         : ,*64 ,PRINT8
+         : ,*64 ,PRINTK
+         : ,UJ ,SYS ER
+ IS WPZ  : ,BSS ,
+         : ,XTA ,INF WR
+         : ,ARX ,=1
+         : ,ATX ,INF WR
+ 6, UTM ,1
+ 5, UTM ,-1
+ 5, VIM ,CYCL ПЗ
+         : ,XTA ,=13
+ 3, ATX ,REF CNT-1
+         : ,XTA ,=6HБ:ПТ
+ D RF FT : ,ATX ,T TT
+         : ,XTA ,RAB
+         : ,ATX ,BUF COM6+2
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,BUF COM6
+         : ,ITS ,14
+ 14, VTM ,=3
+         : ,ITS ,14
+         : ,CALL ,RQ TO CM
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,T TT
+         : ,ITS ,14
+ 14, VTM ,=44
+         : ,ITS ,14
+         : ,CALL ,TO CM
+ RET FT  : ,BSS ,
+         : ,STI ,
+         : ,ATI ,13
+ 13, UTC ,
+ 13, VTM ,
+         : ,SJ ,
+ OUT BUF : ,BSS ,
+         : ,WTC ,CNT
+         : ,UTC ,PAGE
+         : ,XTA ,
+         : ,XTS ,CNT
+         : ,ARX ,=1
+         : ,ATX ,CNT
+         : ,AAX ,=2000
+         : ,U1A ,OUT T
+         : ,STX ,
+ 13, UJ ,
+ OUT T   : ,TAPE ,INF W
+         : ,ITA ,
+         : ,ATX ,CNT
+         : ,XTA ,INF W
+         : ,ARX ,=1
+         : ,ATX ,INF W
+         : ,TAPE ,INF W
+         : ,STX ,
+ 13, UJ ,
+ ERR PS  : ,ITA ,3
+         : ,AAX ,=7
+         : ,AOX ,=60
+         : ,ASN ,64-32
+         : ,XTS ,T PS-1
+         : ,AAX ,=776
+ 15, AOX ,
+ 15, ATX ,T PS+1
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,T PS
+         : ,ITS ,14
+ 14, VTM ,=10
+         : ,ITS ,14
+         : ,CALL ,T TO CM
+ NO COM  : ,XTA ,RAB
+         : ,ATX ,BUF COM5+2
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,BUF COM5
+         : ,ITS ,14
+ 14, VTM ,=3
+         : ,ITS ,14
+         : ,CALL ,RQ TO CM
+         : ,UJ ,RET FT
+ ERR NF  : ,ITA ,1
+         : ,AAX ,=17
+         : ,AOX ,=60
+         : ,ASN ,64-40
+         : ,ATX ,T NF+2
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,T NF
+         : ,ITS ,14
+ 14, VTM ,=15
+         : ,ITS ,14
+         : ,CALL ,T TO CM
+         : ,UJ ,NO COM
+ NO FT   : ,XTA ,=6H6:NO
+         : ,ATX ,T TT
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,T TT
+         : ,ITS ,14
+ 14, VTM ,=22
+         : ,ITS ,14
+         : ,CALL ,T TO CM
+         : ,UJ ,NO COM
+ SYS FR  : ,ITA ,1
+         : ,AAX ,=7
+         : ,ASN ,64-8
+         : ,XTS ,TSE+3
+         : ,AOX ,=17 7400
+         : ,AEX ,=17 7400
+         : ,AOX ,=6H'0''0''0''0''0''0'
+ 15, AOX ,
+         : ,ATX ,TSE+3
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,TSE
+         : ,ITS ,14
+ 14, VTM ,=30
+         : ,ITS ,14
+         : ,CALL ,T TO CM
+         : ,UJ ,NO COM
+ IS PS   : ,BSS ,
+         : ,ITA ,13
+         : ,ATX ,R13
+         : ,WTC ,F W C
+ 1, VTM ,1
+ 1, XTA ,1
+ 1, UTC ,YES PS-1
+         : ,XTA ,
+         : ,UTC ,BUF COM12+2
+         : ,ATX ,
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,BUF COM12
+         : ,ITS ,14
+ 14, VTM ,=3
+         : ,ITS ,14
+         : ,CALL ,RQ TO CM
+         : ,XTA ,R13
+         : ,ATI ,13
+ 13, UJ ,
+ IS MRV  : ,BSS ,
+         : ,ITA ,13
+         : ,ATX ,R13
+         : ,XTA ,RAB
+         : ,ATX ,BUF COM6+2
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,BUF COM6
+         : ,ITS ,14
+ 14, VTM ,=3
+         : ,ITS ,14
+         : ,CALL ,RQTOCM
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,START T
+         : ,ITS ,14
+ 14, VTM ,=14
+         : ,ITS ,14
+         : ,CALL ,T TO CM
+         : ,XTA ,R13
+         : ,ATI ,13
+ 13, UJ ,
+ N REG  : ,BSS ,
+         : ,ITA ,13
+         : ,ATX ,R13
+ 1, UTC ,F W C
+ 1, VTM ,1
+ 1, XTA ,1
+         : ,ATI ,2
+ 1, XTA ,1
+         : ,AOX ,=10
+ 2, ATX ,NREG PS-1
+         : ,XTA ,RAB
+         : ,ATX ,BUF COM6+2
+ 14, VTM ,MASH
+         : ,ITS ,14
+ 14, VTM ,BUF COM6
+         : ,ITS ,14
+ 14, VTM ,=3
+         : ,ITS ,14
+         : ,CALL ,RQ TO CM
+         : ,XTA ,R13
+         : ,ATI ,13
+ 13, UJ ,
+ SUB L R : ,BSS ,
+         : ,CALL ,R INT
+         : ,CALL ,R REAL
+         : ,CALL ,R 16COD
+         : ,CALL ,R 48COD
+         : ,CALL ,R NTOBIT
+         : ,CALL ,R BITTON
+         : ,CALL ,R D TAB
+         : ,CALL ,R ST REG
+         : ,BSS ,
+ TAB L R : ,BSS ,
+         : ,CALL, T MEAV M
+         : ,CALL, T RTAB M
+         : ,CALL, T ALFA M
+         : ,CALL, T AVAR M
+         : ,CALL, T RDT M
+         : ,CALL, T RDT M
+         : ,CALL, T HAND M
+         : ,CALL, T RDT K
+         : ,CALL, T ALFA K
+         : ,CALL, T ZDT K
+         : ,CALL, T AVAR K
+         : ,CALL, T MEAV K
+         : ,LOG ,
+         : ,LOG ,
+         : ,CALL, T MEAV Y
+         : ,CALL, T ALFA Y
+         : ,CALL, T AVAR Y
+         : ,CALL, T RDT Y
+         : ,CALL, T EXT Y
+         : ,CALL, T HAND Y
+         : ,CALL, T RTAB Y
+         : ,CALL, T ZDT Y
+         : ,CALL, T RDT Y
+         : ,CALL, T RTAB 0
+         : ,CALL, T RDT 0
+         : ,CALL, T NAGRO
+         : ,CALL, T ALFA 0
+         : ,CALL, T AVAR 0
+         : ,CALL, T RDT 0
+         : ,CALL, T MEAV 0
+         : ,LOG ,
+ SUB L W : ,BSS ,
+         : ,CALL, W INT
+         : ,CALL, W REAL
+         : ,CALL, W 16COD
+         : ,CALL, W 48COD
+         : ,CALL, W УСТ
+         : ,CALL, W TABLO
+ TAB L W : ,BSS ,
+         : ,Z00 ,T WDT K
+         : ,CALL, T SIG K
+         : ,CALL, T PRD K
+         : ,CALL, T STP K
+         : ,CALL, T СТР K
+ 1, Z00 ,T WREG K
+         : ,LOG ,
+         : ,CALL, T LTB M
+         : ,CALL, T УСТ M
+         : ,Z00 ,T WDT M
+         : ,CALL, T DOZ M
+         : ,CALL, T СТР M
+         : ,Z00 ,T WREG M
+         : ,LOG ,
+         : ,LOG ,
+         : ,CALL, T LTB Y
+         : ,CALL, T RTB Y
+         : ,CALL, T УСТ Y
+         : ,Z00 ,T WDT Y
+         : ,CALL, T СТР Y
+         : ,Z00 ,T WREG Y
+         : ,LOG ,
+         : ,LOG ,
+         : ,CALL, T LTB 0
+         : ,Z00 ,TWDTO
+         : ,CALL, T УСТ 0
+         : ,CALL, T СТР 0
+         : ,Z00 ,TWREGO
+         : ,LOG ,
+         : ,LOG ,
+         : ,LOG ,
+ P BASE Э: ,BSS ,1
+ P BASE B: ,BSS ,1
+ MASH    : ,BSS ,1
+ CNT PCK : ,BSS ,4
+ CONT SM : ,BSS ,1
+ N C A   : ,BSS ,1
+ F W C   : ,BSS ,1
+ BAS COM : ,BSS ,1
+ BUF COM1: ,LOG ,1
+         : ,LOG ,
+ BUF COM3: ,LOG ,3
+         : ,LOG ,
+ BUF COM4: ,LOG ,4
+         : ,LOG ,1
+ R13     : ,BSS ,1
+ CCOM1   : ,BSS ,100
+ CCOM2   : ,BSS ,100
+ CCOM3   : ,BSS ,100
+ ADES    : ,Z00 ,
+         : ,Z00 ,DESK M1
+         : ,Z00 ,DESK M2
+         : ,Z00 ,DESK M3
+         : ,Z00 ,DESK B1
+         : ,Z00 ,DESK B2
+         : ,Z00 ,DESK B3
+ A COM   : ,Z00 ,
+         : ,Z00 ,CCOM1
+         : ,Z00 ,CCOM2
+         : ,Z00 ,CCOM3
+ IFIEL  : ,Z00 ,
+         : ,Z00 ,IN FLD
+ 19, SET ,ADES
+ 1,      ,DESM
+ 1, SET ,IFIEL
+ 1,      ,IFLD
+         : ,END ,
+*end file
+``````
+еконец
